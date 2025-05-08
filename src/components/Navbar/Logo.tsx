@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { LuLayoutDashboard } from "react-icons/lu";
 import Image from "next/image";
 
 interface LogoProps {

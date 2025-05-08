@@ -1,4 +1,4 @@
-import {Roboto, Poppins, Lora, Edu_QLD_Beginner} from "next/font/google"
+import {Roboto, Poppins, Edu_QLD_Beginner} from "next/font/google"
 
 export const roboto = Roboto({
   subsets: ['latin'],

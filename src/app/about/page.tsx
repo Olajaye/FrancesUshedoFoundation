@@ -1,9 +1,7 @@
 import Hero from '@/components/Hero/Hero'
 import React from 'react'
 
-type Props = {}
-
-const page = (props: Props) => {
+const page = () => {
   return (
     <div>
       <Hero className="bg-aboutbg"/>

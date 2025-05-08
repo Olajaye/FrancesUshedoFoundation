@@ -1,7 +1,7 @@
 import React from "react";
 import { Navbar } from "../Navbar/Navbar";
-import { Typewriter } from "@/app/hooks/typewriter";
-import { DualTypewriter } from "@/app/hooks/DualTypewriter";
+// import { Typewriter } from "@/hooks/typewriter";
+import { DualTypewriter } from "@/hooks/DualTypewriter";
 
 type Props = {
   className?: string;
@@ -32,17 +32,16 @@ const Hero = ({ className }: Props) => {
               delay={2000}
             />
           </h1>
-         
 
           {/* <h3 className="bg-darckLilac text-white mt-7 p-2 text-base md:text-xl font-extrabold rounded-lg font-sans shadow-inner">
             A Beacon of Hope for Future Generations
           </h3> */}
           <div className="mt-7 md:max-w-[40%]">
             <p className="text-lg md:text-2xl text-white  italic font-EduQld">
-              "In the heart of every child lies a spark of potential. At TFUF,
-              we are committed to nurturing this potential in Nigeria, providing
-              the support and care that every child deserves. Please join us in
-              our journey to create brighter futures."
+              &quot;In the heart of every child lies a spark of potential. At
+              TFUF, we are committed to nurturing this potential in Nigeria,
+              providing the support and care that every child deserves. Please
+              join us in our journey to create brighter futures.&quot;
             </p>
             <p className="mt-10 text-2xl text-white italic text-right">
               — Amanda Ushedo, Founder

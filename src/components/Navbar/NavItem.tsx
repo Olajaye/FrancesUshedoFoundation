@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
+// import { usePathname } from "next/navigation";
+// import { cn } from "@/lib/utils";
 
 interface NavItemProps {
   href: string;
@@ -10,8 +10,8 @@ interface NavItemProps {
 }
 
 export const NavItem = ({ href, label }: NavItemProps) => {
-  const pathname = usePathname();
-  const isActive = pathname === href;
+  // const pathname = usePathname();
+  // const isActive = pathname === href;
 
   return (
     <Link
