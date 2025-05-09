@@ -22,7 +22,7 @@ const Hero = ({ className }: Props) => {
           {/* <h1 className="text-4xl md:text-7xl font-bold font-sans text-white text-center shadow-lilac rounded-lg p-2 shadow-sm">
             <Typewriter text="The Frances Ushedo Foundation" speed={80} />
           </h1> */}
-          <h1 className="text-4xl md:text-7xl font-bold font-EduQld text-darckLilac text-center rounded-lg p-2  min-h-[1.5em] max-w-[70%]">
+          <h1 className="text-4xl md:text-7xl font-bold font-EduQld text-darckLilac text-center rounded-lg p-2  min-h-[2.5em] max-w-[70%]">
             <DualTypewriter
               texts={[
                 "The Frances Ushedo Foundation",
