@@ -13,7 +13,7 @@ function FooterLink({ href, children, className }: FooterLinkProps) {
       <Link 
         href={href} 
         className={cn(
-          "text-muted-foreground hover:text-primary hover:underline transition-colors duration-200",
+          "text-black text-base hover:underline transition-colors duration-200",
           className
         )}
       >
@@ -25,10 +25,10 @@ function FooterLink({ href, children, className }: FooterLinkProps) {
 
 export function FooterNavLinks() {
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 gap-8">
-      <div className="space-y-3">
-        <h3 className="text-lg font-semibold">Who We Are</h3>
-        <ul className="space-y-2 text-sm">
+    <div className="grid grid-cols-1 sm:grid-cols-1 gap-8">
+      <div className="space-y-4">
+        <h3 className="font-bold text-xl text-darckLilac">Who We Are</h3>
+        <ul className="space-x-7 text-sm flex">
           <FooterLink href="/about">About Us</FooterLink>
           <FooterLink href="/mission">Our Mission</FooterLink>
           <FooterLink href="/team">Our Team</FooterLink>
@@ -36,8 +36,8 @@ export function FooterNavLinks() {
           <FooterLink href="/success-stories">Success Stories</FooterLink>
         </ul>
       </div>
-      <div className="space-y-3">
-        <h3 className="text-lg font-semibold">Get Involved</h3>
+      {/* <div className="space-y-4">
+        <h3 className="font-bold text-xl text-darckLilac">Get Involved</h3>
         <ul className="space-y-2 text-sm">
           <FooterLink href="/donate">Donate</FooterLink>
           <FooterLink href="/volunteer">Volunteer</FooterLink>
@@ -45,8 +45,8 @@ export function FooterNavLinks() {
           <FooterLink href="/events">Events</FooterLink>
           <FooterLink href="/corporate">Corporate Giving</FooterLink>
         </ul>
-      </div>
-      <div className="space-y-3">
+      </div> */}
+      {/* <div className="space-y-3">
         <h3 className="text-lg font-semibold">Resources</h3>
         <ul className="space-y-2 text-sm">
           <FooterLink href="/blog">Blog</FooterLink>
@@ -55,7 +55,7 @@ export function FooterNavLinks() {
           <FooterLink href="/faq">FAQ</FooterLink>
           <FooterLink href="/contact">Contact Us</FooterLink>
         </ul>
-      </div>
+      </div> */}
     </div>
   );
 }

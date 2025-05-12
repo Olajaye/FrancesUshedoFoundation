@@ -16,9 +16,9 @@ const config: Config = {
       backgroundImage: {
         'hero': "url('/picture1.jpg')",
         "aboutbg": "url('/picture2.jpg')",
-        "footerbg": "url('/footer2.png')",
+        "footerbg": "url('/footer.jpg')",
         "dark-overlay":
-          "linear-gradient(rgba(201,162,204, 0.3), rgba(0, 0, 0, 0.7))",
+          "linear-gradient(rgba(0,0,0, 0.5), rgba(0, 0, 0, 0.5))",
         "light-overlay":
           "linear-gradient(rgba(255, 255, 255, 1), rgba(0,0,0, 0.1))",
         "lilac-gradient": "linear-gradient(to right, #d0b1d1, #d154d6)",

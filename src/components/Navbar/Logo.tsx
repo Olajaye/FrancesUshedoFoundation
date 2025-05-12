@@ -10,17 +10,17 @@ interface LogoProps {
 
 export const Logo = ({ className }: LogoProps) => {
   return (
-    <Link href="/" className={cn("flex items-center gap-2", className)}>
+    <Link href="/" className={cn("flex items-center gap-2 relative", className)}>
       <Image
-        src={"/logo transp bg-01.png"}
+        src={"/logoNew.png"}
         alt={"Logo"}
         width={200}
         height={200}
         className="w-auto h-[100px]"
       />
-      {/* <span className="font-semibold text-xl hidden md:inline-block">
-        The Frances Ushedo Foundation
-      </span> */}
+      <span className="text-3xl absolute right-2 bottom-0 font-extrabold font-EduQld text-[#a564af]  hidden md:inline-block">
+        TFUF
+      </span>
     </Link>
   );
 };

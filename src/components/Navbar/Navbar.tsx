@@ -28,7 +28,7 @@ export const Navbar = () => {
   return (
     <header 
       className={cn(
-        "sticky top-0 w-full z-50 transition-all duration-700 ease-in-out",
+        "fixed top-0 w-full z-50 transition-all duration-700 ease-in-out",
         scrolled 
           ? "bg-[#ffffffcd] shadow-lg backdrop-blur-sm py-0" 
           : "md:bg-transparent py-3 bg-[#ffffffcd]"

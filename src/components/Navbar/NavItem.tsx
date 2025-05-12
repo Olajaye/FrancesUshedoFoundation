@@ -16,7 +16,7 @@ export const NavItem = ({ href, label }: NavItemProps) => {
   return (
     <Link
       href={href}
-      className={"text-2xl font-medium transition-colors text-darckLilac font-EduQld"}
+      className={"text-2xl font-medium transition-colors text-darckLilac font-roboto"}
     >
       {label}
     </Link>

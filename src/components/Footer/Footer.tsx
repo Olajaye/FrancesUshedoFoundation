@@ -1,10 +1,12 @@
 "use client";
 
 // import { Separator } from '@/components/ui/separator';
-import { BiHeart } from "react-icons/bi";
+// import { BiHeart } from "react-icons/bi";
 import { FooterNavLinks } from "./FooterNavLinks";
 import { FooterSocial } from "./FooterSocial";
-import { Logo } from "../Navbar/Logo";
+// import { Logo } from "../Navbar/Logo";
+import Link from "next/link";
+import Image from "next/image";
 // import { FooterNewsletter } from './FooterNewsletter';
 
 export function Footer() {
@@ -16,30 +18,44 @@ export function Footer() {
       {/* Overlay */}
       <div className="relative z-50">
         <div className="px-4 sm:px-6 lg:px-8">
+
+
           <div className="py-12">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {/* Mission and CTA */}
               <div className="lg:col-span-1 space-y-4">
-                {/* <h2 className="text-xl font-bold">Hope Charity Foundation</h2> */}
-                <Logo/>
-                <p className="text-sm text-muted-darklilac font-roboto">
+                <Link
+                  href="/"
+                  className={"flex items-center gap-2 relative"}
+                >
+                  <Image
+                    src={"/logoNew.png"}
+                    alt={"Logo"}
+                    width={200}
+                    height={200}
+                    className="w-auto h-[100px]"
+                  />
+                  <span className="text-3xl font-extrabold font-EduQld text-[#a564af]  hidden md:inline-block">
+                    TFUF
+                  </span>
+                </Link>
+                <p className="text-base text-muted-darklilac font-roboto">
                   Making a difference in communities around the world through
                   compassion, action, and sustainable development programs.
                 </p>
-                <button className="group relative overflow-hidden">
-                  <span className="absolute inset-0 bg-primary-foreground/10 group-hover:bg-transparent transition-colors duration-300"></span>
+                {/* <button className="group flex items-center relative overflow-hidden">
                   <BiHeart className="h-4 w-4 mr-2 group-hover:text-red-500 group-hover:scale-110 transition-all" />
                   Donate Now
-                </button>
+                </button> */}
               </div>
 
               {/* Navigation Links */}
-              <div className="lg:col-span-2">
+              <div className="lg:col-span-1 flex justify-center items-center">
                 <FooterNavLinks />
               </div>
 
               {/* Newsletter and Social */}
-              <div className="lg:col-span-1 space-y-8">
+              <div className="lg:col-span-1 space-y-8 flex justify-center items-center">
                 {/* <FooterNewsletter /> */}
                 <FooterSocial />
               </div>
@@ -47,12 +63,12 @@ export function Footer() {
           </div>
 
           {/* <Separator /> */}
-          <hr />
+          <hr className="bg-darckLilac text-darckLilac"/>
 
           <div className="py-6 md:flex md:items-center md:justify-between">
             <div className="text-center md:text-left">
               <p className="text-sm text-muted-foreground">
-                &copy; {currentYear} Hope Charity Foundation. All rights
+                &copy; {currentYear} The Frances Ushedo Foundation. All rights
                 reserved.
               </p>
             </div>
