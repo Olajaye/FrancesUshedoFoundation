@@ -45,13 +45,13 @@ export const NavItem = ({ href, label, isActive }: NavItemProps) => {
       <Link
         href={href}
         className={
-          "text-2xl font-medium transition-colors text-darckLilac font-roboto"
+          "text-base font-medium transition-colors text-darckLilac font-roboto"
         }
       >
         {label}
       </Link>
       <div
-        className={`h-1 bg-darckLilac transition-all duration-300 ${
+        className={`h-1 bg-darckLilac transition-all duration-300 mt-4 ${
           isActive || isHovered ? "w-full" : "w-0"
         }`}
       ></div>
