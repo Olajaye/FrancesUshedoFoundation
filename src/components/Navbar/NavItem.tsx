@@ -1,24 +1,60 @@
-"use client";
+// "use client";
 
 import Link from "next/link";
+import { useState } from "react";
+
+// import Link from "next/link";
 // import { usePathname } from "next/navigation";
-// import { cn } from "@/lib/utils";
 
 interface NavItemProps {
   href: string;
   label: string;
+  isActive: boolean
 }
 
-export const NavItem = ({ href, label }: NavItemProps) => {
-  // const pathname = usePathname();
-  // const isActive = pathname === href;
+// export const NavItem = ({ href, label, isActive }: NavItemProps) => {
+//   return (
+//     <>
+//       <div>
+//         <Link
+//           href={href}
+//           className={
+//             "text-2xl font-medium transition-colors text-darckLilac font-roboto"
+//           }
+//         >
+//           {label}
+//         </Link>
+//         <div
+//           className={`h-1 bg-darckLilac ${isActive ? "w-full" : ""}`}
+//         ></div>
+//       </div>
+//     </>
+//   );
+// };
+
+
+export const NavItem = ({ href, label, isActive }: NavItemProps) => {
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <Link
-      href={href}
-      className={"text-2xl font-medium transition-colors text-darckLilac font-roboto"}
+    <div 
+      className="inline-block"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      {label}
-    </Link>
+      <Link
+        href={href}
+        className={
+          "text-2xl font-medium transition-colors text-darckLilac font-roboto"
+        }
+      >
+        {label}
+      </Link>
+      <div
+        className={`h-1 bg-darckLilac transition-all duration-300 ${
+          isActive || isHovered ? "w-full" : "w-0"
+        }`}
+      ></div>
+    </div>
   );
 };

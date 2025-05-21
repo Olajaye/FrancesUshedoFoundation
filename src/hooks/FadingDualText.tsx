@@ -19,15 +19,15 @@ const FadeText = () => {
       setTimeout(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % texts.length);
         setFade(true);
-      }, 3000); // This should match the CSS transition time
-    }, 5000); // Change text every 3 seconds
+      }, 2000); // This should match the CSS transition time
+    }, 7000); // Change text every 3 seconds
 
     return () => clearInterval(interval);
   }, [texts.length]);
 
   return (
     <div className="fade-container flex justify-center items-center">
-      <h1 className={`fade-text ${fade ? 'fade-in' : 'fade-out'}`}>
+      <h1 className={`fade-text text-5xl font-bold leading-tight mb-4 font-lora ${fade ? 'fade-in' : 'fade-out'} `} >
         {texts[currentIndex]}
       </h1>
     </div>

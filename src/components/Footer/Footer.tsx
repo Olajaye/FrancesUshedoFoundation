@@ -14,7 +14,7 @@ export function Footer() {
 
   return (
     <footer className="bg-footerbg bg-cover bg-top bg-opacity-0 relative  w-full ">
-      <div className="absolute inset-0 bg-light-overlay z-10"></div>
+      <div className="absolute inset-0 bg-dark-overlay z-10"></div>
       {/* Overlay */}
       <div className="relative z-50">
         <div className="px-4 sm:px-6 lg:px-8">
