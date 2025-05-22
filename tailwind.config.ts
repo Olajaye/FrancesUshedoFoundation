@@ -9,15 +9,16 @@ const config: Config = {
   theme: {
     extend: {
       backgroundColor: {
-        lilac: "#d0b1d1",
+        lilac: "#E89EED",
         darckLilac: "#d154d6",
         "lilac-gradient": "linear-gradient(to right, #d0b1d1, #d154d6)",
       },
       backgroundImage: {
         'hero': "url('/picture1.jpg')",
         'welcomeHero': "url('/welcomeHero.png')",
-        "aboutbg": "url('/picture2.jpg')",
+        "picture2": "url('/picture2.jpg')",
         "footerbg": "url('/footert.jpg')",
+        "about": "url('/about/IMG_3137.jpg')",
         "dark-overlay":
           "linear-gradient(rgba(0,0,0, 0.5), rgba(0, 0, 0, 0.5))",
         "light-overlay":

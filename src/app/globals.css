@@ -40,3 +40,13 @@
 .fade-out {
   opacity: 0;
 }
+
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: #d154d6 !important; /* Match your theme color */
+}
+
+.swiper-pagination-bullet-active {
+  background: #d154d6 !important;
+}

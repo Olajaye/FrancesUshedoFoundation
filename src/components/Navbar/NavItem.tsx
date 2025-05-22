@@ -9,7 +9,7 @@ import { useState } from "react";
 interface NavItemProps {
   href: string;
   label: string;
-  isActive: boolean
+  isActive: boolean;
 }
 
 // export const NavItem = ({ href, label, isActive }: NavItemProps) => {
@@ -32,26 +32,25 @@ interface NavItemProps {
 //   );
 // };
 
-
 export const NavItem = ({ href, label, isActive }: NavItemProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div 
+    <div
       className="inline-block"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <Link
         href={href}
-        className={
-          "text-base font-medium transition-colors text-darckLilac font-roboto"
-        }
+        className={`text-base font-normal transition-colors font-roboto ${
+          isActive || isHovered ? "text-darckLilac" : "text-black"
+        }`}
       >
         {label}
       </Link>
       <div
-        className={`h-1 bg-darckLilac transition-all duration-300 mt-4 ${
+        className={`h-[2px] bg-darckLilac transition-all duration-300 mt-4 ${
           isActive || isHovered ? "w-full" : "w-0"
         }`}
       ></div>

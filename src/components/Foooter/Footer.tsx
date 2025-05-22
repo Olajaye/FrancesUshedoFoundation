@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="bg-footerbg bg-cover h-[75vh] bg-top relative overflow-hidden ">
+    <footer className="bg-footerbg bg-cover h-[75vh] bg-top relative overflow-hidden">
       <div className="absolute inset-0 bg-black/80 "></div>
       <div
         className="absolute inset-0 flex flex-col items-center justify-center text-start text-white px-4"

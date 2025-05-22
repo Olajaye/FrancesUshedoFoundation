@@ -21,7 +21,7 @@ export const Logo = ({ className }: LogoProps) => {
         height={200}
         className="w-auto h-[80px]"
       />
-      <span className="text-xl absolute -right-7 -bottom-2 font-semibold font-roboto text-black italic  hidden md:inline-block">
+      <span className="text-base absolute right-5 bottom-0 font-normal font-roboto text-black italic hidden lg:inline-block">
         The Frances Ushedo Foundation
       </span>
     </Link>
