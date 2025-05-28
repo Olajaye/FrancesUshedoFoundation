@@ -7,12 +7,12 @@ import { MdAlignHorizontalCenter } from 'react-icons/md';
 const FooterContact: React.FC = () => {
   const [email, setEmail] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Subscription email:', email);
-    setEmail('');
-    // Add your subscription logic here
-  };
+  // const handleSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   console.log('Subscription email:', email);
+  //   setEmail('');
+    
+  // };
 
   return (
     <div>

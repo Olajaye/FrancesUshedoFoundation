@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Logo } from "@/components/Navbar/Logo";
+// import { Logo } from "@/components/Navbar/Logo";
 import { MobileMenu } from "@/components/Navbar/MobileMenu";
 import { NavItem } from "@/components/Navbar/NavItem";
 import { cn } from "@/lib/utils";
