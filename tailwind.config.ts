@@ -13,6 +13,10 @@ const config: Config = {
         darckLilac: "#d154d6",
         "lilac-gradient": "linear-gradient(to right, #d0b1d1, #d154d6)",
       },
+      screens: {
+        'custom': '1038px',
+        'custom2': '1275px',
+      },
       backgroundImage: {
         'hero': "url('/picture1.jpg')",
         'welcomeHero': "url('/welcomeHero.png')",

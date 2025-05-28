@@ -8,6 +8,8 @@ import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import { IoMdMailUnread } from "react-icons/io";
 import { FaPhoneVolume } from "react-icons/fa6";
+import Image from "next/image";
+import Link from "next/link";
 
 const navItems = [
   { href: "/", label: "Home" },
@@ -32,16 +34,16 @@ export const Navbar = () => {
       <div className="bg-lilac p-3 ">
         <div className="container mx-auto px-4">
           <div className="flex">
-            <div className="flex items-center space-x-2 ps-10">
-              <IoMdMailUnread className="w-5 h-5 text-black" />
-              <p className="text-white text-base font-semibold">
+            <div className="flex items-center space-x-2">
+              <IoMdMailUnread className=" w-3 h-3 md:w-5 md:h-5 text-white" />
+              <p className="text-white text-sm md:text-base font-semibold">
                 foundation@gmail.com
               </p>
             </div>
 
-            <div className="flex items-center space-x-2 ms-32">
-              <FaPhoneVolume className="w-5 h-5 text-white" />
-              <p className="text-white text-base font-semibold">
+            <div className="flex items-center space-x-2 ms-6 md:ms-32">
+              <FaPhoneVolume className=" w-3 h-3 md:w-5 md:h-5 text-white" />
+              <p className="text-white text-sm md:text-base font-semibold">
                 +448287876545
               </p>
             </div>
@@ -62,7 +64,24 @@ export const Navbar = () => {
           className={cn("container mx-auto px-4 py-3")} //scrolled ? "md:bg-white" : "md:bg-white"
         >
           <div className="flex items-center justify-between h-16 md:h-20">
-            <Logo />
+            {/* <Logo /> */}
+            <div className="flex items-center md:w-[27%] relative">
+              <Link
+                href="/"
+                className={cn("flex items-center gap-2 w-auto")}
+              >
+                <Image
+                  src={"/logoNew.png"}
+                  alt={"Logo"}
+                  width={200}
+                  height={200}
+                  className="w-auto h-[80px]"
+                />
+                <span className="text-base absolute custom:-right-7 custom2:right-5 lg:right-5 bottom-0 font-normal font-roboto text-black italic hidden lg:inline-block">
+                  The Frances Ushedo Foundation
+                </span>
+              </Link>
+            </div>
 
             {/* Desktop navigation */}
             <nav className="hidden md:flex items-center space-x-10">

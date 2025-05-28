@@ -40,7 +40,7 @@ const FooterContact: React.FC = () => {
         </div>
       </div>
       
-      <form onSubmit={handleSubmit} className="flex">
+      {/* <form onSubmit={handleSubmit} className="flex">
         <input
           type="email"
           placeholder="Your email"
@@ -55,7 +55,7 @@ const FooterContact: React.FC = () => {
         >
           SEND
         </button>
-      </form>
+      </form> */}
     </div>
   );
 };

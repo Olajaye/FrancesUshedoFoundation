@@ -26,10 +26,10 @@ const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="bg-footerbg bg-cover h-[75vh] bg-top relative overflow-hidden">
-      <div className="absolute inset-0 bg-black/80 "></div>
+    <footer className="bg-footerbg bg-cover bg-top">
+      {/* <div className="absolute inset-0 bg-black/80 "></div> */}
       <div
-        className="absolute inset-0 flex flex-col items-center justify-center text-start text-white px-4"
+        className="flex flex-col items-center bg-black/85 justify-center text-start text-white px-4"
         style={{ zIndex: 999 }}
       >
         <div className="container mx-auto px-6 py-12">

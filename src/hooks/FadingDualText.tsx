@@ -27,7 +27,7 @@ const FadeText = () => {
 
   return (
     <div className="fade-container flex justify-center items-center">
-      <h1 className={`fade-text text-5xl font-bold leading-tight mb-4 font-lora ${fade ? 'fade-in' : 'fade-out'} `} >
+      <h1 className={`fade-text text-3xl md:text-5xl font-bold leading-tight mb-4 font-lora ${fade ? 'fade-in' : 'fade-out'} `} >
         {texts[currentIndex]}
       </h1>
     </div>

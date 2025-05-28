@@ -55,8 +55,6 @@ export default function Home() {
         </div>
       </section>
 
-    
-
       {/* <section className="py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl font-bold text-center text-darckLilac mb-8">
@@ -70,15 +68,26 @@ export default function Home() {
         </div>
       </section> */}
 
-      <section className="bg-picture2 bg-cover h-[75vh] py-12 bg-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/80 "></div>
+      <section className="bg-picture2 bg-cover  bg-center relative h-auto ">
+        {/* <div className="absolute inset-0 bg-black/20 "></div> */}
         <div
-          className="absolute inset-0 flex flex-col items-center justify-center text-start text-white px-4"
-          style={{ zIndex: 999 }}
+          className="flex flex-col bg-black/80 items-center py-12 justify-center text-start text-white"
+          style={{ zIndex: 9999 }}
         >
-          <div className="container mx-auto px-6 ">
-            <div className="flex justify-between items-center">
-              <div className="w-[50%]">
+          <div className="px-4 container mx-auto">
+            <div className="lg:flex justify-between items-center">
+              <div className="lg:w-[50%] w-[100%] flex justify-center items-center order-2 lg:order-2">
+                <Image
+                  src={"/Untitled-5.jpg"}
+                  alt={"Logo"}
+                  width={200}
+                  height={200}
+                  className="w-auto h-[400px] rounded-lg"
+                />
+              </div>
+
+
+              <div className="lg:w-[50%] w-[100%] order-1 lg:order-1 mt-5">
                 <div className="">
                   <div className="mb-10">
                     <h1 className="text-4xl font-roboto font-medium">
@@ -88,7 +97,7 @@ export default function Home() {
                   </div>
 
                   <div className="mb-10">
-                    <h3>
+                    <h3 className="text-base">
                       {" "}
                       The Frances Ushedo Foundation (TFUF) is a purpose-driven
                       family dedicated to empowering Nigerian children to
@@ -98,7 +107,7 @@ export default function Home() {
                       grief into transformative action.
                     </h3>
                     {""}
-                    <h3 className="mt-3">
+                    <h3 className="mt-3 text-base">
                       The butterfly emblem symbolizes Frances’ fleeting yet
                       impactful life, inspiring TFUF’s mission to address health
                       and educational barriers for vulnerable children. Guided
@@ -121,23 +130,13 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-
-              <div className="w-[50%] flex justify-center items-center">
-                <Image
-                  src={"/Untitled-5.jpg"}
-                  alt={"Logo"}
-                  width={200}
-                  height={200}
-                  className="w-auto h-[400px] rounded-lg"
-                />
-              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <div className="bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+      <div className="container mx-auto px-4 py-12">
+        <div className="">
           <h2 className="text-3xl font-bold text-darckLilac mb-8">
             Latest Blog
           </h2>
