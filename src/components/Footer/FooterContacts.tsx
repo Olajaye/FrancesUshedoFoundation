@@ -1,11 +1,11 @@
 'use client'
-import React, { useState } from 'react';
+import React from 'react';
 import { BiMapPin, BiPhone } from 'react-icons/bi';
 import { MdAlignHorizontalCenter } from 'react-icons/md';
 
 
 const FooterContact: React.FC = () => {
-  const [email, setEmail] = useState('');
+  // const [email, setEmail] = useState('');
 
   // const handleSubmit = (e: React.FormEvent) => {
   //   e.preventDefault();

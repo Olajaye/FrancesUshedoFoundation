@@ -13,8 +13,9 @@ import Link from "next/link";
 
 const navItems = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About" }, // Added leading slash
-  { href: "/services", label: "Services" },
+  { href: "/about", label: "About us" }, // Added leading slash
+  { href: "/portfoilio", label: "Portfoilio" },
+  { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
 ];
 export const Navbar = () => {
@@ -71,7 +72,7 @@ export const Navbar = () => {
                 className={cn("flex items-center gap-2 w-auto")}
               >
                 <Image
-                  src={"/logoNew.png"}
+                  src={"/logo/logoNew.png"}
                   alt={"Logo"}
                   width={200}
                   height={200}

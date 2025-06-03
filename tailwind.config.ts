@@ -18,11 +18,12 @@ const config: Config = {
         'custom2': '1275px',
       },
       backgroundImage: {
-        'hero': "url('/picture1.jpg')",
-        'welcomeHero': "url('/welcomeHero.png')",
-        "picture2": "url('/picture2.jpg')",
-        "footerbg": "url('/footert.jpg')",
+        'hero': "url('/home/welcomeHero.png')",
+        "footerbg": "url('/footer/footert.jpg')",
+        "homeAbout": "url('/home/picture2.jpg')",
         "about": "url('/about/IMG_3137.jpg')",
+        "portfoilio": "url('/portfolio/picture1.jpg')",
+        "contact": "url('/contact/IMG_3137.jpg')",
         "dark-overlay":
           "linear-gradient(rgba(0,0,0, 0.5), rgba(0, 0, 0, 0.5))",
         "light-overlay":

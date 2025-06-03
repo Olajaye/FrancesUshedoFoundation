@@ -1,113 +1,98 @@
-"use client";
+import React from "react";
+// import FooterLogo from "./FooterLogo";
+import FooterLinks from "./FooterLinks";
+import FooterNewsItem from "./FooterNewsItem";
+import FooterContact from "./FooterContacts";
+import FooterSocial from "./FooterSocial";
+import { BiHeart } from "react-icons/bi";
 
-// import { Separator } from '@/components/ui/separator';
-// import { BiHeart } from "react-icons/bi";
-import { FooterNavLinks } from "./FooterNavLinks";
-import { FooterSocial } from "./FooterSocial";
-// import { Logo } from "../Navbar/Logo";
-import Link from "next/link";
 import Image from "next/image";
-// import { FooterNewsletter } from './FooterNewsletter';
 
-export function Footer() {
-  const currentYear = new Date().getFullYear();
+const Footer: React.FC = () => {
+  const usefulLinks = [
+    { text: "Privacy Policy", href: "#" },
+    { text: "Become a Volunteer", href: "#" },
+    { text: "Donate", href: "#" },
+    { text: "Testimonials", href: "#" },
+    { text: "Causes", href: "#" },
+    { text: "Portfolio", href: "#" },
+    { text: "News", href: "#" },
+  ];
+
+  const newsItems = [
+    { title: "A new cause to help", date: "MARCH 12, 2018" },
+    { title: "We love to help people", date: "MARCH 12, 2018" },
+    { title: "The new ideas for helping", date: "MARCH 12, 2018" },
+  ];
 
   return (
-    <footer className="bg-footerbg bg-cover bg-top bg-opacity-0 relative  w-full ">
-      <div className="absolute inset-0 bg-dark-overlay z-10"></div>
-      {/* Overlay */}
-      <div className="relative z-50">
-        <div className="px-4 sm:px-6 lg:px-8">
-
-
-          <div className="py-12">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {/* Mission and CTA */}
-              <div className="lg:col-span-1 space-y-4">
-                <Link
-                  href="/"
-                  className={"flex items-center gap-2 relative"}
-                >
-                  <Image
-                    src={"/logoNew.png"}
-                    alt={"Logo"}
-                    width={200}
-                    height={200}
-                    className="w-auto h-[100px]"
-                  />
-                  <span className="text-3xl font-extrabold font-EduQld text-[#a564af]  hidden md:inline-block">
-                    TFUF
-                  </span>
-                </Link>
-                <p className="text-base text-muted-darklilac font-roboto">
-                  Making a difference in communities around the world through
-                  compassion, action, and sustainable development programs.
-                </p>
-                {/* <button className="group flex items-center relative overflow-hidden">
-                  <BiHeart className="h-4 w-4 mr-2 group-hover:text-red-500 group-hover:scale-110 transition-all" />
-                  Donate Now
-                </button> */}
-              </div>
-
-              {/* Navigation Links */}
-              <div className="lg:col-span-1 flex justify-center items-center">
-                <FooterNavLinks />
-              </div>
-
-              {/* Newsletter and Social */}
-              <div className="lg:col-span-1 space-y-8 flex justify-center items-center">
-                {/* <FooterNewsletter /> */}
-                <FooterSocial />
-              </div>
-            </div>
-          </div>
-
-          {/* <Separator /> */}
-          <hr className="bg-darckLilac text-darckLilac"/>
-
-          <div className="py-6 md:flex md:items-center md:justify-between">
-            <div className="text-center md:text-left">
-              <p className="text-sm text-muted-foreground">
-                &copy; {currentYear} The Frances Ushedo Foundation. All rights
-                reserved.
+    <footer className="bg-footerbg bg-cover bg-top">
+      {/* <div className="absolute inset-0 bg-black/80 "></div> */}
+      <div
+        className="flex flex-col items-center bg-black/85 justify-center text-start text-white px-4"
+        style={{ zIndex: 999 }}
+      >
+        <div className="container mx-auto px-6 py-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Logo and About */}
+            <div>
+              {/* <FooterLogo /> */}
+              <Image
+                src={"/logo/logoNew.png"}
+                alt={"Logo"}
+                width={200}
+                height={200}
+                className="w-auto h-[80px]"
+              />
+              <p className="text-gray-400 mt-6 mb-6">
+                &quot;In the heart of every child lies a spark of potential. At
+                TFUF, we are committed to nurturing this potential in Nigeria,
+                providing the support and care that every child deserves. Please
+                join us in our journey to create brighter futures.&quot;
               </p>
+              <FooterSocial />
             </div>
-            <div className="mt-4 md:mt-0 flex flex-wrap justify-center md:justify-end gap-4 text-sm text-muted-foreground">
-              <a
-                href="/privacy"
-                className="hover:text-primary hover:underline transition-colors"
-              >
-                Privacy Policy
-              </a>
-              <a
-                href="/terms"
-                className="hover:text-primary hover:underline transition-colors"
-              >
-                Terms of Service
-              </a>
-              <a
-                href="/accessibility"
-                className="hover:text-primary hover:underline transition-colors"
-              >
-                Accessibility
-              </a>
-              <a
-                href="/cookie-policy"
-                className="hover:text-primary hover:underline transition-colors"
-              >
-                Cookie Policy
-              </a>
+
+            {/* Useful Links */}
+            <div>
+              <FooterLinks title="Useful Links" links={usefulLinks} />
+            </div>
+
+            {/* Latest News */}
+            <div>
+              <h3 className="text-xl font-semibold text-white mb-6">
+                Latest News
+              </h3>
+              {newsItems.map((item, index) => (
+                <FooterNewsItem
+                  key={index}
+                  title={item.title}
+                  date={item.date}
+                />
+              ))}
+            </div>
+
+            {/* Contact */}
+            <div>
+              <FooterContact />
             </div>
           </div>
 
-          <div className="py-4 text-center">
-            <p className="text-xs text-muted-foreground">
-              Hope Charity Foundation is a registered charity (No. 123456789)
-              dedicated to creating positive change.
+          {/* Copyright */}
+          <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500 text-sm">
+            <p>
+              Copyright ©2025 All rights reserved |  The Frances Ushedo Foundation
+              <BiHeart
+                className="inline-block text-darckLilac fill-darktext-darckLilac"
+                size={14}
+              />{" "}
+              
             </p>
           </div>
         </div>
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;

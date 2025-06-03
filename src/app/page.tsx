@@ -1,7 +1,7 @@
 "use client";
 import BlogCard from "@/components/Blogs/BlogCard";
 import SponsorCard from "@/components/Sponsor/Sponsor";
-import Hero from "@/components/WelcomeHero/Hero";
+import Hero from "@/components/Hero/Hero";
 import { blogPosts, sponsors } from "@/constant/constant";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -28,11 +28,11 @@ export default function Home() {
             modules={[Navigation, Pagination, Autoplay]}
             spaceBetween={24}
             slidesPerView={1}
-            navigation
+            // navigation
             pagination={{ clickable: true }}
             loop={true}
             autoplay={{
-              delay: 2500,
+              delay: 2000,
               disableOnInteraction: false,
             }}
             speed={800}
@@ -55,20 +55,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* <section className="py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-darckLilac mb-8">
-            Our Sponsors
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {sponsors.map((sponsor, index) => (
-              <SponsorCard key={index} {...sponsor} />
-            ))}
-          </div>
-        </div>
-      </section> */}
 
-      <section className="bg-picture2 bg-cover  bg-center relative h-auto ">
+      <section className="bg-homeAbout bg-cover  bg-center relative h-auto ">
         {/* <div className="absolute inset-0 bg-black/20 "></div> */}
         <div
           className="flex flex-col bg-black/80 items-center py-12 justify-center text-start text-white"

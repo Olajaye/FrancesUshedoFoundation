@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import {edu_QLD_Beginner, roboto } from "@/app/Font/font";
 
 import { Navbar } from "@/components/Navbar/Navbar";
-import Footer from "@/components/Foooter/Footer";
+import Footer from "@/components/Footer/Footer";
 
 export const metadata: Metadata = {
   title: "Frances Ushedo Foundation",

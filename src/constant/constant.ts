@@ -3,59 +3,47 @@ import { SponsorProps } from "@/components/Sponsor/Sponsor";
 export const sponsors: SponsorProps[] = [
   {
     name: "TechCorp",
-    logoUrl: "/Untitled-4.jpg",
+    logoUrl: "/sponsor/meettoaspire.webp",
     logoAlt: "TechCorp Logo",
     tier: "platinum",
     url: "https://techcorp.example.com",
-    description: "Leading technology solutions provider",
+   
   },
   {
     name: "DesignHub",
-    logoUrl: "/Untitled-4.jpg",
+    logoUrl: "/sponsor/HWD.webp",
     logoAlt: "DesignHub Logo",
     tier: "gold",
-    url: "https://designhub.example.com",
+    url: ''
   },
   {
     name: "WebServices",
-    logoUrl: "/Untitled-4.jpg",
+    logoUrl: "/sponsor/logo5.png",
     logoAlt: "WebServices Logo",
     tier: "silver",
-    description: "Premium web hosting services",
-  },
-  {
-    name: "CodeCraft",
-    logoUrl: "/Untitled-4.jpg",
-    logoAlt: "CodeCraft Logo",
-    tier: "bronze",
+    url: "",
   },
    {
     name: "TechCorp",
-    logoUrl: "/Untitled-4.jpg",
+    logoUrl: "/sponsor/meettoaspire.webp",
     logoAlt: "TechCorp Logo",
     tier: "platinum",
     url: "https://techcorp.example.com",
-    description: "Leading technology solutions provider",
+   
   },
   {
     name: "DesignHub",
-    logoUrl: "/Untitled-4.jpg",
+    logoUrl: "/sponsor/HWD.webp",
     logoAlt: "DesignHub Logo",
     tier: "gold",
-    url: "https://designhub.example.com",
+    url: ''
   },
   {
     name: "WebServices",
-    logoUrl: "/Untitled-4.jpg",
+    logoUrl: "/sponsor/logo5.png",
     logoAlt: "WebServices Logo",
     tier: "silver",
-    description: "Premium web hosting services",
-  },
-  {
-    name: "CodeCraft",
-    logoUrl: "/Untitled-4.jpg",
-    logoAlt: "CodeCraft Logo",
-    tier: "bronze",
+    url: "",
   },
 ];
 

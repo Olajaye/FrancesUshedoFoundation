@@ -11,7 +11,8 @@ const page = () => {
         >
           <div className="container mx-auto px-6 ">
             <div>
-              <h2 className="text-6xl font-serif text-center">About Us</h2>
+              <h2 className="text-6xl font-serif text-start">About Us</h2>
+              <div className="w-[100px] h-2 bg-darckLilac"></div>
             </div>
           </div>
         </div>
