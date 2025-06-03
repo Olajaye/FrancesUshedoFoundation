@@ -66,7 +66,7 @@ export default function Home() {
             <div className="lg:flex justify-between items-center">
               <div className="lg:w-[50%] w-[100%] flex justify-center items-center order-2 lg:order-2">
                 <Image
-                  src={"/Untitled-5.jpg"}
+                  src={"/home/tryout3.png"}
                   alt={"Logo"}
                   width={200}
                   height={200}
