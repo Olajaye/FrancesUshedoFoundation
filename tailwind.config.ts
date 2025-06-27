@@ -37,6 +37,8 @@ const config: Config = {
       fontFamily: {
         EduQld: ["var(--eduQld-beginner)"],
         roboto: ["var(--font-lora)"],
+        poppins: ["var(--font-poppins)"],
+        montserrat: ["var(--font-montserrat)"],
       },
     },
   },

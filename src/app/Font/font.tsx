@@ -1,4 +1,4 @@
-import {Roboto, Poppins, Edu_QLD_Beginner} from "next/font/google"
+import {Roboto, Poppins, Edu_QLD_Beginner, Montserrat} from "next/font/google"
 
 export const roboto = Roboto({
   subsets: ['latin'],
@@ -16,4 +16,10 @@ export const edu_QLD_Beginner = Edu_QLD_Beginner({
   subsets: ['latin'],
   weight: ['400',"500", "600" ],
   variable: '--eduQld-beginner'
+})
+
+export const montserrat = Montserrat({
+  subsets: ['latin'],
+  weight: ['400', "500", "600", "700" ],
+  variable: '--font-montserrat'
 })

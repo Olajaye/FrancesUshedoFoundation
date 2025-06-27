@@ -1,8 +1,8 @@
 "use client";
-import BlogCard from "@/components/Blogs/BlogCard";
+
 import SponsorCard from "@/components/Sponsor/Sponsor";
 import Hero from "@/components/Hero/Hero";
-import { blogPosts, sponsors } from "@/constant/constant";
+import {  sponsors } from "@/constant/constant"; //blogPosts,
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -18,6 +18,32 @@ export default function Home() {
     <div className="">
       <Hero />
 
+      <div className=" container mx-auto  ">
+        <div className="flex justify-center items-center py-10">
+          <div className="flex gap-6">
+            <Card
+              title="Become a Volunteer"
+              text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempus vestibulum mauris quis aliquam."
+              // bgColor="bg-orange-500"
+              icon="🤝" // Placeholder, replace with actual icon
+            />
+            <Card
+              title="Dance & Music"
+              text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempus vestibulum mauris quis aliquam."
+              // bgColor="bg-cyan-50"
+              icon="🎶" // Placeholder, replace with actual icon
+            />
+            <Card
+              title="Online Conference"
+              text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempus vestibulum mauris quis aliquam."
+              // bgColor="bg-cyan-50"
+              icon="📹" // Placeholder, replace with actual icon
+            />
+          </div>
+        </div>
+      </div>
+
+      {/*  Partners Section */}
       <section className="py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl font-bold text-center text-darckLilac mb-8">
@@ -55,7 +81,6 @@ export default function Home() {
         </div>
       </section>
 
-
       <section className="bg-homeAbout bg-cover  bg-center relative h-auto ">
         {/* <div className="absolute inset-0 bg-black/20 "></div> */}
         <div
@@ -73,7 +98,6 @@ export default function Home() {
                   className="w-auto h-[400px] rounded-lg"
                 />
               </div>
-
 
               <div className="lg:w-[50%] w-[100%] order-1 lg:order-1 mt-5">
                 <div className="">
@@ -123,18 +147,153 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="container mx-auto px-4 py-12">
-        <div className="">
-          <h2 className="text-3xl font-bold text-darckLilac mb-8">
-            Latest Blog
-          </h2>
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {blogPosts.map((post) => (
-              <BlogCard key={post.slug} {...post} />
-            ))}
+      <div className="container mx-auto mt-10 p-4">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="w-full md:w-1/2">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">
+              Upcoming Events
+            </h2>
+            <EventCard
+              image="/junks/IMG_2792.JPG"
+              title="Fundraiser for Kids"
+              date="Aug 25, 2018"
+              location="Ball Room New York"
+              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempus vestibulum mauris."
+            />
+            <EventCard
+              image="/junks/IMG_2792.JPG"
+              title="Bring water to the children"
+              date="Aug 25, 2018"
+              location="Ball Room New York"
+              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempus vestibulum mauris."
+            />
+            <EventCard
+              image="/junks/IMG_2792.JPG"
+              title="Bring water to the children"
+              date="Aug 25, 2018"
+              location="Ball Room New York"
+              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempus vestibulum mauris."
+            />
+          </div>
+          <div className="w-full md:w-1/2">
+            <FeaturedCause />
+          </div>
+        </div>
+      </div>
+
+      
+
+      <div className="container mx-auto">
+        <div className="flex items-center justify-between my-10 p-6">
+          <div className="text-center max-w-2xl">
+            <h1 className="text-3xl font-semibold text-gray-800 text-left leading-tight">
+              We love to help all the children that have problems in the world.
+              After  years we have many goals achieved.
+            </h1>
+            <div className="mt-4">
+              <hr className="border-t-2 border-orange-500 w-16 mx-auto" />
+            </div>
+            <p className="mt-2 text-sm text-gray-500">
+              Dolor sit amet, consectetur adipiscing elit. Mauris tempus
+              vestibulum mauris quis aliquam. Lorem ipsum dolor sit amet.
+            </p>
+          </div>
+          <div className="mt-10 flex justify-center gap-8">
+            <StatCard
+              icon="🤲" // Placeholder, replace with actual icon
+              number="120k"
+              label="Children Helped"
+            />
+            <StatCard
+              icon="💧" // Placeholder, replace with actual icon
+              number="79"
+              label="Water Wells"
+            />
+            <StatCard
+              icon="🕊️" // Placeholder, replace with actual icon
+              number="253"
+              label="Volunteers"
+            />
           </div>
         </div>
       </div>
     </div>
   );
 }
+
+const EventCard = ({ image, title, date, location, description }: {image:string, title:string, date:string, location:string, description:string}) => (
+  <div className="mb-6 flex space-x-3 items-center">
+    <img src={image} alt={title} className="w-32 h-32 object-cover mb-2" />
+    <div className="text-gray-800">
+      <h3 className="font-semibold">{title}</h3>
+      <p className="text-sm text-gray-600">
+        {date} | {location}
+      </p>
+      <p className="text-sm mt-1">{description}</p>
+      <a href="#" className="text-orange-500 text-sm mt-1 inline-block">
+        Read More
+      </a>
+    </div>
+  </div>
+);
+
+const FeaturedCause = () => (
+  <div className="bg-gray-100 p-6 rounded-lg">
+    <h2 className="text-2xl font-bold text-gray-800 mb-4">Featured Cause</h2>
+    <div className="flex flex-col md:flex-row items-center">
+      <img
+        src="/home/tryout3.png"
+        alt="Featured Cause"
+        className="w-full md:w-1/2 h-[350px] object-cover mb-4 md:mb-0 md:mr-4"
+      />
+      <div className="w-full md:w-1/2">
+        <h3 className="font-semibold text-lg">Fundraiser for Kids</h3>
+        <p className="text-sm text-gray-600">
+          Aug 25, 2018 | Ball Room New York
+        </p>
+        <p className="text-sm mt-2">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempus
+          vestibulum mauris.
+        </p>
+        <button className="bg-orange-500 text-white px-4 py-2 rounded-full mt-4">
+          Donate Now
+        </button>
+        <div className="mt-4">
+          <div className="flex justify-between text-sm text-gray-600 mb-1">
+            <span>Raised: $56,880</span>
+            <span>Goal: $70,000</span>
+          </div>
+          <div className="w-full bg-gray-300 rounded-full h-2.5">
+            <div
+              className="bg-orange-500 h-2.5 rounded-full"
+              style={{ width: "83%" }}
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+const Card = ({ title, text,  icon }: {title:string, text:string, icon: string}) => {
+  return (
+    <div
+      className={`w-[350px] h-72 rounded-2xl p-6 text-center flex flex-col justify-center items-center bg-lilac`}
+    >
+      <div className="text-4xl mb-4">{icon}</div> {/* Icon placeholder */}
+      <h3 className="text-2xl font-bold mb-2">{title}</h3>
+      <p className="text-sm leading-5">{text}</p>
+    </div>
+  );
+};
+
+const StatCard = ({ icon, number, label }: {icon:string, number:number|string, label:string}) => {
+  return (
+    <div className="text-center">
+      <div className="text-4xl text-orange-500 mb-2">{icon}</div>{" "}
+      {/* Icon placeholder */}
+      <div className="text-3xl font-bold text-gray-800">{number}</div>
+      <div className="text-sm text-gray-600">{label}</div>
+    </div>
+  );
+};

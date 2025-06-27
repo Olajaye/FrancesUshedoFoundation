@@ -1,6 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import {edu_QLD_Beginner, roboto } from "@/app/Font/font";
+import {edu_QLD_Beginner, montserrat, roboto } from "@/app/Font/font";
 
 import { Navbar } from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
@@ -17,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${roboto.variable} ${edu_QLD_Beginner.variable}`}>
+      <body className={`${roboto.variable} ${edu_QLD_Beginner.variable} ${montserrat.variable} `}>
         <Navbar />
         {children}
         <Footer />

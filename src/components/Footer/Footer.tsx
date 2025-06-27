@@ -38,7 +38,7 @@ const Footer: React.FC = () => {
             <div>
               {/* <FooterLogo /> */}
               <Image
-                src={"/logo/logoNew.png"}
+                src={"/logo/LogoWithOutLabel.png"}
                 alt={"Logo"}
                 width={200}
                 height={200}
