@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 5px;
   height: 5px;
 }
@@ -13,7 +13,7 @@
 
 ::-webkit-scrollbar-thumb {
   background-color: #ffffff;
-}
+} */
 
 .fade-container {
   display: flex;
@@ -24,7 +24,7 @@
 
 .fade-text {
   opacity: 0;
-  /* font-size: 76px; */
+  font-size: 56px;
   /* padding-top: 7px; */
   /* padding-bottom: 7px; */
   /* font-weight: 800; */

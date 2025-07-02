@@ -32,7 +32,7 @@ export const Navbar = () => {
 
   return (
     <section>
-      <div className="bg-lilac p-2 ">
+      <div className="bg-lilac p-1 ">
         <div className="container mx-auto px-4 ">
           <div className="sm:flex ">
             <div className="flex items-center space-x-2">
@@ -59,7 +59,7 @@ export const Navbar = () => {
           isScrolled
             ? "bg-white shadow-lilac/20"
             : "bg-white/50 shadow-transparent"
-        )} // scrolled ? "bg-white py-0" : "bg-white"
+        )} 
       >
         <div
           className={cn("container mx-auto px-4")} //scrolled ? "md:bg-white" : "md:bg-white"
@@ -75,7 +75,7 @@ export const Navbar = () => {
                   alt={"Logo"}
                   width={200}
                   height={100}
-                  className="w-auto h-[55px]"
+                  className="w-auto h-[60px]"
                 />
                
               </Link>

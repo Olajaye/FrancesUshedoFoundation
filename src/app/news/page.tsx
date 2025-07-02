@@ -5,7 +5,7 @@ import BlogCard from "@/components/Blogs/BlogCard";
 const page = () => {
   return (
     <>
-      <section className="bg-portfoilio bg-cover h-[45vh] py-12 bg-center relative overflow-hidden">
+      <section className="bg-portfoilio bg-cover h-[35vh] py-12 bg-center relative overflow-hidden">
         <div className="absolute inset-0 bg-black/80"></div>
         <div
           className="absolute inset-0 flex flex-col items-center justify-center text-start text-white px-4"
@@ -13,7 +13,9 @@ const page = () => {
         >
           <div className="container mx-auto px-6 ">
             <div>
-              <h2 className="text-6xl font-serif text-start">Blogs</h2>
+              <h2 className="text-6xl font-montserrat font-semibold text-start">
+                News
+              </h2>
               <div className="w-[100px] h-2 bg-darckLilac"></div>
             </div>
           </div>
@@ -24,7 +26,7 @@ const page = () => {
         <div className="container mx-auto px-4 py-12">
           <div className="flex flex-col">
             {/* <Header /> */}
-            <div className="flex flex-1 overflow-hidden">
+            <div className="flex flex-1 space-x-6 overflow-hidden">
               <MainContent />
                <Sidebar />
             </div>
@@ -92,7 +94,7 @@ const MainContent = () => {
   ];
 
   return (
-    <div className="flex-1 p-6 overflow-y-scroll h-screen">
+    <div className="flex-1  overflow-y-scroll h-screen">
       {posts.map((post) => (
         <div key={post.id} className="mb-8">
           <img

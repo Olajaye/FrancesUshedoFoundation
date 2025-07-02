@@ -2,7 +2,7 @@
 
 import SponsorCard from "@/components/Sponsor/Sponsor";
 import Hero from "@/components/Hero/Hero";
-import {  sponsors } from "@/constant/constant"; //blogPosts,
+import { sponsors } from "@/constant/constant"; //blogPosts,
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -11,6 +11,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/autoplay";
+import Link from "next/link";
 
 export default function Home() {
   const router = useRouter();
@@ -23,21 +24,18 @@ export default function Home() {
           <div className="flex gap-6">
             <Card
               title="Become a Volunteer"
-              text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempus vestibulum mauris quis aliquam."
-              // bgColor="bg-orange-500"
-              icon="🤝" // Placeholder, replace with actual icon
+              text="Becoming a volunteer with TFUF brings purpose, connection, and the chance to make lasting positive change."
+              icon="/junks/handIcon.png"
             />
             <Card
-              title="Dance & Music"
-              text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempus vestibulum mauris quis aliquam."
-              // bgColor="bg-cyan-50"
-              icon="🎶" // Placeholder, replace with actual icon
+              title="Donate"
+              text="Donating through TFUF empowers change, supports vital causes, and helps build stronger communities for a better future."
+              icon="/junks/loveOnHand.png"
             />
             <Card
-              title="Online Conference"
-              text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempus vestibulum mauris quis aliquam."
-              // bgColor="bg-cyan-50"
-              icon="📹" // Placeholder, replace with actual icon
+              title="Partner with Us"
+              text="Partnering with TFUF amplifies impact, fosters collaboration, and drives meaningful change for vulnerable children in Nigeria."
+              icon="/junks/Slove.png"
             />
           </div>
         </div>
@@ -129,7 +127,7 @@ export default function Home() {
                       change—one child at a time.
                     </h3>
 
-                    <p>🦋 ✨</p>
+                    {/* <p>🦋 ✨</p> */}
                   </div>
 
                   <div>
@@ -155,24 +153,25 @@ export default function Home() {
             </h2>
             <EventCard
               image="/junks/IMG_2792.JPG"
-              title="Fundraiser for Kids"
-              date="Aug 25, 2018"
-              location="Ball Room New York"
-              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempus vestibulum mauris."
+              title="Empowering Nigeria’s Youth"
+              date="Aug 25, 2025"
+              location="Kano State, Nigeria"
+              description="Get ready for our upcoming fundraiser to support vital health and education programs. Your generosity will help transform young lives across Nigeria."
             />
             <EventCard
               image="/junks/IMG_2792.JPG"
-              title="Bring water to the children"
-              date="Aug 25, 2018"
-              location="Ball Room New York"
-              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempus vestibulum mauris."
+              title="Community Health Workshop"
+              date="Aug 25, 2025"
+              location="Lagos State, Nigeria"
+              description="We’re planning a workshop to educate families on health practices, including sickle cell awareness. Join us to promote healthier futures for children.
+"
             />
             <EventCard
               image="/junks/IMG_2792.JPG"
-              title="Bring water to the children"
+              title="School Outreach Program"
               date="Aug 25, 2018"
-              location="Ball Room New York"
-              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempus vestibulum mauris."
+              location="Abuja, Nigeria"
+              description="Our upcoming school visits will provide resources and support to students in need. Help us empower the next generation through education."
             />
           </div>
           <div className="w-full md:w-1/2">
@@ -181,36 +180,32 @@ export default function Home() {
         </div>
       </div>
 
-      
-
       <div className="container mx-auto">
-        <div className="flex items-center justify-between my-10 p-6">
+        <div className="flex items-end justify-between py-40 p-6">
           <div className="text-center max-w-2xl">
-            <h1 className="text-3xl font-semibold text-gray-800 text-left leading-tight">
-              We love to help all the children that have problems in the world.
-              After  years we have many goals achieved.
+            <h1 className="text-4xl font-semibold text-[#262626] text-left leading-snug">
+              At The Frances Ushedo Foundation, we’re passionate about transforming young lives in Nigeria. In our first year, we’ve laid a strong foundation for lasting impact.
             </h1>
             <div className="mt-4">
-              <hr className="border-t-2 border-orange-500 w-16 mx-auto" />
+              <hr className="border-t-2 border-darckLilac w-16" />
             </div>
             <p className="mt-2 text-sm text-gray-500">
-              Dolor sit amet, consectetur adipiscing elit. Mauris tempus
-              vestibulum mauris quis aliquam. Lorem ipsum dolor sit amet.
+              Through targeted health and education programs, we empower children and communities to thrive. Join us in building brighter futures across Nigeria.
             </p>
           </div>
-          <div className="mt-10 flex justify-center gap-8">
+          <div className="flex justify-center gap-8">
             <StatCard
-              icon="🤲" // Placeholder, replace with actual icon
+              icon="/junks/handIcon.png" // Placeholder, replace with actual icon
               number="120k"
               label="Children Helped"
             />
             <StatCard
-              icon="💧" // Placeholder, replace with actual icon
+              icon="/junks/loveOnHand.png" // Placeholder, replace with actual icon
               number="79"
               label="Water Wells"
             />
             <StatCard
-              icon="🕊️" // Placeholder, replace with actual icon
+              icon="/junks/Slove.png" // Placeholder, replace with actual icon
               number="253"
               label="Volunteers"
             />
@@ -221,7 +216,19 @@ export default function Home() {
   );
 }
 
-const EventCard = ({ image, title, date, location, description }: {image:string, title:string, date:string, location:string, description:string}) => (
+const EventCard = ({
+  image,
+  title,
+  date,
+  location,
+  description,
+}: {
+  image: string;
+  title: string;
+  date: string;
+  location: string;
+  description: string;
+}) => (
   <div className="mb-6 flex space-x-3 items-center">
     <img src={image} alt={title} className="w-32 h-32 object-cover mb-2" />
     <div className="text-gray-800">
@@ -229,10 +236,10 @@ const EventCard = ({ image, title, date, location, description }: {image:string,
       <p className="text-sm text-gray-600">
         {date} | {location}
       </p>
-      <p className="text-sm mt-1">{description}</p>
-      <a href="#" className="text-orange-500 text-sm mt-1 inline-block">
+      <p className="text-sm mt-1">{description.slice(0, 90)}....</p>
+      <Link  href="/news" className="text-darckLilac text-sm mt-1 inline-block">
         Read More
-      </a>
+      </Link>
     </div>
   </div>
 );
@@ -255,7 +262,7 @@ const FeaturedCause = () => (
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempus
           vestibulum mauris.
         </p>
-        <button className="bg-orange-500 text-white px-4 py-2 rounded-full mt-4">
+        <button className="bg-darckLilac text-white px-4 py-2 rounded-full mt-4">
           Donate Now
         </button>
         <div className="mt-4">
@@ -265,7 +272,7 @@ const FeaturedCause = () => (
           </div>
           <div className="w-full bg-gray-300 rounded-full h-2.5">
             <div
-              className="bg-orange-500 h-2.5 rounded-full"
+              className="bg-darckLilac h-2.5 rounded-full"
               style={{ width: "83%" }}
             ></div>
           </div>
@@ -275,22 +282,39 @@ const FeaturedCause = () => (
   </div>
 );
 
-const Card = ({ title, text,  icon }: {title:string, text:string, icon: string}) => {
+const Card = ({
+  title,
+  text,
+  icon,
+}: {
+  title: string;
+  text: string;
+  icon: string;
+}) => {
   return (
     <div
       className={`w-[350px] h-72 rounded-2xl p-6 text-center flex flex-col justify-center items-center bg-lilac`}
     >
-      <div className="text-4xl mb-4">{icon}</div> {/* Icon placeholder */}
-      <h3 className="text-2xl font-bold mb-2">{title}</h3>
-      <p className="text-sm leading-5">{text}</p>
+      <img src={icon} alt="hand" className="w-32" />
+      <h3 className="text-2xl font-bold mb-2 font-montserrat">{title}</h3>
+      <p className="text-sm leading-5 font-montserrat">{text}</p>
     </div>
   );
 };
 
-const StatCard = ({ icon, number, label }: {icon:string, number:number|string, label:string}) => {
+const StatCard = ({
+  icon,
+  number,
+  label,
+}: {
+  icon: string;
+  number: number | string;
+  label: string;
+}) => {
   return (
     <div className="text-center">
-      <div className="text-4xl text-orange-500 mb-2">{icon}</div>{" "}
+      {/* <div className="text-4xl text-orange-500 mb-2">{icon}</div>{" "} */}
+      <img src={icon} alt="hand" className="w-24 h-20" />
       {/* Icon placeholder */}
       <div className="text-3xl font-bold text-gray-800">{number}</div>
       <div className="text-sm text-gray-600">{label}</div>
