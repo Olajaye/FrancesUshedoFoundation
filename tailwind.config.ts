@@ -14,18 +14,17 @@ const config: Config = {
         "lilac-gradient": "linear-gradient(to right, #d0b1d1, #d154d6)",
       },
       screens: {
-        'custom': '1038px',
-        'custom2': '1275px',
+        custom: "1038px",
+        custom2: "1275px",
       },
       backgroundImage: {
-        'hero': "url('/home/welcomeHero.png')",
-        "footerbg": "url('/footer/footert.jpg')",
-        "homeAbout": "url('/home/picture2.jpg')",
-        "about": "url('/about/IMG_3137.jpg')",
-        "portfoilio": "url('/portfolio/picture1.jpg')",
-        "contact": "url('/contact/IMG_3137.jpg')",
-        "dark-overlay":
-          "linear-gradient(rgba(0,0,0, 0.5), rgba(0, 0, 0, 0.5))",
+        hero: "url('/home/welcomeHero.png')",
+        footerbg: "url('/footer/footert.jpg')",
+        homeAbout: "url('/home/PHOTO-2025-01-31-12-29-05.jpg')",
+        about: "url('/about/IMG_3137.jpg')",
+        portfoilio: "url('/portfolio/picture1.jpg')",
+        contact: "url('/contact/IMG_3137.jpg')",
+        "dark-overlay": "linear-gradient(rgba(0,0,0, 0.5), rgba(0, 0, 0, 0.5))",
         "light-overlay":
           "linear-gradient(rgba(255, 255, 255, 1), rgba(0,0,0, 0.1))",
         "lilac-gradient": "linear-gradient(to right, #d0b1d1, #d154d6)",

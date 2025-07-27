@@ -36,11 +36,11 @@ export const MobileMenu = ({ navItems }: MobileMenuProps) => {
   }, [isOpen]);
 
   return (
-    <div className="md:hidden">
+    <div className="md:hidden relative z-50" style={{ zIndex: 2000 }}>
       <button
         aria-label={isOpen ? "Close menu" : "Open menu"}
         onClick={() => setIsOpen(!isOpen)}
-        className="flex flex-col justify-center items-center w-10 h-10 relative z-20"
+        className="flex flex-col justify-center items-center w-8 h-8 space-y-1.5"
       >
         <span
           className={cn(
@@ -63,22 +63,22 @@ export const MobileMenu = ({ navItems }: MobileMenuProps) => {
       </button>
 
       {/* Mobile menu overlay */}
-      <div
+      {/* <div
         className={cn(
           "fixed inset-0 bg-lilac/80 backdrop-blur-sm z-10 transition-all duration-300",
           isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         )}
         onClick={() => setIsOpen(false)}
-      />
+      /> */}
 
       {/* Mobile menu panel */}
       <div
         className={cn(
-          "fixed top-[72px] left-0 right-0 bottom-0 bg-background z-10 p-6 transition-transform duration-300 ease-in-out",
-          isOpen ? "translate-x-0" : "translate-x-full"
+          "fixed top-[60px] left-0 right-0 bottom-0  z-10 p-6 transition-transform duration-300 ease-in-out",
+          isOpen ? "translate-x-0" : "hidden -translate-x-full"
         )}
       >
-        <nav className="flex flex-col space-y-4">
+        <nav className="flex flex-col space-y-4 bg-white p-4 rounded-lg shadow-lg">
           {navItems.map((item) => (
             <Link
               key={item.href}

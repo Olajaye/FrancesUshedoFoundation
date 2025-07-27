@@ -13,8 +13,8 @@ import Link from "next/link";
 
 const navItems = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About us" }, // Added leading slash
-  { href: "/portfoilio", label: "Portfoilio" },
+  { href: "/about", label: "About us" },
+  { href: "/portfolio", label: "Portfolio" }, // Fixed typo from "portfoilio"
   { href: "/news", label: "News" },
   { href: "/contact", label: "Contact" },
 ];
@@ -31,21 +31,20 @@ export const Navbar = () => {
   }, []);
 
   return (
-    <section>
-      <div className="bg-lilac p-1 ">
-        <div className="container mx-auto px-4 ">
-          <div className="sm:flex ">
-            <div className="flex items-center space-x-2">
-              <IoMdMailUnread className=" w-3 h-3 md:w-5 md:h-5 text-white" />
-              <p className="text-white text-sm md:text-base font-semibold font-montserrat">
+    <nav className="sticky top-0 z-50">
+      <div className="bg-lilac py-2">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col sm:flex-row items-center justify-start gap-2 sm:gap-8">
+            <div className="flex items-center gap-2">
+              <IoMdMailUnread className="w-4 h-4 md:w-5 md:h-5 text-white" />{" "}
+              <p className="text-white text-sm md:text-base font-montserrat">
                 foundation@gmail.com
               </p>
             </div>
-
-            <div className="flex items-center space-x-2 sm:ms-3 md:ms-32">
-              <FaPhoneVolume className=" w-3 h-3 md:w-5 md:h-5 text-white" />
-              <p className="text-white text-sm md:text-base font-semibold font-montserrat">
-                +448287876545
+            <div className="flex items-center gap-2">
+              <FaPhoneVolume className="w-4 h-4 md:w-5 md:h-5 text-white" />
+              <p className="text-white text-sm md:text-base  font-montserrat">
+                +44 828 787 6545{" "}
               </p>
             </div>
           </div>
@@ -54,52 +53,37 @@ export const Navbar = () => {
 
       <header
         className={cn(
-          "sticky overflow-x-hidden top-0 z-50 backdrop-blur-sm bg-opacity-90",
-          "transition-all duration-300 ease-in-out shadow-lg",
-          isScrolled
-            ? "bg-white shadow-lilac/20"
-            : "bg-white/50 shadow-transparent"
-        )} 
+          "bg-white/90 backdrop-blur-sm transition-all duration-300 ease-in-out shadow-md", // Made shadow subtle and always present for
+          isScrolled ? "shadow-lilac/30" : "shadow-lilac/10"
+        )}
       >
-        <div
-          className={cn("container mx-auto px-4")} //scrolled ? "md:bg-white" : "md:bg-white"
-        >
-          <div className="flex items-center justify-between py-2 ">
-           
-            <div className="flex items-center md:w-[27%] relative">
-              <Link
-                href="/"
-              >
-                <Image
-                  src={"/logo/cropLogo.png"}
-                  alt={"Logo"}
-                  width={200}
-                  height={100}
-                  className="w-auto h-[60px]"
-                />
-               
-              </Link>
-            </div>
-
-            {/* Desktop navigation */}
-            <nav className="hidden md:flex items-center space-x-10">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between py-3 md:py-4">
+            <Link href="/">
+              <Image
+                src="/logo/cropLogo.png"
+                alt="Foundation Logo"
+                width={180}
+                height={60}
+                className="w-auto h-10 md:h-12"
+                priority
+              />
+            </Link>
+            <ul className="hidden md:flex items-center gap-8 lg:gap-10">
               {navItems.map((item) => (
-                <NavItem
-                  key={item.href}
-                  href={item.href}
-                  isActive={pathname === item.href}
-                  label={item.label}
-                />
+                <li key={item.href}>
+                  <NavItem
+                    href={item.href}
+                    isActive={pathname === item.href}
+                    label={item.label}
+                  />
+                </li>
               ))}
-            </nav>
-
-            {/* Mobile menu toggle */}
+            </ul>
             <MobileMenu navItems={navItems} />
           </div>
         </div>
       </header>
-    </section>
+    </nav>
   );
 };
-
-

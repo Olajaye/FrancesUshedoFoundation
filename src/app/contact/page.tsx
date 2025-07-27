@@ -1,4 +1,5 @@
 "use client";
+import { PagesHero } from "@/components/hearderCom/hearder";
 import { useState } from "react";
 import React from "react";
 
@@ -30,7 +31,7 @@ const Page = () => {
   };
   return (
     <>
-      <section className="bg-portfoilio bg-cover h-[45vh] py-12 bg-center relative overflow-hidden">
+      {/* <section className="bg-portfoilio bg-cover h-[45vh] py-12 bg-center relative overflow-hidden">
         <div className="absolute inset-0 bg-black/80"></div>
         <div
           className="absolute inset-0 flex flex-col items-center justify-center text-start text-white px-4"
@@ -43,7 +44,9 @@ const Page = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
+
+      <PagesHero img={"/portfolio/picture1.jpg"} title={"Contact Us"} />
 
       <section className="container px-4 mx-auto py-12">
         <div className="flex items-center justify-between">

@@ -1,11 +1,12 @@
 import React from "react";
 import { blogPosts } from "@/constant/constant";
 import BlogCard from "@/components/Blogs/BlogCard";
+import { PagesHero } from "@/components/hearderCom/hearder";
 
 const page = () => {
   return (
     <>
-      <section className="bg-portfoilio bg-cover h-[35vh] py-12 bg-center relative overflow-hidden">
+      {/* <section className="bg-portfoilio bg-cover h-[35vh] py-12 bg-center relative overflow-hidden">
         <div className="absolute inset-0 bg-black/80"></div>
         <div
           className="absolute inset-0 flex flex-col items-center justify-center text-start text-white px-4"
@@ -20,7 +21,9 @@ const page = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
+
+      <PagesHero img={"/portfolio/picture1.jpg"} title={" News"} />
 
       <section className="container px-4 mx-auto py-12">
         <div className="container mx-auto px-4 py-12">
@@ -28,7 +31,7 @@ const page = () => {
             {/* <Header /> */}
             <div className="flex flex-1 space-x-6 overflow-hidden">
               <MainContent />
-               <Sidebar />
+              <Sidebar />
             </div>
           </div>
           <div className="">
@@ -79,7 +82,7 @@ const MainContent = () => {
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempus vestibulum mauris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempus vestibulum mauris quis aliquam. Integer accumsan sodales odio, id tempus velit ullamc.",
     },
-     {
+    {
       id: 1,
       date: "March 12, 2018",
       title: "Toys for Children Campaign",

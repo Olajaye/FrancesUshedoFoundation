@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState,  useEffect } from "react";
+import { PagesHero } from "@/components/hearderCom/hearder";
+import React, { useState, useEffect } from "react";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import { BsX } from "react-icons/bs";
 
@@ -176,7 +177,7 @@ const albums: Album[] = [
 const page = () => {
   return (
     <>
-      <section className="bg-portfoilio bg-cover h-[35vh] py-12 bg-center relative overflow-hidden">
+      {/* <section className="bg-portfoilio bg-cover h-[35vh] py-12 bg-center relative overflow-hidden">
         <div className="absolute inset-0 bg-black/80"></div>
         <div
           className="absolute inset-0 flex flex-col items-center justify-center text-start text-white px-4"
@@ -191,7 +192,9 @@ const page = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
+
+      <PagesHero img={"/portfolio/picture1.jpg"} title={"Portfolio"} />
 
       <section className="container px-4 mx-auto py-12">
         <PhotoGallery />
@@ -220,15 +223,14 @@ const PhotoGallery: React.FC = () => {
     <div className="">
       <div className="container mx-auto px-4 py-8">
         {albums.length > 0 ? (
-          // //sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 
-          <div className="grid grid-cols-3 gap-6"> 
+          // //sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4
+          <div className="grid grid-cols-3 gap-6">
             {albums.map((album) => (
               <div key={album.id} className="aspect-square">
                 <AlbumCard
                   album={album}
                   onClick={() => handleAlbumClick(album)}
                 />
-                
               </div>
             ))}
           </div>
@@ -275,6 +277,12 @@ interface AlbumCardProps {
   album: Album;
   onClick: () => void;
 }
+interface PhotoModalProps {
+  album: Album;
+  selectedPhoto: Photo;
+  onClose: () => void;
+  onPhotoSelect: (photo: Photo) => void;
+}
 
 const AlbumCard: React.FC<AlbumCardProps> = ({ album, onClick }) => {
   return (
@@ -290,26 +298,21 @@ const AlbumCard: React.FC<AlbumCardProps> = ({ album, onClick }) => {
           loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+        <div className="absolute bottom-0 left-0 right-0 p-4 bg-lilac transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
           <h3 className="text-white font-semibold text-lg mb-1 truncate">
             {album.name}
           </h3>
           <p className="text-white/90 text-sm mb-2 line-clamp-2">
             {album.photos.length} photos
           </p>
+          <h3 className="text-base text-dark text">
+            {album.description.slice(0, 200)}
+          </h3>
         </div>
       </div>
-      {/* <h3 className="text-xl text-dark text">{album.description}</h3> */}
     </div>
   );
 };
-
-interface PhotoModalProps {
-  album: Album;
-  selectedPhoto: Photo;
-  onClose: () => void;
-  onPhotoSelect: (photo: Photo) => void;
-}
 
 const PhotoModal: React.FC<PhotoModalProps> = ({
   album,
@@ -425,7 +428,7 @@ const PhotoModal: React.FC<PhotoModalProps> = ({
               </div>
             </div>
 
-            <div className="border-t pt-4">
+            {/* <div className="border-t pt-4">
               <div className="flex items-center justify-between mb-3">
                 <span className="text-sm text-gray-500">Photographer</span>
                 <span className="font-medium text-gray-900">
@@ -444,9 +447,9 @@ const PhotoModal: React.FC<PhotoModalProps> = ({
                   {selectedPhoto.width} × {selectedPhoto.height}
                 </span>
               </div>
-            </div>
+            </div> */}
 
-            <div className="border-t pt-4">
+            {/* <div className="border-t pt-4">
               <h3 className="text-sm font-medium text-gray-900 mb-2">Tags</h3>
               <div className="flex flex-wrap gap-2">
                 {selectedPhoto.tags.map((tag) => (
@@ -458,7 +461,7 @@ const PhotoModal: React.FC<PhotoModalProps> = ({
                   </span>
                 ))}
               </div>
-            </div>
+            </div> */}
 
             <div className="border-t pt-4">
               <button className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200">

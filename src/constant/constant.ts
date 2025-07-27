@@ -7,14 +7,13 @@ export const sponsors: SponsorProps[] = [
     logoAlt: "TechCorp Logo",
     tier: "platinum",
     url: "https://techcorp.example.com",
-   
   },
   {
     name: "DesignHub",
     logoUrl: "/sponsor/HWD.webp",
     logoAlt: "DesignHub Logo",
     tier: "gold",
-    url: ''
+    url: "",
   },
   {
     name: "WebServices",
@@ -23,20 +22,19 @@ export const sponsors: SponsorProps[] = [
     tier: "silver",
     url: "",
   },
-   {
+  {
     name: "TechCorp",
     logoUrl: "/sponsor/meettoaspire.webp",
     logoAlt: "TechCorp Logo",
     tier: "platinum",
     url: "https://techcorp.example.com",
-   
   },
   {
     name: "DesignHub",
     logoUrl: "/sponsor/HWD.webp",
     logoAlt: "DesignHub Logo",
     tier: "gold",
-    url: ''
+    url: "",
   },
   {
     name: "WebServices",
@@ -50,8 +48,9 @@ export const sponsors: SponsorProps[] = [
 export const blogPosts = [
   {
     title: "5 Ways to Make a Difference in Your Community Today",
-    excerpt: "Discover simple yet impactful actions you can take to support those in need and create positive change.",
-    imageUrl: "/junks/Untitled-3.jpg" ,
+    excerpt:
+      "Discover simple yet impactful actions you can take to support those in need and create positive change.",
+    imageUrl: "/junks/Untitled-3.jpg",
     imageAlt: "Volunteers serving food at community kitchen",
     author: {
       name: "Sarah Johnson",
@@ -64,7 +63,8 @@ export const blogPosts = [
   },
   {
     title: "The Ripple Effect: How Small Donations Create Big Change",
-    excerpt: "Learn how even modest contributions can transform lives through our transparent funding model.",
+    excerpt:
+      "Learn how even modest contributions can transform lives through our transparent funding model.",
     imageUrl: "/junks/IMG_2792.JPG",
     imageAlt: "Children smiling while receiving school supplies",
     author: {
@@ -78,7 +78,8 @@ export const blogPosts = [
   },
   {
     title: "Volunteer Spotlight: Transforming Lives Through Service",
-    excerpt: "Meet our dedicated volunteers and hear their inspiring stories of compassion in action.",
+    excerpt:
+      "Meet our dedicated volunteers and hear their inspiring stories of compassion in action.",
     imageUrl: "/junks/Untitled-4.jpg",
     imageAlt: "Group of volunteers planting trees",
     author: {
@@ -92,6 +93,29 @@ export const blogPosts = [
   },
 ];
 
-
-
- 
+export const Sponsors = [
+  {
+    name: "TechCorp",
+    logo: "/sponsor/meettoaspire.webp",
+  },
+  {
+    name: "DesignHub",
+    logo: "/sponsor/HWD.webp",
+  },
+  {
+    name: "WebServices",
+    logo: "/sponsor/logo5.png",
+  },
+  {
+    name: "TechCorp",
+    logo: "/sponsor/meettoaspire.webp",
+  },
+  {
+    name: "DesignHub",
+    logo: "/sponsor/HWD.webp",
+  },
+  {
+    name: "WebServices",
+    logo: "/sponsor/logo5.png",
+  },
+];
