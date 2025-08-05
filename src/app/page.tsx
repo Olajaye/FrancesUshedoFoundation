@@ -26,13 +26,13 @@ const cardsData = [
   {
     title: "Donate",
     text: "Donating through TFUF empowers change, supports vital causes, and helps build stronger communities for a better future.",
-    icon: "/junks/loveOnHand.png",
+    icon: "/junks/handIcon.png",
     href: "/donate",
   },
   {
     title: "Partner with Us",
     text: "Partnering with TFUF amplifies impact, fosters collaboration, and drives meaningful change for vulnerable children in Nigeria.",
-    icon: "/junks/Slove.png",
+    icon: "/junks/handIcon.png",
     href: "/partner",
   },
 ];

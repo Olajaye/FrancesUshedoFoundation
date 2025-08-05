@@ -33,7 +33,7 @@ const page = () => {
             className="flex flex-col items-center py-12 justify-center text-start text-black"
             style={{ zIndex: 9999 }}
           >
-            <div className="px-4 container mx-auto">
+            <div className="container mx-auto">
               <div className="lg:flex justify-between items-center">
                 <div className="lg:w-[50%] w-[100%] flex justify-center items-center order-2 lg:order-2">
                   <Image
@@ -48,7 +48,7 @@ const page = () => {
                 <div className="lg:w-[50%] w-[100%] order-1 lg:order-1 mt-5">
                   <div className="">
                     <div className="mb-10">
-                      <h1 className="text-4xl font-montserrat font-medium">
+                      <h1 className="md:text-4xl text-2xl font-montserrat font-medium">
                         Welcome to The Frances Ushedo Foundation
                       </h1>
                       <div className="w-[100px] h-1 rounded-md bg-darckLilac mt-4"></div>
@@ -90,7 +90,7 @@ const page = () => {
                         creating a lasting impact on the lives of the less
                         fortunate.
                       </h3>
-                      <h3 className="mt-3 text-base">
+                      <h3 className="mt-3 text-base font-montserrat font-medium">
                         We invite you to join us on this rewarding journey.
                         Together, we can transform lives, one child at a
                         time.&quot;
