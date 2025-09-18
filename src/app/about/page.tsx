@@ -118,9 +118,10 @@ const page = () => {
           <div className="flex flex-col md:flex-row items-start justify-between gap-8 md:gap-12">
             {/* Mission: Left column, responsive text */}
             <div className="w-full md:w-1/2">
-              <h2 className="text-3xl md:text-4xl font-montserrat font-bold text-gray-800 mb-4 md:mb-6">
+              <h2 className="text-3xl md:text-4xl font-montserrat font-bold text-gray-800 mb-2">
                 Our Mission
               </h2>
+              <div className="w-[100px] h-1 rounded-md bg-darckLilac mb-4 md:mb-6"></div>
               <p className="text-lg md:text-xl font-montserrat font-medium italic text-gray-700 leading-relaxed">
                 <span className="text-darkLilac text-4xl font-bold">
                   &ldquo;
@@ -140,9 +141,10 @@ const page = () => {
 
             {/* Vision: Right column, matching styles */}
             <div className="w-full md:w-1/2 mt-8 md:mt-0">
-              <h2 className="text-3xl md:text-4xl font-montserrat font-bold text-gray-800 mb-4 md:mb-6">
+              <h2 className="text-3xl md:text-4xl font-montserrat font-bold text-gray-800 mb-2">
                 Our Vision
               </h2>
+              <div className="w-[100px] h-1 rounded-md bg-darckLilac mb-4 md:mb-6"></div>
               <p className="text-lg md:text-xl font-montserrat font-medium italic text-gray-700 leading-relaxed">
                 <span className="text-darkLilac text-4xl font-bold">
                   &ldquo;

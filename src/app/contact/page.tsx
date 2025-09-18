@@ -37,12 +37,14 @@ const Page = () => {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="w-full md:w-1/2 text-center md:text-left">
-              <h2 className="text-3xl font-bold text-darckLilac font-montserrat mb-8">
+              <h2 className="text-3xl md:text-4xl font-montserrat font-bold text-gray-800 mb-2">
                 Get in Touch
               </h2>
+              <div className="w-[100px] h-1 rounded-md bg-darckLilac mb-4 md:mb-6"></div>
+
               <p className="text-gray-600 mb-6">
-                We would love to hear from you! Please fill out the form below
-                and we will get back to you as soon as possible.
+                We would love to hear from you! Please fill out the form and we
+                will get back to you as soon as possible.
               </p>
               <div className="mt-8 text-gray-600">
                 <p>Phone: (123) 456-7890</p>

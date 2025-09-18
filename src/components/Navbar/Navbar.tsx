@@ -58,17 +58,35 @@ export const Navbar = () => {
         )}
       >
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between py-3 md:py-4">
-            <Link href="/">
+          <div className="flex items-center justify-between py-2 md:py-2 ">
+            <Link href="/" className="flex items-center ">
               <Image
-                src="/logo/cropLogo.png"
+                src="/logo/logoImg.png"
                 alt="Foundation Logo"
                 width={180}
                 height={60}
-                className="w-auto h-10 md:h-12"
+                className="w-auto h-10 md:h-16"
+                priority
+              />
+              <Image
+                src="/logo/title.png"
+                alt="Foundation Logo"
+                width={180}
+                height={60}
+                className="w-auto h-10 md:h-13 hidden md:block"
                 priority
               />
             </Link>
+            {/* <Link href="/" className="flex items-center md:hidden">
+              <Image
+                src="/logo/mobileLogo.png"
+                alt="Foundation Logo"
+                width={180}
+                height={60}
+                className="w-auto h-20"
+                priority
+              />
+            </Link> */}
             <ul className="hidden md:flex items-center gap-8 lg:gap-10">
               {navItems.map((item) => (
                 <li key={item.href}>

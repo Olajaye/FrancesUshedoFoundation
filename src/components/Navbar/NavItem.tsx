@@ -19,7 +19,7 @@ export const NavItem = ({ href, label, isActive }: NavItemProps) => {
     >
       <Link
         href={href}
-        className={`text-base transition-colors font-montserrat font-semibold ${
+        className={`text-base transition-colors font-montserrat  ${
           isActive || isHovered ? "text-darckLilac" : "text-black"
         }`}
       >
