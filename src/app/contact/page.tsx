@@ -47,9 +47,9 @@ const Page = () => {
                 will get back to you as soon as possible.
               </p>
               <div className="mt-8 text-gray-600">
-                <p>Phone: (123) 456-7890</p>
+                <p>Phone: (123) 456-78908888</p>
                 <p>Email: info@charityorg.org</p>
-                <p>Address: 123 Charity Lane, City, State 12345</p>
+                <p>Address: 123 Charity Lane, City, State 123458898</p>
               </div>
             </div>
             <div className="w-full md:w-1/2">
