@@ -1,12 +1,9 @@
 "use client";
 
-// import SponsorCard from "@/components/Sponsor/Sponsor";
 import Hero from "@/components/Hero/Hero";
-import { Sponsors } from "@/constant/constant"; //blogPosts,  sponsors
+import { Sponsors } from "@/constant/constant";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-// import { Swiper, SwiperSlide } from "swiper/react";
-// import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -20,8 +17,8 @@ const cardsData = [
   {
     title: "Become a Volunteer",
     text: "Becoming a volunteer with TFUF brings purpose, connection, and the chance to make lasting positive change.",
-    icon: "/junks/handIcon.png",
-    href: "/volunteer",
+    icon: "/junks/checking.png",
+    href: "/contact",
   },
   {
     title: "Donate",
@@ -32,16 +29,16 @@ const cardsData = [
   {
     title: "Partner with Us",
     text: "Partnering with TFUF amplifies impact, fosters collaboration, and drives meaningful change for vulnerable children in Nigeria.",
-    icon: "/junks/handIcon.png",
-    href: "/partner",
+    icon: "/junks/icontry.png",
+    href: "/contact",
   },
 ];
 
 const eventsData = [
   {
-    image: "/junks/IMG_2792.JPG", // Placeholder; recommend unique images per event
+    image: "/junks/IMG_2792.JPG",
     title: "Empowering Nigeria’s Youth",
-    date: "Aug 25, 2025",
+    date: "Aug 25, 2026",
     location: "Kano State, Nigeria",
     description:
       "Get ready for our upcoming fundraiser to support vital health and education programs. Your generosity will help transform young lives across Nigeria.",
@@ -49,7 +46,7 @@ const eventsData = [
   {
     image: "/junks/IMG_2792.JPG",
     title: "Community Health Workshop",
-    date: "Aug 25, 2025",
+    date: "Aug 25, 2026",
     location: "Lagos State, Nigeria",
     description:
       "We’re planning a workshop to educate families on health practices, including sickle cell awareness. Join us to promote healthier futures for children.",
@@ -57,42 +54,45 @@ const eventsData = [
   {
     image: "/junks/IMG_2792.JPG",
     title: "School Outreach Program",
-    date: "Aug 25, 2025", // Changed 2018 to 2025 assuming typo; otherwise, it would be filtered out
+    date: "Aug 25, 2026",
     location: "Abuja, Nigeria",
     description:
       "Our upcoming school visits will provide resources and support to students in need. Help us empower the next generation through education.",
   },
 ];
+
 const statsData = [
   {
-    icon: "/junks/icon11.jpg", // Updated path for organization
-    number: "120k",
-    label: "Children Helped",
+    icon: "/junks/icon11.jpg",
+    number: "220+",
+    label: "Children Supported",
   },
   {
-    icon: "/junks/icon12.jpg",
-    number: "79",
-    label: "Water Wells",
+    icon: "/junks/places.png",
+    number: "3",
+    label: "States Reached (Lagos, Delta, Kano)",
   },
   {
     icon: "/junks/icon13.jpg",
-    number: "253",
-    label: "Volunteers",
+    number: "12",
+    label: "Community Initiatives Launched",
   },
 ];
 export default function Home() {
   const router = useRouter();
+
   const upcomingEvents = useMemo(() => {
     const now = new Date();
     return eventsData
+      .slice(0, 2)
       .filter((event) => new Date(event.date) > now)
       .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()); // Sort by date ascending
   }, []);
+
   return (
     <div className="">
       <Hero />
 
-      {/* Cards */}
       <section className="py-12 md:py-16 bg-[#ffffff]">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap justify-center gap-6 md:gap-8">
@@ -104,7 +104,6 @@ export default function Home() {
       </section>
 
       <section className="bg-homeAbout bg-cover  bg-top relative h-auto ">
-        {/* <div className="absolute inset-0 bg-black/20 "></div> */}
         <div
           className="flex flex-col bg-black/70 items-center py-12 justify-center text-start text-white"
           style={{ zIndex: 9999 }}
@@ -150,8 +149,6 @@ export default function Home() {
                       turning adversity into hope and building a legacy of
                       change—one child at a time.
                     </h3>
-
-                    {/* <p>🦋 ✨</p> */}
                   </div>
 
                   <div>
@@ -170,7 +167,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Upcoming Even */}
       <section className="py-12 md:py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row gap-8 md:gap-12">
@@ -198,100 +194,19 @@ export default function Home() {
         </div>
       </section>
 
-      {/*  Partners Section */}
-      {/* <section className="py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-darckLilac mb-8">
-            Our Partners
-          </h2>
+      <SponsorsCarousel sponsors={Sponsors} speed={25} direction="left" />
 
-          <Swiper
-            modules={[Navigation, Pagination, Autoplay]}
-            spaceBetween={24}
-            slidesPerView={1}
-            
-            pagination={{ clickable: true }}
-            loop={true}
-            autoplay={{
-              delay: 2000,
-              disableOnInteraction: false,
-            }}
-            speed={800}
-            breakpoints={{
-              640: { slidesPerView: 2 },
-              1024: { slidesPerView: 4 },
-            }}
-            className="relative group px-4 py-8"
-          >
-            {sponsors.map((sponsor, index) => (
-              <SwiperSlide key={index}>
-                <SponsorCard {...sponsor} />
-              </SwiperSlide>
-            ))}
-
-         
-          </Swiper>
-        </div>
-      </section> */}
-
-      <SponsorsCarousel
-        sponsors={Sponsors}
-        speed={25} // Slower for professionalism
-        direction="left"
-      />
-
-      {/* <div className="container mx-auto">
-        <div className="flex items-end justify-between py-40 p-6">
-          <div className="text-center max-w-2xl">
-            <h1 className="text-4xl font-semibold text-[#262626] text-left leading-snug">
-              At The Frances Ushedo Foundation, we’re passionate about
-              transforming young lives in Nigeria. In our first year, we’ve laid
-              a strong foundation for lasting impact.
-            </h1>
-            <div className="mt-4">
-              <hr className="border-t-2 border-darckLilac w-16" />
-            </div>
-            <p className="mt-2 text-sm text-gray-500">
-              Through targeted health and education programs, we empower
-              children and communities to thrive. Join us in building brighter
-              futures across Nigeria.
-            </p>
-          </div>
-          <div className="flex justify-center gap-8">
-            <StatCard
-              icon="/junks/handIcon.png" // Placeholder, replace with actual icon
-              number="120k"
-              label="Children Helped"
-            />
-            <StatCard
-              icon="/junks/loveOnHand.png" // Placeholder, replace with actual icon
-              number="79"
-              label="Water Wells"
-            />
-            <StatCard
-              icon="/junks/Slove.png" // Placeholder, replace with actual icon
-              number="253"
-              label="Volunteers"
-            />
-          </div>
-        </div>
-      </div> */}
       <section className="py-16 md:py-24 bg-white">
-        {" "}
-        {/* Wrapped in section, reduced padding for balance */}
         <div className="container mx-auto px-4 md:px-6">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
-            {/* Text Content: Left-aligned, responsive text sizes */}
             <div className="w-full lg:w-1/2 max-w-2xl">
               <h2 className="text-xl md:text-3xl font-montserrat font-semibold text-gray-800 leading-7 mb-4">
-                {" "}
-                {/* Changed to h2 for semantics */}
                 At The Frances Ushedo Foundation, we’re passionate about
                 transforming young lives in Nigeria. In our first year, we’ve
                 laid a strong foundation for lasting impact.
               </h2>
-              <div className="w-20 h-1 bg-darkLilac mb-6" />{" "}
-              {/* Fixed typo, increased width */}
+              <div className="w-20 h-1 bg-darkLilac mb-6" />
+
               <p className="text-base md:text-lg font-montserrat text-gray-600 leading-relaxed">
                 Through targeted health and education programs, we empower
                 children and communities to thrive. Join us in building brighter
@@ -299,8 +214,7 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Stats: Grid for better mobile stacking, with hover effects */}
-            <div className="w-full lg:w-1/2 grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
+            <div className="w-full lg:w-1/2 grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8 ">
               {statsData.map((stat, index) => (
                 <StatCard key={index} {...stat} />
               ))}
@@ -381,7 +295,6 @@ const EventCard = ({
         </p>
         <p className="text-sm font-montserrat text-gray-700 mt-2 line-clamp-3">
           {" "}
-          {/* Used line-clamp for better truncation */}
           {description}
         </p>
         <Link
@@ -493,7 +406,7 @@ const StatCard = ({
   number: string;
   label: string;
 }) => (
-  <div className="flex flex-col items-center text-center  rounded-lg shadow-sm transition-all duration-300 hover:shadow-md hover:scale-105">
+  <div className="flex flex-col items-center text-center  rounded-lg  transition-all duration-300 hover:shadow-md hover:scale-105 shadow-md shadow-lilac">
     {" "}
     {/* Added card styling */}
     <Image

@@ -28,7 +28,6 @@ const page = () => {
 
       <section className="container px-4 mx-auto py-6">
         <section className="h-auto ">
-          {/* <div className="absolute inset-0 bg-black/20 "></div> */}
           <div
             className="flex flex-col items-center py-12 justify-center text-start text-black"
             style={{ zIndex: 9999 }}
@@ -106,9 +105,38 @@ const page = () => {
         </section>
       </section>
 
-      <section className="bg-gray-800 py-12 md:py-16">
-        <div className="container mx-auto px-4">
-          <ProgressCircles />
+      <section className="">
+        <div className="flex">
+          <Image
+            src={"/junks/IMG_2792.JPG"}
+            alt="pic"
+            width={500}
+            height={400}
+            className="w-full h-[300px]"
+          />{" "}
+          <Image
+            src={"/junks/Untitled-3.jpg"}
+            alt="pic"
+            width={500}
+            height={400}
+            className="w-full h-[300px]"
+          />{" "}
+        </div>
+        <div className="flex">
+          <Image
+            src={"/junks/Untitled-4.jpg"}
+            alt="pic"
+            width={500}
+            height={400}
+            className="w-full h-[300px]"
+          />{" "}
+          <Image
+            src={"/junks/Untitled-5.jpg"}
+            alt="pic"
+            width={500}
+            height={400}
+            className="w-full h-[300px]"
+          />{" "}
         </div>
       </section>
 
