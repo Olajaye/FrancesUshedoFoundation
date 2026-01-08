@@ -26,7 +26,7 @@ export const SponsorsCarousel = ({
 }: SponsorsProps) => {
   const [isMounted, setIsMounted] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
-  const [activeTier, setActiveTier] = useState<string>("all");
+  const [activeTier] = useState<string>("all");
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ export const SponsorsCarousel = ({
 
   if (!isMounted) return null;
 
-  const extendedSponsors = [...sponsors, ...sponsors];
+  // const extendedSponsors = [...sponsors, ...sponsors];
 
   // Filter sponsors by tier if needed
   const filteredSponsors =

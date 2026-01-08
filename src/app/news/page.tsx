@@ -1,6 +1,6 @@
 import React from "react";
-import { blogPosts } from "@/constant/constant";
-import BlogCard from "@/components/Blogs/BlogCard";
+// import { blogPosts } from "@/constant/constant";
+// import BlogCard from "@/components/Blogs/BlogCard";
 import { PagesHero } from "@/components/hearderCom/hearder";
 
 const page = () => {
@@ -164,101 +164,101 @@ const EventCalendar = () => {
   );
 };
 
-const EventSidebar = () => {
-  const quickLinks = [
-    { id: 1, label: "Event Calendar", href: "/events/calendar", icon: "📅" },
-    { id: 2, label: "Volunteer Opportunities", href: "/volunteer", icon: "🤝" },
-    { id: 3, label: "Become a Sponsor", href: "/sponsorship", icon: "💼" },
-    { id: 4, label: "Past Events Gallery", href: "/gallery", icon: "📸" },
-  ];
+// const EventSidebar = () => {
+//   const quickLinks = [
+//     { id: 1, label: "Event Calendar", href: "/events/calendar", icon: "📅" },
+//     { id: 2, label: "Volunteer Opportunities", href: "/volunteer", icon: "🤝" },
+//     { id: 3, label: "Become a Sponsor", href: "/sponsorship", icon: "💼" },
+//     { id: 4, label: "Past Events Gallery", href: "/gallery", icon: "📸" },
+//   ];
 
-  const importantDates = [
-    { id: 1, date: "May 1, 2024", event: "Early Bird Registration Ends" },
-    { id: 2, date: "May 10, 2024", event: "Volunteer Orientation" },
-    { id: 3, date: "June 1, 2024", event: "Scholarship Application Deadline" },
-  ];
+//   const importantDates = [
+//     { id: 1, date: "May 1, 2024", event: "Early Bird Registration Ends" },
+//     { id: 2, date: "May 10, 2024", event: "Volunteer Orientation" },
+//     { id: 3, date: "June 1, 2024", event: "Scholarship Application Deadline" },
+//   ];
 
-  return (
-    <div className="space-y-8">
-      <section>
-        <h3 className="text-xl font-bold text-darkLilac mb-4 flex items-center">
-          📋 Quick Links
-        </h3>
-        <div className="space-y-2">
-          {quickLinks.map((link) => (
-            <a
-              key={link.id}
-              href={link.href}
-              className="flex items-center p-3 rounded-lg hover:bg-lilac/10 transition-colors duration-200 text-gray-700 hover:text-darkLilac"
-            >
-              <span className="text-lg mr-3">{link.icon}</span>
-              <span className="font-medium">{link.label}</span>
-            </a>
-          ))}
-        </div>
-      </section>
+//   return (
+//     <div className="space-y-8">
+//       <section>
+//         <h3 className="text-xl font-bold text-darkLilac mb-4 flex items-center">
+//           📋 Quick Links
+//         </h3>
+//         <div className="space-y-2">
+//           {quickLinks.map((link) => (
+//             <a
+//               key={link.id}
+//               href={link.href}
+//               className="flex items-center p-3 rounded-lg hover:bg-lilac/10 transition-colors duration-200 text-gray-700 hover:text-darkLilac"
+//             >
+//               <span className="text-lg mr-3">{link.icon}</span>
+//               <span className="font-medium">{link.label}</span>
+//             </a>
+//           ))}
+//         </div>
+//       </section>
 
-      <section>
-        <h3 className="text-xl font-bold text-darkLilac mb-4 flex items-center">
-          ⏰ Important Dates
-        </h3>
-        <div className="bg-white rounded-lg p-4 border border-lilac/20">
-          <ul className="space-y-3">
-            {importantDates.map((date) => (
-              <li key={date.id} className="flex items-start">
-                <div className="bg-lilac/10 text-darkLilac text-sm font-semibold px-3 py-1 rounded-md mr-3">
-                  {date.date}
-                </div>
-                <span className="text-gray-700 text-sm">{date.event}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+//       <section>
+//         <h3 className="text-xl font-bold text-darkLilac mb-4 flex items-center">
+//           ⏰ Important Dates
+//         </h3>
+//         <div className="bg-white rounded-lg p-4 border border-lilac/20">
+//           <ul className="space-y-3">
+//             {importantDates.map((date) => (
+//               <li key={date.id} className="flex items-start">
+//                 <div className="bg-lilac/10 text-darkLilac text-sm font-semibold px-3 py-1 rounded-md mr-3">
+//                   {date.date}
+//                 </div>
+//                 <span className="text-gray-700 text-sm">{date.event}</span>
+//               </li>
+//             ))}
+//           </ul>
+//         </div>
+//       </section>
 
-      <section>
-        <h3 className="text-xl font-bold text-darkLilac mb-4 flex items-center">
-          📞 Need Help?
-        </h3>
-        <div className="bg-white p-5 rounded-lg border border-lilac/20">
-          <p className="text-gray-600 mb-3">
-            Questions about an event or registration?
-          </p>
-          <a
-            href="mailto:events@foundation.org"
-            className="inline-block w-full text-center py-3 bg-darkLilac text-white font-medium rounded-lg hover:bg-lilac transition-colors duration-300"
-          >
-            Contact Event Coordinator
-          </a>
-          <p className="text-sm text-gray-500 mt-3 text-center">
-            Or call: (555) 123-4567
-          </p>
-        </div>
-      </section>
+//       <section>
+//         <h3 className="text-xl font-bold text-darkLilac mb-4 flex items-center">
+//           📞 Need Help?
+//         </h3>
+//         <div className="bg-white p-5 rounded-lg border border-lilac/20">
+//           <p className="text-gray-600 mb-3">
+//             Questions about an event or registration?
+//           </p>
+//           <a
+//             href="mailto:events@foundation.org"
+//             className="inline-block w-full text-center py-3 bg-darkLilac text-white font-medium rounded-lg hover:bg-lilac transition-colors duration-300"
+//           >
+//             Contact Event Coordinator
+//           </a>
+//           <p className="text-sm text-gray-500 mt-3 text-center">
+//             Or call: (555) 123-4567
+//           </p>
+//         </div>
+//       </section>
 
-      <section>
-        <h3 className="text-xl font-bold text-darkLilac mb-4 flex items-center">
-          📢 Subscribe
-        </h3>
-        <div className="bg-white p-5 rounded-lg border border-lilac/20">
-          <p className="text-gray-600 mb-3">
-            Get notified about new events and opportunities
-          </p>
-          <div className="space-y-3">
-            <input
-              type="email"
-              placeholder="Your email address"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-lilac focus:border-transparent"
-            />
-            <button className="w-full py-3 bg-lilac text-white font-medium rounded-lg hover:bg-darkLilac transition-colors duration-300">
-              Subscribe to Updates
-            </button>
-          </div>
-        </div>
-      </section>
-    </div>
-  );
-};
+//       <section>
+//         <h3 className="text-xl font-bold text-darkLilac mb-4 flex items-center">
+//           📢 Subscribe
+//         </h3>
+//         <div className="bg-white p-5 rounded-lg border border-lilac/20">
+//           <p className="text-gray-600 mb-3">
+//             Get notified about new events and opportunities
+//           </p>
+//           <div className="space-y-3">
+//             <input
+//               type="email"
+//               placeholder="Your email address"
+//               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-lilac focus:border-transparent"
+//             />
+//             <button className="w-full py-3 bg-lilac text-white font-medium rounded-lg hover:bg-darkLilac transition-colors duration-300">
+//               Subscribe to Updates
+//             </button>
+//           </div>
+//         </div>
+//       </section>
+//     </div>
+//   );
+// };
 
 // const page = () => {
 //   return (

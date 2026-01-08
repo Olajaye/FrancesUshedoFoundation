@@ -1,29 +1,12 @@
 "use client";
 import { PagesHero } from "@/components/hearderCom/hearder";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import { useInView } from "react-intersection-observer";
+import React from "react";
+// import { useInView } from "react-intersection-observer"; { useEffect, useState }
 
 const page = () => {
   return (
     <>
-      {/* <section className="bg-about bg-cover h-[35vh] py-12 bg-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/80 "></div>
-        <div
-          className="absolute inset-0 flex flex-col items-center justify-center text-start text-white px-4"
-          style={{ zIndex: 999 }}
-        >
-          <div className="container mx-auto px-6 ">
-            <div>
-              <h2 className="text-6xl font-montserrat font-semibold text-start">
-                About Us
-              </h2>
-              <div className="w-[100px] h-2 bg-darckLilac"></div>
-            </div>
-          </div>
-        </div>
-      </section> */}
-
       <PagesHero img={"/about/IMG_3137.jpg"} title={"About Us"} />
 
       <section className="container px-4 mx-auto py-6">
@@ -198,100 +181,100 @@ const page = () => {
 
 export default page;
 
-const ProgressCircles = () => {
-  const [, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.3, // Lowered for earlier trigger
-  });
-  const progressData = [
-    { percentage: 83, label: "Hard Work" },
-    { percentage: 100, label: "Pure Love" },
-    { percentage: 75, label: "Smart Ideas" },
-    { percentage: 65, label: "Good Decisions" },
-  ];
+// const ProgressCircles = () => {
+//   const [, inView] = useInView({
+//     triggerOnce: true,
+//     threshold: 0.3,
+//   });
+//   const progressData = [
+//     { percentage: 83, label: "Hard Work" },
+//     { percentage: 100, label: "Pure Love" },
+//     { percentage: 75, label: "Smart Ideas" },
+//     { percentage: 65, label: "Good Decisions" },
+//   ];
 
-  const [counts, setCounts] = useState<number[]>(progressData.map(() => 0));
+//   const [counts, setCounts] = useState<number[]>(progressData.map(() => 0));
 
-  useEffect(() => {
-    if (inView) {
-      const duration = 1500; // Total animation duration in ms
-      const steps = 50; // Number of steps for smoother animation
-      const timers = progressData.map((data, index) =>
-        setInterval(() => {
-          setCounts((prev) => {
-            const newCounts = [...prev];
-            const increment = data.percentage / steps;
-            if (newCounts[index] < data.percentage) {
-              newCounts[index] = Math.min(
-                newCounts[index] + increment,
-                data.percentage
-              );
-            }
-            return newCounts;
-          });
-        }, duration / steps)
-      );
+//   useEffect(() => {
+//     if (inView) {
+//       const duration = 1500; // Total animation duration in ms
+//       const steps = 50; // Number of steps for smoother animation
+//       const timers = progressData.map((data, index) =>
+//         setInterval(() => {
+//           setCounts((prev) => {
+//             const newCounts = [...prev];
+//             const increment = data.percentage / steps;
+//             if (newCounts[index] < data.percentage) {
+//               newCounts[index] = Math.min(
+//                 newCounts[index] + increment,
+//                 data.percentage
+//               );
+//             }
+//             return newCounts;
+//           });
+//         }, duration / steps)
+//       );
 
-      return () => timers.forEach(clearInterval);
-    }
-  }, [inView]);
+//       return () => timers.forEach(clearInterval);
+//     }
+//   }, [inView]);
 
-  const circumference = 2 * Math.PI * 45; // Calculated once
+//   const circumference = 2 * Math.PI * 45; // Calculated once
 
-  return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 justify-items-center">
-      {" "}
-      {/* Grid for better responsiveness */}
-      {progressData.map((data, index) => {
-        const strokeDashoffset =
-          circumference - (counts[index] / 100) * circumference;
+//   return (
+//     <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 justify-items-center">
+//       {" "}
+//       {/* Grid for better responsiveness */}
+//       {progressData.map((data, index) => {
+//         const strokeDashoffset =
+//           circumference - (counts[index] / 100) * circumference;
 
-        return (
-          <div key={data.label} className="text-center">
-            <svg
-              className="w-32 h-32 md:w-40 md:h-40 lg:w-44 lg:h-44 mx-auto" // Responsive sizes
-              viewBox="0 0 100 100"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle
-                cx="50"
-                cy="50"
-                r="45"
-                stroke="#4b5563" // Gray background stroke
-                strokeWidth="4"
-                fill="none"
-              />
-              <circle
-                cx="50"
-                cy="50"
-                r="45"
-                stroke="#d154d6" // Lilac progress stroke
-                strokeWidth="4"
-                fill="none"
-                strokeDasharray={circumference}
-                strokeDashoffset={strokeDashoffset}
-                strokeLinecap="round"
-                transform="rotate(-90 50 50)"
-                style={{ transition: "stroke-dashoffset 0.3s ease" }} // Smooth transition
-              />
-              <text
-                x="50"
-                y="50"
-                textAnchor="middle"
-                dy=".3em"
-                className="text-white text-lg md:text-xl font-montserrat font-bold"
-                fill="white"
-              >
-                {Math.round(counts[index])}% {/* Rounded for clean display */}
-              </text>
-            </svg>
-            <p className="mt-4 text-white text-base md:text-lg font-montserrat font-semibold">
-              {data.label}
-            </p>
-          </div>
-        );
-      })}
-    </div>
-  );
-};
+//         return (
+//           <div key={data.label} className="text-center">
+//             <svg
+//               className="w-32 h-32 md:w-40 md:h-40 lg:w-44 lg:h-44 mx-auto" // Responsive sizes
+//               viewBox="0 0 100 100"
+//               fill="none"
+//               xmlns="http://www.w3.org/2000/svg"
+//             >
+//               <circle
+//                 cx="50"
+//                 cy="50"
+//                 r="45"
+//                 stroke="#4b5563" // Gray background stroke
+//                 strokeWidth="4"
+//                 fill="none"
+//               />
+//               <circle
+//                 cx="50"
+//                 cy="50"
+//                 r="45"
+//                 stroke="#d154d6" // Lilac progress stroke
+//                 strokeWidth="4"
+//                 fill="none"
+//                 strokeDasharray={circumference}
+//                 strokeDashoffset={strokeDashoffset}
+//                 strokeLinecap="round"
+//                 transform="rotate(-90 50 50)"
+//                 style={{ transition: "stroke-dashoffset 0.3s ease" }} // Smooth transition
+//               />
+//               <text
+//                 x="50"
+//                 y="50"
+//                 textAnchor="middle"
+//                 dy=".3em"
+//                 className="text-white text-lg md:text-xl font-montserrat font-bold"
+//                 fill="white"
+//               >
+//                 {Math.round(counts[index])}% {/* Rounded for clean display */}
+//               </text>
+//             </svg>
+//             <p className="mt-4 text-white text-base md:text-lg font-montserrat font-semibold">
+//               {data.label}
+//             </p>
+//           </div>
+//         );
+//       })}
+//     </div>
+//   );
+// };
