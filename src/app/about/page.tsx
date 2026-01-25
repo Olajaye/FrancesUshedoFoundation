@@ -23,7 +23,7 @@ const page = () => {
                     alt={"Logo"}
                     width={200}
                     height={200}
-                    className="w-auto h-[400px] rounded-lg"
+                    className="w-auto h-[400px] md:h-[500px] rounded-lg"
                   />
                 </div>
 

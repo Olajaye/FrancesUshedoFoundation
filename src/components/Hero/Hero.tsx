@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 // import Image from "next/image";
 // import FadeText from "@/hooks/FadingDualText";
 import React, { useEffect, useState } from "react";
@@ -63,7 +64,7 @@ const Hero = () => {
   // const [currentSlide, setCurrentSlide] = useState(0);
   const [currentSlide2, setCurrentSlide2] = useState(0);
   const [direction, setDirection] = useState<"next" | "prev" | null>(null);
-
+  const router = useRouter();
   // Auto-advance slides every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
@@ -172,12 +173,12 @@ const Hero = () => {
               index === currentSlide2
                 ? "translate-x-0"
                 : direction === "next" && index === currentSlide2 - 1
-                ? "-translate-x-full"
-                : direction === "prev" && index === currentSlide2 + 1
-                ? "translate-x-full"
-                : index < currentSlide2
-                ? "-translate-x-full"
-                : "translate-x-full"
+                  ? "-translate-x-full"
+                  : direction === "prev" && index === currentSlide2 + 1
+                    ? "translate-x-full"
+                    : index < currentSlide2
+                      ? "-translate-x-full"
+                      : "translate-x-full"
             }`}
             style={{ zIndex: index === currentSlide2 ? 10 : 1 }}
           >
@@ -203,7 +204,10 @@ const Hero = () => {
                 <p className="text-xl mb-7 mt-7 italic md:max-w-[70%]">
                   {slide.quote}
                 </p>
-                <button className="w-auto p-3 bg-lilac text-dark font-bold font-montserrat rounded-xl transition duration-300 hover:bg-darckLilac hover:text-white">
+                <button
+                  onClick={() => router.push("/donate")}
+                  className="w-auto p-3 bg-lilac text-dark font-bold font-montserrat rounded-xl transition duration-300 hover:bg-darckLilac hover:text-white"
+                >
                   {slide.cta}
                 </button>
               </div>
