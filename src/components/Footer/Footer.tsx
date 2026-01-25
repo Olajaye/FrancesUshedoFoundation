@@ -38,13 +38,25 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
           {/* Logo and About: Enhanced spacing, responsive text */}
           <div className="space-y-6">
-            <Link href="/">
+            <Link
+              href="/"
+              className="flex items-center bg-white/70 p-2 rounded-md"
+            >
               <Image
-                src="/logo/LogoWithoutLabel.png" // Fixed typo in filename
-                alt="The Frances Ushedo Foundation Logo"
+                src="/logo/logoImg.png"
+                alt="Foundation Logo"
                 width={180}
-                height={80}
-                className="w-auto h-16 md:h-20"
+                height={60}
+                className="w-auto h-10 md:h-16"
+                priority
+              />
+              <Image
+                src="/logo/title.png"
+                alt="Foundation Logo"
+                width={180}
+                height={60}
+                className="w-auto h-10 md:h-13 hidden md:block"
+                priority
               />
             </Link>
             <p className="text-gray-300 text-sm md:text-base font-montserrat leading-relaxed max-w-md">

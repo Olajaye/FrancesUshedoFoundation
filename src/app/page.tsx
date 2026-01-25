@@ -63,21 +63,22 @@ const eventsData = [
 
 const statsData = [
   {
-    icon: "/junks/icon11.jpg",
+    icon: "/childrenSupported.jpg", //"/junks/icon11.jpg",
     number: "220+",
     label: "Children Supported",
   },
   {
-    icon: "/junks/places.png",
+    icon: "/road.jpg", //"/junks/places.png",
     number: "3",
     label: "States Reached (Lagos, Delta, Kano)",
   },
   {
-    icon: "/junks/icon13.jpg",
+    icon: "/communityReached.jpg", //"/junks/icon13.jpg",
     number: "12",
     label: "Community Initiatives Launched",
   },
 ];
+
 export default function Home() {
   const router = useRouter();
 
@@ -277,14 +278,12 @@ const EventCard = ({
 }) => {
   return (
     <div className="flex items-start gap-4 bg-gray-50 rounded-lg p-4 shadow-sm transition-shadow hover:shadow-md">
-      {" "}
-      {/* Added card styling for elevation */}
       <Image
         src={image}
         alt={title}
         width={120}
         height={120}
-        className="w-28 h-28 object-cover rounded-md" // Rounded for modern look
+        className="w-28 h-28 object-cover rounded-md"
       />
       <div className="flex-1">
         <h3 className="text-lg font-montserrat font-semibold text-gray-800">
@@ -294,15 +293,12 @@ const EventCard = ({
           {date} | {location}
         </p>
         <p className="text-sm font-montserrat text-gray-700 mt-2 line-clamp-3">
-          {" "}
           {description}
         </p>
         <Link
-          href="/news"
+          href="/gallery"
           className="text-darkLilac text-sm font-montserrat font-medium mt-2 inline-block hover:underline"
         >
-          {" "}
-          {/* Fixed typo, added hover */}
           Read More
         </Link>
       </div>
@@ -407,14 +403,12 @@ const StatCard = ({
   label: string;
 }) => (
   <div className="flex flex-col items-center text-center  rounded-lg  transition-all duration-300 hover:shadow-md hover:scale-105 shadow-md shadow-lilac">
-    {" "}
-    {/* Added card styling */}
     <Image
       src={icon}
-      alt={`${label} icon`} // Dynamic alt
+      alt={`${label} icon`}
       width={100}
       height={100}
-      className="mb-1 w-12 h-12 md:w-44 md:h-44"
+      className=" w-full h-12  md:h-44 mb-3 rounded-t-lg object-cover"
     />
     <h3 className="text-xl font-montserrat font-bold text-darkLilac mb-2">
       {number}

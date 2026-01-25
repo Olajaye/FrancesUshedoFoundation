@@ -14,7 +14,8 @@ import Link from "next/link";
 const navItems = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About us" },
-  { href: "/portfolio", label: "Portfolio" }, // Fixed typo from "portfoilio"
+  { href: "/gallery", label: "Gallery" },
+  { href: "/event", label: "Event" },
   { href: "/news", label: "News" },
   { href: "/contact", label: "Contact" },
 ];
@@ -54,7 +55,7 @@ export const Navbar = () => {
       <header
         className={cn(
           "bg-white/90 backdrop-blur-sm transition-all duration-300 ease-in-out shadow-md", // Made shadow subtle and always present for
-          isScrolled ? "shadow-lilac/30" : "shadow-lilac/10"
+          isScrolled ? "shadow-lilac/30" : "shadow-lilac/10",
         )}
       >
         <div className="container mx-auto px-4">
@@ -77,16 +78,7 @@ export const Navbar = () => {
                 priority
               />
             </Link>
-            {/* <Link href="/" className="flex items-center md:hidden">
-              <Image
-                src="/logo/mobileLogo.png"
-                alt="Foundation Logo"
-                width={180}
-                height={60}
-                className="w-auto h-20"
-                priority
-              />
-            </Link> */}
+
             <ul className="hidden md:flex items-center gap-8 lg:gap-10">
               {navItems.map((item) => (
                 <li key={item.href}>

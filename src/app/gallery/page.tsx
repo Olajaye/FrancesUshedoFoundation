@@ -16,24 +16,30 @@ interface PhotoModalProps {
   onPhotoSelect: (photo: Photo) => void;
 }
 
+interface Photo {
+  id: string;
+  url: string;
+  thumbnail: string;
+  title: string;
+  description: string;
+  category: string;
+  tags: string[];
+  photographer: string;
+}
+
+interface Album {
+  id: string;
+  name: string;
+  description: string;
+  coverPhoto: Photo;
+  photos: Photo[];
+}
+
 const albums: Album[] = [
   {
     id: "1",
     name: "Visit to Kano",
-    description: `
-    Last month, I had the privilege of joining a charity organization on a visit to Kano, Nigeria’s second-largest city, known for its rich culture and bustling economy. The goal of our visit was to provide support to underprivileged communities, particularly orphans and widows, through food donations, educational materials, and medical outreach.  
-
-    Our journey began early in the morning as we loaded two trucks with bags of rice, beans, cooking oil, notebooks, and medical supplies. The excitement among our team was palpable, knowing we were about to make a meaningful impact. Upon arrival in Kano, we were warmly welcomed by local volunteers who guided us to a small community on the outskirts of the city.  
-
-    The first stop was an orphanage housing over 50 children. The sight of their bright smiles despite their hardships was both heartwarming and humbling. We distributed food items, school supplies, and toys, while a team of volunteer doctors conducted health checks. The children sang and danced in appreciation, their joy filling the air. One little girl, Aisha, clung to a new notebook like a treasure, whispering, *“Now I can write my stories.”* Her words reminded me of the power of small gestures.  
-
-    Next, we visited a widow’s cooperative where dozens of women gathered to receive food packs and sewing machines donated by our organization. Many of these women, left to fend for their families alone, expressed deep gratitude. Hajiya Fatima, the group’s leader, thanked us tearfully, saying, *“This will help us feed our children and learn skills to earn a living.”*  
-
-    Before leaving, we stopped at a local primary school with crumbling walls and few resources. We handed out books, pencils, and uniforms to eager pupils. The headmaster, Mallam Yusuf, explained how many children struggled to attend school due to poverty. “Education is their only hope,” he said, urging us to continue supporting them.  
-
-    As we drove back, I reflected on the day’s events. Though our contributions were modest, they brought immediate relief and hope to many. Kano’s resilience and warmth left a lasting impression on me. The trip reinforced the belief that charity is not just about giving but also about connecting, understanding, and inspiring change—one community at a time.  
-
-    This visit was a reminder that even in the face of hardship, kindness can light the way forward. I left Kano with a heart full of gratitude and a renewed commitment to serving those in need.
+    description: `This visit was a reminder that even in the face of hardship, kindness can light the way forward. I left Kano with a heart full of gratitude and a renewed commitment to serving those in need.
   `,
     coverPhoto: {
       id: "1",
@@ -44,8 +50,6 @@ const albums: Album[] = [
       category: "nature",
       tags: ["mountains", "landscape", "mist", "scenic"],
       photographer: "James Wheeler",
-      width: 1260,
-      height: 750,
     },
     photos: [
       {
@@ -57,8 +61,6 @@ const albums: Album[] = [
         category: "nature",
         tags: ["mountains", "landscape", "mist", "scenic"],
         photographer: "James Wheeler",
-        width: 1260,
-        height: 750,
       },
       {
         id: "3",
@@ -70,8 +72,6 @@ const albums: Album[] = [
         category: "nature",
         tags: ["ocean", "waves", "water", "coastal"],
         photographer: "Matt Hardy",
-        width: 1260,
-        height: 750,
       },
       {
         id: "5",
@@ -83,27 +83,13 @@ const albums: Album[] = [
         category: "nature",
         tags: ["forest", "path", "trees", "sunlight"],
         photographer: "Valiphotos",
-        width: 1260,
-        height: 750,
       },
     ],
   },
   {
     id: "2",
     name: "Urban Exploration",
-    description: `
-    Last month, I had the privilege of joining a charity organization on a visit to Kano, Nigeria’s second-largest city, known for its rich culture and bustling economy. The goal of our visit was to provide support to underprivileged communities, particularly orphans and widows, through food donations, educational materials, and medical outreach.  
-
-    Our journey began early in the morning as we loaded two trucks with bags of rice, beans, cooking oil, notebooks, and medical supplies. The excitement among our team was palpable, knowing we were about to make a meaningful impact. Upon arrival in Kano, we were warmly welcomed by local volunteers who guided us to a small community on the outskirts of the city.  
-
-    The first stop was an orphanage housing over 50 children. The sight of their bright smiles despite their hardships was both heartwarming and humbling. We distributed food items, school supplies, and toys, while a team of volunteer doctors conducted health checks. The children sang and danced in appreciation, their joy filling the air. One little girl, Aisha, clung to a new notebook like a treasure, whispering, *“Now I can write my stories.”* Her words reminded me of the power of small gestures.  
-
-    Next, we visited a widow’s cooperative where dozens of women gathered to receive food packs and sewing machines donated by our organization. Many of these women, left to fend for their families alone, expressed deep gratitude. Hajiya Fatima, the group’s leader, thanked us tearfully, saying, *“This will help us feed our children and learn skills to earn a living.”*  
-
-    Before leaving, we stopped at a local primary school with crumbling walls and few resources. We handed out books, pencils, and uniforms to eager pupils. The headmaster, Mallam Yusuf, explained how many children struggled to attend school due to poverty. “Education is their only hope,” he said, urging us to continue supporting them.  
-
-    As we drove back, I reflected on the day’s events. Though our contributions were modest, they brought immediate relief and hope to many. Kano’s resilience and warmth left a lasting impression on me. The trip reinforced the belief that charity is not just about giving but also about connecting, understanding, and inspiring change—one community at a time.  
-
+    description: ` 
     This visit was a reminder that even in the face of hardship, kindness can light the way forward. I left Kano with a heart full of gratitude and a renewed commitment to serving those in need.
   `,
     coverPhoto: {
@@ -115,8 +101,6 @@ const albums: Album[] = [
       category: "architecture",
       tags: ["city", "building", "modern", "urban"],
       photographer: "Expect Best",
-      width: 1260,
-      height: 750,
     },
     photos: [
       {
@@ -128,8 +112,6 @@ const albums: Album[] = [
         category: "architecture",
         tags: ["city", "building", "modern", "urban"],
         photographer: "Expect Best",
-        width: 1260,
-        height: 750,
       },
       {
         id: "4",
@@ -141,8 +123,6 @@ const albums: Album[] = [
         category: "urban",
         tags: ["street", "neon", "night", "city"],
         photographer: "Aleksandar Pasaric",
-        width: 1260,
-        height: 750,
       },
       {
         id: "8",
@@ -154,37 +134,15 @@ const albums: Album[] = [
         category: "urban",
         tags: ["skyline", "city", "twilight", "buildings"],
         photographer: "Pixabay",
-        width: 1260,
-        height: 750,
       },
     ],
   },
 ];
-export interface Photo {
-  id: string;
-  url: string;
-  thumbnail: string;
-  title: string;
-  description: string;
-  category: string;
-  tags: string[];
-  photographer: string;
-  width: number;
-  height: number;
-}
-
-export interface Album {
-  id: string;
-  name: string;
-  description: string;
-  coverPhoto: Photo;
-  photos: Photo[];
-}
 
 const page = () => {
   return (
     <>
-      <PagesHero img={"/portfolio/picture1.jpg"} title={"Portfolio"} />
+      <PagesHero img={"/portfolio/picture1.jpg"} title={"Gallery"} />
 
       <section className="container px-4 mx-auto py-12">
         <PhotoGallery />
@@ -368,7 +326,7 @@ const PhotoModal: React.FC<PhotoModalProps> = ({
         </button>
       )}
 
-      <div className="w-full max-w-6xl mx-auto flex flex-col lg:flex-row gap-6 max-h-[90vh]">
+      <div className="w-full container mx-auto flex flex-col lg:flex-row gap-6 max-h-[90vh]">
         <div className="flex-1 flex items-center justify-center relative">
           {!imageLoaded && (
             <div className="absolute inset-0 flex items-center justify-center">
@@ -385,7 +343,7 @@ const PhotoModal: React.FC<PhotoModalProps> = ({
           />
         </div>
 
-        <div className="lg:w-80 bg-white/95 backdrop-blur-sm rounded-2xl p-3 overflow-y-auto">
+        <div className="lg:w-96 bg-white/95 backdrop-blur-sm rounded-2xl p-3 overflow-y-auto">
           <div className="space-y-4">
             <div>
               <h2 className="text-2xl font-bold text-gray-900 mb-2">

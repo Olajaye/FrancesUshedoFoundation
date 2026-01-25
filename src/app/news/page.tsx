@@ -1,481 +1,324 @@
 import React from "react";
-// import { blogPosts } from "@/constant/constant";
-// import BlogCard from "@/components/Blogs/BlogCard";
 import { PagesHero } from "@/components/hearderCom/hearder";
+import Link from "next/link";
+import Image from "next/image";
 
-const page = () => {
+const newsArticles = [
+  {
+    id: 1,
+    title: "Annual Charity Gala Raises $100,000 for Diabetes Prevention",
+    excerpt:
+      "Our recent fundraising event exceeded expectations, raising critical funds for community health initiatives...",
+    category: "Event Report",
+    date: "November 10, 2025",
+    readTime: "5 min read",
+    image: "/news/gala-2025.jpg",
+    author: "Sarah Johnson",
+    authorRole: "Event Coordinator",
+    featured: true,
+    tags: ["Fundraising", "Diabetes", "Community"],
+  },
+  {
+    id: 2,
+    title: "Sickle-cell Awareness Workshop Impacts 200+ Participants",
+    excerpt:
+      "The workshop focused on mental health and self-stigma reduction among sickle-cell survivors...",
+    category: "Workshop Report",
+    date: "September 25, 2025",
+    readTime: "4 min read",
+    image: "/news/workshop-report.jpg",
+    author: "Dr. Michael Chen",
+    authorRole: "Clinical Director",
+    featured: false,
+    tags: ["Workshop", "Sickle-cell", "Mental Health"],
+  },
+  {
+    id: 3,
+    title: "New Community Health Center Opens in Downtown Area",
+    excerpt:
+      "Thanks to generous donations, we've opened a new facility offering free screenings and consultations...",
+    category: "Announcement",
+    date: "August 15, 2025",
+    readTime: "3 min read",
+    image: "/news/health-center.jpg",
+    author: "Maria Rodriguez",
+    authorRole: "Operations Manager",
+    featured: true,
+    tags: ["Facility", "Health Center", "Community"],
+  },
+  {
+    id: 4,
+    title: "Volunteer Spotlight: John Doe's 10 Years of Service",
+    excerpt:
+      "Celebrating a decade of dedication from one of our longest-serving volunteers...",
+    category: "Volunteer Spotlight",
+    date: "July 22, 2025",
+    readTime: "6 min read",
+    image: "/news/volunteer-spotlight.jpg",
+    author: "Lisa Wang",
+    authorRole: "Volunteer Coordinator",
+    featured: false,
+    tags: ["Volunteer", "Recognition", "Community"],
+  },
+  {
+    id: 5,
+    title: "Quarterly Impact Report: Q2 2025 Achievements",
+    excerpt:
+      "A comprehensive look at our foundation's achievements and community impact for the second quarter...",
+    category: "Impact Report",
+    date: "June 30, 2025",
+    readTime: "8 min read",
+    image: "/news/impact-report.jpg",
+    author: "David Smith",
+    authorRole: "Program Director",
+    featured: false,
+    tags: ["Report", "Impact", "Statistics"],
+  },
+  {
+    id: 6,
+    title: "Partnership Announcement: Healthcare Alliance 2025",
+    excerpt:
+      "We're proud to announce a new partnership with leading healthcare providers to expand our services...",
+    category: "Partnership",
+    date: "May 18, 2025",
+    readTime: "4 min read",
+    image: "/news/partnership.jpg",
+    author: "Robert Kim",
+    authorRole: "Partnership Director",
+    featured: false,
+    tags: ["Partnership", "Collaboration", "Healthcare"],
+  },
+];
+
+const categories = [
+  "All News",
+  "Event Reports",
+  "Impact Reports",
+  "Announcements",
+  "Volunteer Stories",
+  "Partnerships",
+];
+
+const NewsPage = () => {
   return (
     <>
-      <PagesHero img={"/portfolio/picture1.jpg"} title={" News"} />
+      <PagesHero img={"/portfolio/picture1.jpg"} title="News & Reports" />
 
-      <section className="container mx-auto px-4 py-12 md:py-16 lg:py-20">
-        <div className="flex flex-col space-y-12 md:space-y-16">
-          <div className="flex flex-col lg:flex-row justify-start space-y-8 lg:space-y-0 lg:space-x-8">
-            <main className="flex-1">
-              <EventCalendar />
-            </main>
-            {/* <aside className="w-full lg:w-80 xl:w-96 bg-lilac/5 p-6 rounded-lg border border-lilac/20">
-              <EventSidebar />
-            </aside> */}
+      <section className="container mx-auto px-4 py-12 md:py-16">
+        {/* Page Header */}
+        <div className="mb-12 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Latest News & Articles
+          </h1>
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            Explore our collection of event reports, success stories, and
+            updates from the field.
+          </p>
+        </div>
+
+        {/* Category Filter */}
+        <div className="mb-12">
+          <div className="flex flex-wrap justify-center gap-2 md:gap-4">
+            {categories.map((category) => (
+              <button
+                key={category}
+                className="px-4 py-2 rounded-full border border-gray-300 text-gray-700 hover:border-lilac hover:text-lilac hover:bg-lilac/5 transition-colors duration-200"
+              >
+                {category}
+              </button>
+            ))}
           </div>
         </div>
+
+        {/* Featured Articles */}
+        <div className="mb-16">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+            Featured Stories
+          </h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {newsArticles
+              .filter((article) => article.featured)
+              .map((article) => (
+                <div
+                  key={article.id}
+                  className="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+                >
+                  <Link href={`/news/${article.id}`}>
+                    <div className="md:flex h-full">
+                      <div className="md:w-2/5 relative h-64 md:h-auto">
+                        <Image
+                          src={article.image}
+                          alt={article.title}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                        <div className="absolute top-4 left-4">
+                          <span className="bg-lilac text-white px-3 py-1 rounded-full text-sm font-medium">
+                            {article.category}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="md:w-3/5 p-6 md:p-8 flex flex-col">
+                        <div className="flex items-center text-sm text-gray-500 mb-4">
+                          <span>{article.date}</span>
+                          <span className="mx-2">•</span>
+                          <span>{article.readTime}</span>
+                        </div>
+
+                        <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-lilac transition-colors">
+                          {article.title}
+                        </h3>
+
+                        <p className="text-gray-600 mb-6 flex-grow">
+                          {article.excerpt}
+                        </p>
+
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center">
+                            <div className="w-10 h-10 rounded-full bg-gray-200 overflow-hidden mr-3">
+                              {/* Author image would go here */}
+                            </div>
+                            <div>
+                              <p className="font-medium text-gray-900">
+                                {article.author}
+                              </p>
+                              <p className="text-sm text-gray-500">
+                                {article.authorRole}
+                              </p>
+                            </div>
+                          </div>
+
+                          <span className="text-lilac font-medium flex items-center">
+                            Read More
+                            <svg
+                              className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M14 5l7 7m0 0l-7 7m7-7H3"
+                              />
+                            </svg>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                </div>
+              ))}
+          </div>
+        </div>
+
+        {/* All News Grid */}
+        <div>
+          <div className="flex justify-between items-center mb-8">
+            <h2 className="text-2xl font-bold text-gray-900">
+              All News Articles
+            </h2>
+            <div className="text-sm text-gray-500">
+              Showing {newsArticles.length} articles
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {newsArticles.map((article) => (
+              <article
+                key={article.id}
+                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 border border-gray-100"
+              >
+                <Link href={`/news/${article.id}`}>
+                  <div className="relative h-48">
+                    <Image
+                      src={article.image}
+                      alt={article.title}
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute top-4 left-4">
+                      <span className="bg-white/90 backdrop-blur-sm text-gray-800 px-3 py-1 rounded-full text-sm font-medium">
+                        {article.category}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="p-6">
+                    <div className="flex items-center text-sm text-gray-500 mb-3">
+                      <span>{article.date}</span>
+                      <span className="mx-2">•</span>
+                      <span>{article.readTime}</span>
+                    </div>
+
+                    <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 hover:text-lilac transition-colors">
+                      {article.title}
+                    </h3>
+
+                    <p className="text-gray-600 mb-4 line-clamp-3">
+                      {article.excerpt}
+                    </p>
+
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {article.tags.slice(0, 2).map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                      <div className="flex items-center">
+                        <div className="w-8 h-8 rounded-full bg-gray-200 overflow-hidden mr-2">
+                          {/* Author image placeholder */}
+                        </div>
+                        <span className="text-sm font-medium text-gray-700">
+                          {article.author}
+                        </span>
+                      </div>
+
+                      <button className="text-lilac font-medium text-sm hover:text-darkLilac transition-colors">
+                        Read Article →
+                      </button>
+                    </div>
+                  </div>
+                </Link>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        {/* <div className="mt-20 bg-gradient-to-r from-lilac to-darkLilac rounded-2xl p-8 md:p-12 text-white">
+          <div className="max-w-2xl mx-auto text-center">
+            <h2 className="text-3xl font-bold mb-4">Stay Updated</h2>
+            <p className="mb-8 text-lilac-100">
+              Subscribe to our newsletter to receive the latest news and reports
+              directly in your inbox.
+            </p>
+
+            <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="flex-grow px-6 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-white"
+              />
+              <button
+                type="submit"
+                className="px-8 py-3 bg-white text-lilac font-medium rounded-lg hover:bg-gray-100 transition-colors"
+              >
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </div> */}
       </section>
     </>
   );
 };
 
-export default page;
-
-const EventCalendar = () => {
-  const upcomingEvents = [
-    {
-      id: 1,
-      date: "May 15, 2024",
-      time: "6:00 PM - 9:00 PM",
-      title: "Annual Charity Gala & Auction",
-      category: "Fundraising",
-      location: "Grand Ballroom, City Center",
-      featured: true,
-      image: "/portfolio/events/gala.jpg",
-      description:
-        "Join us for our premier fundraising event of the year featuring live music, silent auction, and keynote speakers. Black tie optional.",
-      ticketsAvailable: 120,
-      registrationLink: "/events/gala-registration",
-    },
-    {
-      id: 2,
-      date: "June 8, 2024",
-      time: "8:00 AM - 12:00 PM",
-      title: "Community Food Drive",
-      category: "Volunteering",
-      location: "Main Street Community Center",
-      featured: false,
-      image: "/portfolio/events/food-drive.jpg",
-      description:
-        "Help us collect and distribute food to families in need. Volunteer shifts available throughout the day.",
-      ticketsAvailable: 50,
-      registrationLink: "/events/food-drive-volunteer",
-    },
-    {
-      id: 3,
-      date: "July 22-24, 2024",
-      time: "Daily 9:00 AM - 4:00 PM",
-      title: "Youth Leadership Camp",
-      category: "Education",
-      location: "Riverside Retreat Center",
-      featured: true,
-      image: "/portfolio/events/youth-camp.jpg",
-      description:
-        "Three-day leadership development program for underprivileged youth. Scholarships available for qualified participants.",
-      ticketsAvailable: 30,
-      registrationLink: "/events/youth-camp-application",
-    },
-    {
-      id: 4,
-      date: "August 30, 2024",
-      time: "10:00 AM - 2:00 PM",
-      title: "Health & Wellness Fair",
-      category: "Community",
-      location: "Central Park Pavilion",
-      featured: false,
-      image: "/portfolio/events/health-fair.jpg",
-      description:
-        "Free health screenings, wellness workshops, and fitness activities for the entire family.",
-      ticketsAvailable: 200,
-      registrationLink: "/events/health-fair-register",
-    },
-  ];
-
-  return (
-    <div className="space-y-8">
-      <div className="mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold text-darkLilac mb-4">
-          Upcoming Foundation Events
-        </h1>
-        <p className="text-gray-600">
-          Join us in our mission to make a difference in the community. Register
-          for upcoming events below.
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 gap-8">
-        {upcomingEvents.map((event) => (
-          <div
-            key={event.id}
-            className={`bg-white rounded-xl shadow-lg overflow-hidden border ${
-              event.featured ? "border-lilac border-2" : "border-gray-100"
-            }`}
-          >
-            <div className="md:flex">
-              <div className="md:w-1/3 relative">
-                <img
-                  src={event.image}
-                  alt={event.title}
-                  className="w-full h-64 md:h-full object-cover"
-                />
-                {event.featured && (
-                  <div className="absolute top-4 left-4 bg-lilac text-white px-3 py-1 rounded-full text-sm font-semibold">
-                    Featured Event
-                  </div>
-                )}
-              </div>
-
-              <div className="md:w-2/3 p-6">
-                <div className="flex flex-wrap items-center text-sm text-gray-500 mb-3 gap-3">
-                  <span className="bg-lilac/10 text-darkLilac px-3 py-1 rounded-full">
-                    {event.category}
-                  </span>
-                  <span>•</span>
-                  <span className="flex items-center">📅 {event.date}</span>
-                  <span>•</span>
-                  <span className="flex items-center">⏰ {event.time}</span>
-                  <span>•</span>
-                  <span className="flex items-center">📍 {event.location}</span>
-                </div>
-
-                <h2 className="text-2xl font-bold text-gray-800 mb-3">
-                  {event.title}
-                </h2>
-
-                <p className="text-gray-600 mb-6">{event.description}</p>
-
-                <div className="flex flex-wrap items-center justify-end">
-                  <div className="flex gap-3">
-                    <a
-                      href={event.registrationLink}
-                      className="px-6 py-3 bg-lilac text-white font-medium rounded-lg hover:bg-darkLilac transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-lilac focus:ring-offset-2"
-                    >
-                      Donate
-                    </a>
-                    <a
-                      href={`/events/${event.id}`}
-                      className="px-6 py-3 border border-lilac text-darkLilac font-medium rounded-lg hover:bg-lilac/10 transition-colors duration-300"
-                    >
-                      Details
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-// const EventSidebar = () => {
-//   const quickLinks = [
-//     { id: 1, label: "Event Calendar", href: "/events/calendar", icon: "📅" },
-//     { id: 2, label: "Volunteer Opportunities", href: "/volunteer", icon: "🤝" },
-//     { id: 3, label: "Become a Sponsor", href: "/sponsorship", icon: "💼" },
-//     { id: 4, label: "Past Events Gallery", href: "/gallery", icon: "📸" },
-//   ];
-
-//   const importantDates = [
-//     { id: 1, date: "May 1, 2024", event: "Early Bird Registration Ends" },
-//     { id: 2, date: "May 10, 2024", event: "Volunteer Orientation" },
-//     { id: 3, date: "June 1, 2024", event: "Scholarship Application Deadline" },
-//   ];
-
-//   return (
-//     <div className="space-y-8">
-//       <section>
-//         <h3 className="text-xl font-bold text-darkLilac mb-4 flex items-center">
-//           📋 Quick Links
-//         </h3>
-//         <div className="space-y-2">
-//           {quickLinks.map((link) => (
-//             <a
-//               key={link.id}
-//               href={link.href}
-//               className="flex items-center p-3 rounded-lg hover:bg-lilac/10 transition-colors duration-200 text-gray-700 hover:text-darkLilac"
-//             >
-//               <span className="text-lg mr-3">{link.icon}</span>
-//               <span className="font-medium">{link.label}</span>
-//             </a>
-//           ))}
-//         </div>
-//       </section>
-
-//       <section>
-//         <h3 className="text-xl font-bold text-darkLilac mb-4 flex items-center">
-//           ⏰ Important Dates
-//         </h3>
-//         <div className="bg-white rounded-lg p-4 border border-lilac/20">
-//           <ul className="space-y-3">
-//             {importantDates.map((date) => (
-//               <li key={date.id} className="flex items-start">
-//                 <div className="bg-lilac/10 text-darkLilac text-sm font-semibold px-3 py-1 rounded-md mr-3">
-//                   {date.date}
-//                 </div>
-//                 <span className="text-gray-700 text-sm">{date.event}</span>
-//               </li>
-//             ))}
-//           </ul>
-//         </div>
-//       </section>
-
-//       <section>
-//         <h3 className="text-xl font-bold text-darkLilac mb-4 flex items-center">
-//           📞 Need Help?
-//         </h3>
-//         <div className="bg-white p-5 rounded-lg border border-lilac/20">
-//           <p className="text-gray-600 mb-3">
-//             Questions about an event or registration?
-//           </p>
-//           <a
-//             href="mailto:events@foundation.org"
-//             className="inline-block w-full text-center py-3 bg-darkLilac text-white font-medium rounded-lg hover:bg-lilac transition-colors duration-300"
-//           >
-//             Contact Event Coordinator
-//           </a>
-//           <p className="text-sm text-gray-500 mt-3 text-center">
-//             Or call: (555) 123-4567
-//           </p>
-//         </div>
-//       </section>
-
-//       <section>
-//         <h3 className="text-xl font-bold text-darkLilac mb-4 flex items-center">
-//           📢 Subscribe
-//         </h3>
-//         <div className="bg-white p-5 rounded-lg border border-lilac/20">
-//           <p className="text-gray-600 mb-3">
-//             Get notified about new events and opportunities
-//           </p>
-//           <div className="space-y-3">
-//             <input
-//               type="email"
-//               placeholder="Your email address"
-//               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-lilac focus:border-transparent"
-//             />
-//             <button className="w-full py-3 bg-lilac text-white font-medium rounded-lg hover:bg-darkLilac transition-colors duration-300">
-//               Subscribe to Updates
-//             </button>
-//           </div>
-//         </div>
-//       </section>
-//     </div>
-//   );
-// };
-
-// const page = () => {
-//   return (
-//     <>
-//       <PagesHero img={"/portfolio/picture1.jpg"} title={" News"} />
-
-//       <section className="container mx-auto px-4 py-12 md:py-16 lg:py-20">
-//         <div className="flex flex-col space-y-12 md:space-y-16">
-//           <div className="flex flex-col lg:flex-row justify-start space-y-8 lg:space-y-0 lg:space-x-8">
-//             <main className="flex-1">
-//               <MainContent />
-//             </main>
-//             <aside className="w-full lg:w-80 xl:w-96 bg-gray-50 p-6 rounded-lg shadow-md">
-//               <Sidebar />
-//             </aside>
-//           </div>
-//         </div>
-//       </section>
-//     </>
-//   );
-// };
-
-// export default page;
-
-// const MainContent = () => {
-//   const posts = [
-//     {
-//       id: 1,
-//       date: "March 12, 2018",
-//       title: "Toys for Children Campaign",
-//       category: "Causes",
-//       author: "Tom Phillips",
-//       comments: 3,
-//       image: "/portfolio/tryout1.png",
-//       description:
-//         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempus vestibulum mauris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempus vestibulum mauris quis aliquam. Integer accumsan sodales odio, id tempus velit ullamc.",
-//     },
-//     {
-//       id: 2,
-//       date: "April 5, 2019",
-//       title: "Education for All Initiative",
-//       category: "Education",
-//       author: "Jane Doe",
-//       comments: 5,
-//       image: "/portfolio/tryout2.png",
-//       description:
-//         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempus vestibulum mauris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempus vestibulum mauris quis aliquam. Integer accumsan sodales odio, id tempus velit ullamc.",
-//     },
-//     // Add more posts as needed
-//   ];
-
-//   return (
-//     <div className="flex-1 space-y-12">
-//       {posts.map((post) => (
-//         <article
-//           key={post.id}
-//           className="bg-white rounded-lg shadow-md overflow-hidden transition-shadow duration-300 hover:shadow-lg"
-//         >
-//           <img
-//             src={post.image}
-//             alt={post.title}
-//             className="w-full h-64 object-cover"
-//           />
-//           <div className="p-6">
-//             <div className="flex items-center text-sm text-gray-500 mb-4 space-x-4">
-//               <span>{post.date}</span>
-//               <span>•</span>
-//               <span>{post.category}</span>
-//               <span>•</span>
-//               <span>By {post.author}</span>
-//             </div>
-//             <h2 className="text-2xl font-bold text-darkLilac mb-3">
-//               {post.title}
-//             </h2>
-//             <p className="text-gray-700 mb-6 line-clamp-3">
-//               {post.description}
-//             </p>
-//             <a
-//               href={`/blog/${post.id}`}
-//               className="inline-block px-6 py-3 bg-lilac text-white font-medium rounded-md hover:bg-darkLilac transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-lilac focus:ring-offset-2"
-//             >
-//               Read More
-//             </a>
-//           </div>
-//         </article>
-//       ))}
-//     </div>
-//   );
-// };
-
-// const Sidebar = () => {
-//   const popularPosts = [
-//     {
-//       id: 1,
-//       title: "A New Cause to Help",
-//       date: "March 12, 2018",
-//       image: "/portfolio/tryout1.png",
-//     },
-//     {
-//       id: 2,
-//       title: "We Love to Help People",
-//       date: "March 12, 2018",
-//       image: "/portfolio/tryout1.png",
-//     },
-//     {
-//       id: 3,
-//       title: "The New Ideas for Helping",
-//       date: "March 09, 2018",
-//       image: "/portfolio/tryout1.png",
-//     },
-//   ];
-
-//   const upcomingEvents = [
-//     {
-//       id: 1,
-//       title: "Fundraiser for Kids",
-//       date: "Aug 25, 2018",
-//       location: "Ballroom New York",
-//       image: "/portfolio/tryout1.png",
-//     },
-//     {
-//       id: 2,
-//       title: "Support for Children",
-//       date: "Aug 25, 2018",
-//       location: "Ballroom New York",
-//       image: "/portfolio/tryout1.png",
-//     },
-//   ];
-
-//   return (
-//     <div className="space-y-8">
-//       <section>
-//         <h3 className="text-xl font-bold text-darkLilac mb-4">Popular Posts</h3>
-//         <div className="space-y-4">
-//           {popularPosts.map((post) => (
-//             <a
-//               key={post.id}
-//               href={`/blog/${post.id}`}
-//               className="flex items-center p-3 rounded-lg hover:bg-gray-100 transition-colors duration-200"
-//             >
-//               <img
-//                 src={post.image}
-//                 alt={post.title}
-//                 className="w-16 h-16 object-cover rounded-md mr-4"
-//               />
-//               <div>
-//                 <p className="text-sm font-medium text-gray-800 line-clamp-2">
-//                   {post.title}
-//                 </p>
-//                 <p className="text-xs text-gray-500 mt-1">{post.date}</p>
-//               </div>
-//             </a>
-//           ))}
-//         </div>
-//       </section>
-
-//       <section>
-//         <h3 className="text-xl font-bold text-darkLilac mb-4">
-//           Make a Donation
-//         </h3>
-//         <a
-//           href="/donate"
-//           className="block w-full text-center py-3 bg-lilac text-white font-medium rounded-md hover:bg-darkLilac transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-lilac focus:ring-offset-2"
-//         >
-//           Donate Now
-//         </a>
-//       </section>
-
-//       <section>
-//         <h3 className="text-xl font-bold text-darkLilac mb-4">
-//           Upcoming Events
-//         </h3>
-//         <div className="space-y-4">
-//           {upcomingEvents.map((event) => (
-//             <a
-//               key={event.id}
-//               href={`/events/${event.id}`}
-//               className="flex items-center p-3 rounded-lg hover:bg-gray-100 transition-colors duration-200"
-//             >
-//               <img
-//                 src={event.image}
-//                 alt={event.title}
-//                 className="w-16 h-16 object-cover rounded-md mr-4"
-//               />
-//               <div>
-//                 <p className="text-sm font-medium text-gray-800 line-clamp-2">
-//                   {event.title}
-//                 </p>
-//                 <p className="text-xs text-gray-500 mt-1">
-//                   {event.date} | {event.location}
-//                 </p>
-//               </div>
-//             </a>
-//           ))}
-//         </div>
-//       </section>
-//     </div>
-//   );
-// };
-
-{
-  /* <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-darkLilac mb-8 md:mb-12 text-center lg:text-left">
-              Latest Blog Posts
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-              {blogPosts.map((post) => (
-                <BlogCard key={post.slug} {...post} />
-              ))}
-            </div>
-            <div className="mt-8 text-center">
-              <a
-                href="/blog"
-                className="inline-block px-6 py-3 bg-lilac text-white font-medium rounded-md hover:bg-darkLilac transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-lilac focus:ring-offset-2"
-              >
-                View All Posts
-              </a>
-            </div>
-          </div> */
-}
+export default NewsPage;

@@ -89,37 +89,43 @@ const page = () => {
       </section>
 
       <section className="">
-        <div className="flex">
-          <Image
-            src={"/junks/IMG_2792.JPG"}
-            alt="pic"
-            width={500}
-            height={400}
-            className="w-full h-[300px]"
-          />{" "}
-          <Image
-            src={"/junks/Untitled-3.jpg"}
-            alt="pic"
-            width={500}
-            height={400}
-            className="w-full h-[300px]"
-          />{" "}
-        </div>
-        <div className="flex">
-          <Image
-            src={"/junks/Untitled-4.jpg"}
-            alt="pic"
-            width={500}
-            height={400}
-            className="w-full h-[300px]"
-          />{" "}
-          <Image
-            src={"/junks/Untitled-5.jpg"}
-            alt="pic"
-            width={500}
-            height={400}
-            className="w-full h-[300px]"
-          />{" "}
+        <div className="grid grid-cols-4 w-full">
+          <div className="relative h-[300px]">
+            <Image
+              src={"/junks/IMG_2792.JPG"}
+              alt="pic"
+              fill
+              className="object-cover"
+              sizes="25vw"
+            />
+          </div>
+          <div className="relative h-[300px]">
+            <Image
+              src={"/portfolio/tryout1.png"}
+              alt="pic"
+              fill
+              className="object-cover"
+              sizes="25vw"
+            />
+          </div>
+          <div className="relative h-[300px]">
+            <Image
+              src={"/about/IMG_3137.jpg"}
+              alt="pic"
+              fill
+              className="object-cover"
+              sizes="25vw"
+            />
+          </div>
+          <div className="relative h-[300px]">
+            <Image
+              src={"/home/PHOTO-2025-01-31-12-29-05.jpg"}
+              alt="pic"
+              fill
+              className="object-cover"
+              sizes="25vw"
+            />
+          </div>
         </div>
       </section>
 
@@ -133,7 +139,7 @@ const page = () => {
                 Our Mission
               </h2>
               <div className="w-[100px] h-1 rounded-md bg-darckLilac mb-4 md:mb-6"></div>
-              <p className="text-lg md:text-xl font-montserrat font-medium italic text-gray-700 leading-relaxed">
+              <p className="text-lg md:text-xl font-medium  text-gray-700 leading-relaxed">
                 <span className="text-darkLilac text-4xl font-bold">
                   &ldquo;
                 </span>{" "}
@@ -150,13 +156,12 @@ const page = () => {
               </p>
             </div>
 
-            {/* Vision: Right column, matching styles */}
             <div className="w-full md:w-1/2 mt-8 md:mt-0">
               <h2 className="text-3xl md:text-4xl font-montserrat font-bold text-gray-800 mb-2">
                 Our Vision
               </h2>
               <div className="w-[100px] h-1 rounded-md bg-darckLilac mb-4 md:mb-6"></div>
-              <p className="text-lg md:text-xl font-montserrat font-medium italic text-gray-700 leading-relaxed">
+              <p className="text-lg md:text-xl font-medium  text-gray-700 leading-relaxed">
                 <span className="text-darkLilac text-4xl font-bold">
                   &ldquo;
                 </span>
