@@ -1,11 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-// import { Logo } from "@/components/Navbar/Logo";
 import { MobileMenu } from "@/components/Navbar/MobileMenu";
 import { NavItem } from "@/components/Navbar/NavItem";
 import { cn } from "@/lib/utils";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { IoMdMailUnread } from "react-icons/io";
 import { FaPhoneVolume } from "react-icons/fa6";
 import Image from "next/image";
@@ -15,13 +14,14 @@ const navItems = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About us" },
   { href: "/gallery", label: "Gallery" },
-  { href: "/event", label: "Event" },
+  { href: "/event", label: "Events" },
   { href: "/news", label: "News" },
   { href: "/contact", label: "Contact" },
 ];
 export const Navbar = () => {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -79,7 +79,7 @@ export const Navbar = () => {
               />
             </Link>
 
-            <ul className="hidden md:flex items-center gap-8 lg:gap-10">
+            <ul className="hidden md:flex items-center gap-4 lg:gap-6">
               {navItems.map((item) => (
                 <li key={item.href}>
                   <NavItem
@@ -89,6 +89,46 @@ export const Navbar = () => {
                   />
                 </li>
               ))}
+
+              <button
+                onClick={() => router.push("/donate")}
+                className="
+                  relative
+                  overflow-hidden
+                  px-6 py-2
+                  bg-lilac
+                  text-dark
+                  font-semibold
+                  font-montserrat
+                  rounded-full
+                  transition-all
+                  duration-1000
+                  ease-in-out
+                  hover:text-white
+                  hover:bg-darkLilac
+                  hover:scale-105
+                  active:scale-95
+                  group
+                  animate-pulseScale
+                "
+              >
+                <span className="relative z-10">Donate</span>
+
+                <span
+                  className="
+                    absolute
+                    left-[-100%]
+                    top-0
+                    h-full
+                    w-full
+                    bg-white/20
+                    skew-x-[-20deg]
+                    transition-all
+                    duration-700
+                    group-hover:left-[100%]
+                  "
+                />
+              </button>
             </ul>
             <MobileMenu navItems={navItems} />
           </div>

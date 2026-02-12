@@ -116,7 +116,62 @@ const newsArticles = [
 
     gallery: ["/news/workshop-1.jpg", "/news/workshop-2.jpg"],
   },
-  // Add more articles as needed
+  {
+    id: 3,
+    title: "Sickle-cell Awareness Workshop Impacts 200+ Participants",
+    excerpt:
+      "The workshop focused on mental health and self-stigma reduction among sickle-cell survivors.",
+    category: "Workshop Report",
+    date: "September 25, 2025",
+    readTime: "4 min read",
+    image: "/news/workshop-report.jpg",
+    author: "Dr. Michael Chen",
+    authorRole: "Clinical Director",
+    authorImage: "/team/michael-chen.jpg",
+    featured: false,
+    tags: ["Workshop", "Sickle-cell", "Mental Health", "Support"],
+
+    content: `
+      <p>On September 20, 2025, we hosted our most successful sickle-cell awareness workshop to date, reaching over 200 participants at the Main Street Community Center. The event focused on mental health support and reducing self-stigma among sickle-cell survivors.</p>
+      
+      <h2>Workshop Structure</h2>
+      <p>The full-day workshop was divided into three main sessions:</p>
+      
+      <h3>Morning Session: Understanding Self-Stigma</h3>
+      <p>Led by clinical psychologist Dr. James Wilson, this session explored the psychological impact of chronic illness and practical strategies for overcoming internalized stigma.</p>
+      
+      <h3>Afternoon Session: Peer Support Networks</h3>
+      <p>Participants engaged in facilitated group discussions, sharing experiences and building connections with others facing similar challenges.</p>
+      
+      <h3>Evening Session: Art Therapy Workshop</h3>
+      <p>Art therapist Robert Thompson guided participants through expressive art activities designed to process emotions and build resilience.</p>
+      
+      <h2>Participant Feedback</h2>
+      <p>Post-workshop surveys showed:</p>
+      <ul>
+        <li>94% reported increased confidence in managing their condition</li>
+        <li>87% felt less alone after connecting with other survivors</li>
+        <li>91% would recommend the workshop to others</li>
+      </ul>
+      
+      <blockquote>
+        "For the first time, I felt truly understood. Connecting with others who share my experience has been life-changing."
+        <footer>- Workshop Participant</footer>
+      </blockquote>
+      
+      <h2>Future Initiatives</h2>
+      <p>Based on this success, we're planning quarterly workshops and establishing a peer mentorship program to provide ongoing support.</p>
+    `,
+
+    stats: [
+      { label: "Participants", value: "200+" },
+      { label: "Satisfaction Rate", value: "94%" },
+      { label: "Volunteer Facilitators", value: "12" },
+      { label: "Future Workshops", value: "Quarterly" },
+    ],
+
+    gallery: ["/news/workshop-1.jpg", "/news/workshop-2.jpg"],
+  },
 ];
 
 interface NewsDetailPageProps {
@@ -140,8 +195,7 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
       <PagesHero img={article.image} title={article.title} />
 
       <section className="container mx-auto px-4 py-12 md:py-16">
-        <div className="max-w-4xl mx-auto">
-          {/* Back to News Link */}
+        <div className="">
           <div className="mb-8">
             <Link
               href="/news"

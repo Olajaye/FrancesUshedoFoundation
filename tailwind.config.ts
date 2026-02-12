@@ -39,6 +39,15 @@ const config: Config = {
         poppins: ["var(--font-poppins)"],
         montserrat: ["var(--font-montserrat)"],
       },
+      animation: {
+        pulseScale: "pulseScale 2s ease-in-out infinite",
+      },
+      keyframes: {
+        pulseScale: {
+          "0%, 100%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.08)" },
+        },
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

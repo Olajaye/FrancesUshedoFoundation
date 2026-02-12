@@ -95,27 +95,27 @@ export const blogPosts = [
 
 export const Sponsors = [
   {
-    name: "TechCorp",
+    name: "Meettoaspire",
     logo: "/sponsor/meettoaspire.webp",
   },
   {
-    name: "DesignHub",
+    name: "HWD",
     logo: "/sponsor/HWD.webp",
   },
   {
-    name: "WebServices",
+    name: "Sickel Cell Foundation",
     logo: "/sponsor/logo5.png",
   },
   {
-    name: "TechCorp",
+    name: "Meettoaspire",
     logo: "/sponsor/meettoaspire.webp",
   },
   {
-    name: "DesignHub",
+    name: "HWD",
     logo: "/sponsor/HWD.webp",
   },
   {
-    name: "WebServices",
+    name: "Sickel Cell Foundation",
     logo: "/sponsor/logo5.png",
   },
 ];

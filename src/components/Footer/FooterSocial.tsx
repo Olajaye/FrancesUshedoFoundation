@@ -1,22 +1,21 @@
-import React from 'react';
-import { BsDribbble, BsInstagram, BsTwitter } from 'react-icons/bs';
-import { FaFacebook } from 'react-icons/fa';
-import { LiaLinkedin } from 'react-icons/lia';
-
+import React from "react";
+import { BsInstagram } from "react-icons/bs"; //BsTwitter BsDribbble,
+import { FaFacebook } from "react-icons/fa";
+import { LiaLinkedin } from "react-icons/lia";
 
 const FooterSocial: React.FC = () => {
   const socialLinks = [
-    { Icon: FaFacebook, href: '#', ariaLabel: 'Facebook' },
-    { Icon: BsTwitter, href: '#', ariaLabel: 'Twitter' },
-    { Icon: BsInstagram, href: '#', ariaLabel: 'Instagram' },
-    { Icon: BsDribbble, href: '#', ariaLabel: 'Dribbble' },
-    { Icon: LiaLinkedin, href: '#', ariaLabel: 'LinkedIn' },
+    { Icon: FaFacebook, href: "#", ariaLabel: "Facebook" },
+    // { Icon: BsTwitter, href: '#', ariaLabel: 'Twitter' },
+    { Icon: BsInstagram, href: "#", ariaLabel: "Instagram" },
+    // { Icon: BsDribbble, href: '#', ariaLabel: 'Dribbble' },
+    { Icon: LiaLinkedin, href: "#", ariaLabel: "LinkedIn" },
   ];
 
   return (
     <div className="flex space-x-4 mt-6">
       {socialLinks.map((social, index) => (
-        <a 
+        <a
           key={index}
           href={social.href}
           aria-label={social.ariaLabel}

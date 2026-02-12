@@ -10,11 +10,11 @@ import FooterSocial from "./FooterSocial";
 
 const usefulLinks = [
   { text: "Privacy Policy", href: "/privacy" }, // Updated hrefs to actual paths; adjust as needed
-  { text: "Become a Volunteer", href: "/volunteer" },
+  { text: "Become a Volunteer", href: "/contact" },
   { text: "Donate", href: "/donate" },
-  { text: "Testimonials", href: "/testimonials" },
-  { text: "Causes", href: "/causes" },
-  { text: "Portfolio", href: "/portfolio" },
+  // { text: "Testimonials", href: "/testimonials" },
+  // { text: "Causes", href: "/causes" },
+  { text: "Gallery", href: "/gallery" },
   { text: "News", href: "/news" },
 ];
 
@@ -59,7 +59,7 @@ const Footer = () => {
                 priority
               />
             </Link>
-            <p className="text-gray-300 text-sm md:text-base font-montserrat leading-relaxed max-w-md">
+            <p className="text-gray-300 text-sm md:text-base font-montserrat italic leading-relaxed max-w-md">
               &quot;In the heart of every child lies a spark of potential. At
               TFUF, we are committed to nurturing this potential in Nigeria,
               providing the support and care that every child deserves. Join us
@@ -78,7 +78,7 @@ const Footer = () => {
             <h3 className="text-xl md:text-2xl font-montserrat font-semibold mb-6">
               Latest News
             </h3>
-            <div className="space-y-4">
+            <div className="space-y-6">
               {newsItems.map((item, index) => (
                 <FooterNewsItem
                   key={index}

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 interface FooterLinksProps {
@@ -17,12 +18,12 @@ const FooterLinks: React.FC<FooterLinksProps> = ({ title, links }) => {
       <ul className="space-y-3">
         {links.map((link, index) => (
           <li key={index}>
-            <a
+            <Link
               href={link.href}
               className="text-gray-300 hover:text-darckLilac transition-colors duration-300"
             >
               {link.text}
-            </a>
+            </Link>
           </li>
         ))}
       </ul>

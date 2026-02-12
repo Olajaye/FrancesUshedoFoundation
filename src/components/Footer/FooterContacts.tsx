@@ -1,7 +1,8 @@
 "use client";
+import { Mail } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 import { BiMapPin, BiPhone } from "react-icons/bi";
-import { MdAlignHorizontalCenter } from "react-icons/md";
 
 const FooterContact: React.FC = () => {
   return (
@@ -16,13 +17,13 @@ const FooterContact: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          <MdAlignHorizontalCenter className="text-darckLilac" size={18} />
-          <a
+          <Mail className="text-darckLilac" size={18} />
+          <Link
             href="mailto:office@template.com"
             className="text-gray-300 hover:text-darckLilac transition-colors duration-300"
           >
             office@template.com
-          </a>
+          </Link>
         </div>
 
         <div className="flex items-start gap-3">

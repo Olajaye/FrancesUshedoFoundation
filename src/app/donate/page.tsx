@@ -70,7 +70,7 @@ const PaymentMethodSelector = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6">
+    <div className="container mx-auto px-2 py-7">
       {/* Header */}
       <div className="text-center mb-8">
         <div className="inline-flex items-center justify-center gap-2 mb-3">
@@ -89,9 +89,9 @@ const PaymentMethodSelector = () => {
         {PAYMENT_OPTIONS.map((option) => (
           <div
             key={option.id}
-            className={`relative p-4 rounded-xl border-2 transition-all cursor-pointer hover:border-blue-500 hover:bg-blue-50/50 ${
+            className={`relative p-4 rounded-xl border-2 transition-all cursor-pointer hover:border-darckLilac hover:bg-lilac/50 ${
               selectedMethod === option.id
-                ? "border-blue-500 bg-blue-50"
+                ? "border-darckLilac bg-lilac/20"
                 : "border-gray-200"
             }`}
             onClick={() => setSelectedMethod(option.id)}
@@ -101,7 +101,7 @@ const PaymentMethodSelector = () => {
                 <div
                   className={`p-3 rounded-lg ${
                     selectedMethod === option.id
-                      ? "bg-blue-100 text-blue-600"
+                      ? "bg-lilac/50 text-darckLilac"
                       : "bg-gray-100 text-gray-600"
                   }`}
                 >
@@ -128,7 +128,7 @@ const PaymentMethodSelector = () => {
                 <div
                   className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
                     selectedMethod === option.id
-                      ? "border-blue-500 bg-blue-500"
+                      ? "border-darckLilac bg-lilac"
                       : "border-gray-300"
                   }`}
                 >
@@ -150,7 +150,7 @@ const PaymentMethodSelector = () => {
           </p>
           <button
             onClick={() => (window.location.href = "/contact?subject=payment")}
-            className="inline-flex items-center gap-2 px-6 py-3 text-blue-600 font-medium border-2 border-blue-200 rounded-lg hover:bg-blue-50 transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 text-darckLilac font-medium border-2 border-darckLilac rounded-lg hover:bg-lilac/20 transition-colors"
           >
             <Mail className="w-4 h-4" />
             Contact Us for Assistance
@@ -165,7 +165,7 @@ const PaymentMethodSelector = () => {
           disabled={!selectedMethod || isProcessing}
           className={`w-full py-3 px-6 rounded-lg font-medium transition-colors ${
             selectedMethod && !isProcessing
-              ? "bg-blue-600 hover:bg-blue-700 text-white"
+              ? "bg-darckLilac/80 hover:bg-darckLilac text-white"
               : "bg-gray-200 text-gray-500 cursor-not-allowed"
           }`}
         >
@@ -194,72 +194,3 @@ const PaymentMethodSelector = () => {
 };
 
 export default PaymentMethodSelector;
-
-// const CompactPaymentSelector = () => {
-//   const [selectedMethod, setSelectedMethod] = useState<
-//     "paystack" | "stripe" | "direct"
-//   >("paystack");
-
-//   return (
-//     <div className="space-y-4">
-//       <h3 className="font-medium text-gray-900">Payment Method</h3>
-
-//       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-//         <button
-//           onClick={() => setSelectedMethod("paystack")}
-//           className={`p-4 rounded-lg border-2 transition-all ${
-//             selectedMethod === "paystack"
-//               ? "border-blue-500 bg-blue-50"
-//               : "border-gray-200 hover:border-gray-300"
-//           }`}
-//         >
-//           <div className="flex flex-col items-center gap-2">
-//             <Globe className="w-5 h-5 text-blue-600" />
-//             <span className="font-medium">Paystack</span>
-//             <span className="text-sm text-gray-600">Pay in Naira</span>
-//           </div>
-//         </button>
-
-//         <button
-//           onClick={() => setSelectedMethod("stripe")}
-//           className={`p-4 rounded-lg border-2 transition-all ${
-//             selectedMethod === "stripe"
-//               ? "border-blue-500 bg-blue-50"
-//               : "border-gray-200 hover:border-gray-300"
-//           }`}
-//         >
-//           <div className="flex flex-col items-center gap-2">
-//             <CreditCard className="w-5 h-5 text-green-600" />
-//             <span className="font-medium">Stripe</span>
-//             <span className="text-sm text-gray-600">Pay in Pounds</span>
-//           </div>
-//         </button>
-
-//         <button
-//           onClick={() => setSelectedMethod("direct")}
-//           className={`p-4 rounded-lg border-2 transition-all ${
-//             selectedMethod === "direct"
-//               ? "border-blue-500 bg-blue-50"
-//               : "border-gray-200 hover:border-gray-300"
-//           }`}
-//         >
-//           <div className="flex flex-col items-center gap-2">
-//             <Mail className="w-5 h-5 text-purple-600" />
-//             <span className="font-medium">Direct</span>
-//             <span className="text-sm text-gray-600">Contact for Details</span>
-//           </div>
-//         </button>
-//       </div>
-
-//       {/* Contact Link */}
-//       <div className="text-center pt-4 border-t">
-//         <button
-//           onClick={() => (window.location.href = "/contact")}
-//           className="text-blue-600 hover:text-blue-700 text-sm font-medium"
-//         >
-//           Need a custom payment method? Contact us
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };

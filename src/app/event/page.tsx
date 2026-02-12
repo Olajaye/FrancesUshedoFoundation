@@ -30,7 +30,7 @@ const EventCalendar = () => {
     <div className="space-y-8">
       <div className="mb-8">
         <h1 className="text-3xl md:text-4xl font-bold text-darkLilac mb-4">
-          Upcoming Foundation Events
+          Foundation Events
         </h1>
         <p className="text-gray-600">
           Join us in our mission to make a difference in the community. Register

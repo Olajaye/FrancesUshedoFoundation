@@ -12,6 +12,7 @@ import Link from "next/link";
 import { useMemo } from "react";
 import Button from "@/components/Button/button";
 import { SponsorsCarousel } from "@/components/Sponsors/SponsorCar";
+import { CalendarX } from "lucide-react";
 
 const cardsData = [
   {
@@ -170,32 +171,43 @@ export default function Home() {
 
       <section className="py-12 md:py-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row gap-8 md:gap-12">
-            <div className="w-full md:w-1/2">
+          <div className="flex flex-col lg:flex-row gap-6 md:gap-8">
+            <div className="w-full lg:w-1/2">
+              <FeaturedCause />
+            </div>
+
+            <div className="w-full lg:w-1/2">
               <h2 className="text-3xl md:text-4xl font-montserrat font-bold text-gray-800 mb-6 md:mb-8">
                 Upcoming Events
               </h2>
               {upcomingEvents.length > 0 ? (
-                <div className="space-y-6">
+                <div className="space-y-3">
                   {upcomingEvents.map((event, index) => (
                     <EventCard key={index} {...event} />
                   ))}
                 </div>
               ) : (
-                <p className="text-gray-600 font-montserrat">
-                  No upcoming events at the moment. Check back soon!
-                </p>
-              )}
-            </div>
+                <div className="flex flex-col items-center justify-center text-center py-7">
+                  <div className="bg-lilac/10 p-4 rounded-full mb-4">
+                    <CalendarX className="w-8 h-8 text-lilac" />
+                  </div>
 
-            <div className="w-full md:w-1/2">
-              <FeaturedCause />
+                  <h3 className="text-lg font-semibold font-montserrat text-dark mb-2">
+                    No Upcoming Events
+                  </h3>
+
+                  <p className="text-gray-600 font-montserrat max-w-md">
+                    There are currently no scheduled events. Please check back
+                    soon for updates and upcoming activities.
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>
       </section>
 
-      <SponsorsCarousel sponsors={Sponsors} speed={25} direction="left" />
+      <SponsorsCarousel sponsors={Sponsors} speed={25} />
 
       <section className="py-16 md:py-24 bg-white">
         <div className="container mx-auto px-4 md:px-6">
@@ -296,7 +308,7 @@ const EventCard = ({
           {description}
         </p>
         <Link
-          href="/gallery"
+          href="/event"
           className="text-darkLilac text-sm font-montserrat font-medium mt-2 inline-block hover:underline"
         >
           Read More
@@ -318,40 +330,32 @@ interface FeaturedCauseProps {
 }
 
 const FeaturedCause = ({
-  title = "Fundraiser for Kids",
-  date = "Aug 25, 2025", // Updated to future date based on current context
-  location = "Ball Room New York",
-  description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempus vestibulum mauris.",
-  imageSrc = "/home/tryout3.png",
+  title = "Building The Butterfly Clinic",
+  date = "1 April 2026",
+  location = "Delta State, Nigeria",
+  description = "We are raising funds to establish The Butterfly Clinic, a dedicated healthcare centre for children aged 0–18, with priority support for sickle cell patients and families in need.",
+  imageSrc = "/feture.png",
   raised = 56880,
   goal = 70000,
   donateHref = "/donate",
 }: FeaturedCauseProps) => {
   const progress = Math.min(100, (raised / goal) * 100).toFixed(0); // Dynamic progress calculation
-  const router = useRouter();
+
   return (
-    <div className="bg-gray-100 p-6 md:p-8 rounded-xl shadow-md">
-      {" "}
-      {/* Increased padding, rounded-xl for softer look */}
-      <h2 className="text-2xl md:text-3xl font-montserrat font-bold text-gray-800 mb-6">
+    <div className="bg-gray-100 p-4 md:p-6 rounded-xl shadow-md">
+      <h2 className="text-2xl md:text-3xl font-montserrat font-bold text-gray-800 mb-3">
         Featured Cause
       </h2>
-      <div className="flex flex-col md:flex-row items-center gap-6">
-        {/* <Image
-          src={"/home/tryout3.png"}
-          alt={`${title} image`} 
-          width={400}
-          height={350}
-          
-          className="w-full md:w-1/2 h-[250px] md:h-[350px] object-cover rounded-lg"
-        /> */}
-        <img
-          src={imageSrc}
-          alt="Featured Cause"
-          className="w-full md:w-1/2 h-[350px] object-cover rounded-lg mb-4 md:mb-0 md:mr-4"
-        />
+      <div className="flex flex-col md:flex-row items-centergap-3">
+        <div className="w-full md:w-1/2 h-[350px] mr-2">
+          <img
+            src={imageSrc}
+            alt="Featured Cause"
+            className="h-[350px] object-cover rounded-lg"
+          />
+        </div>
 
-        <div className="w-full md:w-1/2">
+        <div className="w-full h-full flex-1">
           <h3 className="text-xl font-montserrat font-semibold text-gray-800 mb-2">
             {title}
           </h3>
@@ -361,19 +365,22 @@ const FeaturedCause = ({
           <p className="text-sm font-montserrat text-gray-700 leading-relaxed mb-6">
             {description}
           </p>
-          {/* <Link
-            href={donateHref}
-            className="inline-block bg-darkLilac text-white px-6 py-3 rounded-full font-montserrat font-medium transition duration-300 hover:bg-lilac hover:shadow-md" // Fixed typo, added hover
-          >
-            Donate Now
-          </Link> */}
-          <Button
-            variant="outline"
-            size="md"
-            onClick={() => router.push(donateHref)} // Dynamic routing
-          >
-            Donate Now
-          </Button>
+          <div className="flex justify-between">
+            <Link
+              href={donateHref}
+              className="w-auto p-3 bg-lilac text-dark font-bold font-montserrat rounded-xl transition duration-300 hover:bg-darckLilac hover:text-white"
+            >
+              Donate Now
+            </Link>
+            <Button
+              variant="outline"
+              size="md"
+              // onClick={() => router.push(donateHref)}
+            >
+              Details
+            </Button>
+          </div>
+
           <div className="mt-6">
             <div className="flex justify-between text-sm font-montserrat text-gray-600 mb-2">
               <span>Raised: ${raised.toLocaleString()}</span>{" "}

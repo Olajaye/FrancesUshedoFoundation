@@ -20,7 +20,7 @@ const EventDetailPage = () => {
       <PagesHero img={event.image} title={event.title} />
 
       <section className="container mx-auto px-4 py-12 md:py-16">
-        <div className="max-w-6xl mx-auto">
+        <div className="">
           {/* Back to Events Link */}
           <div className="mb-8">
             <Link

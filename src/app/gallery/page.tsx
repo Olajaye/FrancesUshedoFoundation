@@ -1,6 +1,7 @@
 "use client";
 
 import { PagesHero } from "@/components/hearderCom/hearder";
+import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import { BsX } from "react-icons/bs";
@@ -19,12 +20,7 @@ interface PhotoModalProps {
 interface Photo {
   id: string;
   url: string;
-  thumbnail: string;
-  title: string;
-  description: string;
-  category: string;
-  tags: string[];
-  photographer: string;
+  description?: string;
 }
 
 interface Album {
@@ -44,45 +40,20 @@ const albums: Album[] = [
     coverPhoto: {
       id: "1",
       url: "/home/picture2.jpg",
-      thumbnail: "/home/picture2.jpg",
-      title: "Mountain Landscape",
       description: "Breathtaking mountain vista with misty peaks",
-      category: "nature",
-      tags: ["mountains", "landscape", "mist", "scenic"],
-      photographer: "James Wheeler",
     },
     photos: [
       {
         id: "1",
         url: "/home/picture2.jpg",
-        thumbnail: "/home/picture2.jpg",
-        title: "Mountain Landscape",
-        description: "Breathtaking mountain vista with misty peaks",
-        category: "nature",
-        tags: ["mountains", "landscape", "mist", "scenic"],
-        photographer: "James Wheeler",
       },
       {
         id: "3",
         url: "https://images.pexels.com/photos/1624496/pexels-photo-1624496.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-        thumbnail:
-          "https://images.pexels.com/photos/1624496/pexels-photo-1624496.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1",
-        title: "Ocean Waves",
-        description: "Powerful ocean waves crashing against rocks",
-        category: "nature",
-        tags: ["ocean", "waves", "water", "coastal"],
-        photographer: "Matt Hardy",
       },
       {
         id: "5",
         url: "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-        thumbnail:
-          "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1",
-        title: "Forest Path",
-        description: "Serene forest pathway with dappled sunlight",
-        category: "nature",
-        tags: ["forest", "path", "trees", "sunlight"],
-        photographer: "Valiphotos",
       },
     ],
   },
@@ -95,45 +66,20 @@ const albums: Album[] = [
     coverPhoto: {
       id: "2",
       url: "/home/tryout3.png",
-      thumbnail: "/home/tryout3.png",
-      title: "City Architecture",
       description: "Modern urban architecture with glass and steel",
-      category: "architecture",
-      tags: ["city", "building", "modern", "urban"],
-      photographer: "Expect Best",
     },
     photos: [
       {
         id: "2",
         url: "/home/tryout3.png",
-        thumbnail: "/home/tryout3.png",
-        title: "City Architecture",
-        description: "Modern urban architecture with glass and steel",
-        category: "architecture",
-        tags: ["city", "building", "modern", "urban"],
-        photographer: "Expect Best",
       },
       {
         id: "4",
         url: "https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-        thumbnail:
-          "https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1",
-        title: "Urban Street",
-        description: "Vibrant city street with neon lights",
-        category: "urban",
-        tags: ["street", "neon", "night", "city"],
-        photographer: "Aleksandar Pasaric",
       },
       {
         id: "8",
         url: "https://images.pexels.com/photos/1552252/pexels-photo-1552252.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-        thumbnail:
-          "https://images.pexels.com/photos/1552252/pexels-photo-1552252.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1",
-        title: "City Skyline",
-        description: "Impressive city skyline at twilight",
-        category: "urban",
-        tags: ["skyline", "city", "twilight", "buildings"],
-        photographer: "Pixabay",
       },
     ],
   },
@@ -228,14 +174,14 @@ const AlbumCard: React.FC<AlbumCardProps> = ({ album, onClick }) => {
     >
       <div className="relative h-full overflow-hidden">
         <img
-          src={album.coverPhoto.thumbnail}
+          src={album.coverPhoto.url}
           alt={album.name}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-        <div className="absolute bottom-0 left-0 right-0 p-4 bg-lilac transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+        <div className="absolute bottom-0 left-0 right-0 p-2 bg-lilac transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
           <div className="h-[80px] flex flex-col justify-between">
             <div>
               <h3 className="text-white font-semibold text-lg mb-1 truncate">
@@ -245,8 +191,8 @@ const AlbumCard: React.FC<AlbumCardProps> = ({ album, onClick }) => {
                 {album.photos.length} photos
               </p>
             </div>
-            <p className="text-white/80 text-sm line-clamp-2">
-              {album.description.slice(0, 60)}
+            <p className="text-white/80 text-sm truncate line-clamp-2">
+              {album.description.slice(0, 40)}...
             </p>
           </div>
         </div>
@@ -308,39 +254,40 @@ const PhotoModal: React.FC<PhotoModalProps> = ({
         <BsX className="w-6 h-6" />
       </button>
 
-      {canGoPrev && (
-        <button
-          onClick={() => handleNavigate("prev")}
-          className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 text-black/80 hover:text-black transition-colors duration-200 bg-white hover:bg-white/50 rounded-full p-3 backdrop-blur-sm"
-        >
-          <BiChevronLeft className="w-6 h-6" />
-        </button>
-      )}
-
-      {canGoNext && (
-        <button
-          onClick={() => handleNavigate("next")}
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 text-black/80 hover:text-black transition-colors duration-200 bg-white hover:bg-white/50 rounded-full p-3 backdrop-blur-sm"
-        >
-          <BiChevronRight className="w-6 h-6" />
-        </button>
-      )}
-
       <div className="w-full container mx-auto flex flex-col lg:flex-row gap-6 max-h-[90vh]">
-        <div className="flex-1 flex items-center justify-center relative">
-          {!imageLoaded && (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-8 h-8 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-            </div>
+        <div className="relative flex-1">
+          {canGoPrev && (
+            <button
+              onClick={() => handleNavigate("prev")}
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 text-black/80 hover:text-black transition-colors duration-200 bg-white hover:bg-white/50 rounded-full p-3 backdrop-blur-sm"
+            >
+              <BiChevronLeft className="w-6 h-6" />
+            </button>
           )}
-          <img
-            src={selectedPhoto.url}
-            alt={selectedPhoto.title}
-            className={`max-w-full max-h-[70vh] object-contain rounded-lg transition-opacity duration-300 ${
-              imageLoaded ? "opacity-100" : "opacity-0"
-            }`}
-            onLoad={() => setImageLoaded(true)}
-          />
+
+          {canGoNext && (
+            <button
+              onClick={() => handleNavigate("next")}
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 text-black/80 hover:text-black transition-colors duration-200 bg-white hover:bg-white/50 rounded-full p-3 backdrop-blur-sm"
+            >
+              <BiChevronRight className="w-6 h-6" />
+            </button>
+          )}
+          <div className="flex-1 flex items-center justify-center relative">
+            {!imageLoaded && (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-8 h-8 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+              </div>
+            )}
+            <img
+              src={selectedPhoto.url}
+              alt={"image"}
+              className={`max-w-full max-h-[70vh] object-contain rounded-lg transition-opacity duration-300 ${
+                imageLoaded ? "opacity-100" : "opacity-0"
+              }`}
+              onLoad={() => setImageLoaded(true)}
+            />
+          </div>
         </div>
 
         <div className="lg:w-96 bg-white/95 backdrop-blur-sm rounded-2xl p-3 overflow-y-auto">
@@ -350,7 +297,7 @@ const PhotoModal: React.FC<PhotoModalProps> = ({
                 {album.name}
               </h2>
               <p className="text-gray-600 leading-relaxed">
-                {selectedPhoto.description}
+                {album.coverPhoto.description}
               </p>
             </div>
 
@@ -362,12 +309,10 @@ const PhotoModal: React.FC<PhotoModalProps> = ({
                 {album.photos.map((photo) => (
                   <img
                     key={photo.id}
-                    src={photo.thumbnail}
-                    alt={photo.title}
+                    src={photo.url}
+                    alt={"image"}
                     className={`w-full h-20 object-cover rounded-lg cursor-pointer ${
-                      photo.id === selectedPhoto.id
-                        ? "ring-2 ring-blue-500"
-                        : ""
+                      photo.id === selectedPhoto.id ? "ring-2 ring-lilac" : ""
                     }`}
                     onClick={() => onPhotoSelect(photo)}
                   />
@@ -382,9 +327,12 @@ const PhotoModal: React.FC<PhotoModalProps> = ({
             </div>
 
             <div className="border-t pt-4">
-              <button className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200">
+              <Link
+                href={"/donate"}
+                className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-darckLilac text-white rounded-lg hover:bg-lilac transition-colors duration-200"
+              >
                 Donate to this Outreach
-              </button>
+              </Link>
             </div>
           </div>
         </div>
