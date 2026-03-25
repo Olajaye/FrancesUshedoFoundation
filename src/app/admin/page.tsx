@@ -8,14 +8,35 @@ import { useRouter } from "next/navigation";
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const route = useRouter();
 
-  const handleSubmite = (e: React.FormEvent) => {
+  const handleSubmite = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError("");
+    setLoading(true);
 
-    console.log("Email:", email);
-    console.log("Password:", password);
-    route.push("/admin/dashboard");
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error || "Login failed");
+        return;
+      }
+
+      route.push("/admin/dashboard");
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <div className="min-h-screen bg-gradient-to-br from-darckLilac/30 via-white to-lilac">
@@ -84,6 +105,11 @@ export default function LoginPage() {
               </div>
 
               <form onSubmit={handleSubmite} className="space-y-6">
+                {error && (
+                  <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl px-4 py-3">
+                    {error}
+                  </div>
+                )}
                 <div className="space-y-2">
                   <label
                     htmlFor="email"
@@ -132,10 +158,13 @@ export default function LoginPage() {
 
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-darckLilac to-lilac text-white py-3 px-4 rounded-xl hover:from-darckLilac hover:to-lilac focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-darckLilac transition-all font-medium flex items-center justify-center space-x-2 group"
+                  disabled={loading}
+                  className="w-full bg-gradient-to-r from-darckLilac to-lilac text-white py-3 px-4 rounded-xl hover:from-darckLilac hover:to-lilac focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-darckLilac transition-all font-medium flex items-center justify-center space-x-2 group disabled:opacity-70 disabled:cursor-not-allowed"
                 >
-                  <span>Sign In</span>
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <span>{loading ? "Signing in..." : "Sign In"}</span>
+                  {!loading && (
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  )}
                 </button>
               </form>
             </div>

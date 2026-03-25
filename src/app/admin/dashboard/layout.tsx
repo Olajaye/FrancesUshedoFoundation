@@ -11,7 +11,7 @@ import {
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function RootLayout({
   children,
@@ -19,6 +19,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    await fetch("/api/auth/logout", { method: "POST" });
+    router.push("/admin");
+  };
 
   const navItems = [
     {
@@ -134,13 +140,13 @@ export default function RootLayout({
           {/* Bottom section */}
           <div className="absolute bottom-4 w-56">
             <div className="border-t border-lilac/20 pt-4">
-              <Link
-                href="#"
-                className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-red-50 text-gray-700 transition-all"
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-red-50 text-gray-700 transition-all w-full"
               >
                 <LogOut className="w-5 h-5 text-gray-500" />
                 <span className="text-sm">Logout</span>
-              </Link>
+              </button>
             </div>
           </div>
         </aside>
