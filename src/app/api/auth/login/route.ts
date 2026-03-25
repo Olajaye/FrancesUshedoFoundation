@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-import { PrismaClient } from "@/generated/prisma";
+import { connectDB } from "@/lib/db";
+import Admin from "@/lib/models/Admin";
 import { signToken } from "@/lib/auth";
-
-const prisma = new PrismaClient();
 
 export async function POST(req: NextRequest) {
   try {
@@ -16,7 +15,9 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const admin = await prisma.admin.findUnique({ where: { email } });
+    await connectDB();
+
+    const admin = await Admin.findOne({ email: email.toLowerCase() });
 
     if (!admin) {
       return NextResponse.json(
@@ -35,7 +36,7 @@ export async function POST(req: NextRequest) {
     }
 
     const token = await signToken({
-      id: admin.id,
+      id: admin._id.toString(),
       email: admin.email,
       name: admin.name,
     });
@@ -49,7 +50,7 @@ export async function POST(req: NextRequest) {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
-      maxAge: 60 * 60 * 8, // 8 hours
+      maxAge: 60 * 60 * 8,
       path: "/",
     });
 
