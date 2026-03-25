@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { Plus, X, Upload, Loader2, Eye } from "lucide-react";
+import { Plus, X, Loader2, Eye } from "lucide-react";
 import Link from "next/link";
 
 interface Stat {

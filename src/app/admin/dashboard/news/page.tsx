@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -13,8 +13,6 @@ import {
   Search,
   Calendar,
   User,
-  Tag,
-  MoreVertical,
   Loader2,
 } from "lucide-react";
 
@@ -51,7 +49,7 @@ interface GalleryImage {
 }
 
 export default function NewsPage() {
-  const router = useRouter();
+  // const router = useRouter();
   const [news, setNews] = useState<News[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
@@ -100,20 +98,20 @@ export default function NewsPage() {
     }
   };
 
-  const handleToggleFeatured = async (id: string, currentFeatured: boolean) => {
-    try {
-      await fetch(`/api/admin/news/${id}/toggle-featured`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ featured: !currentFeatured }),
-      });
-      fetchNews();
-    } catch (error) {
-      console.error("Error toggling featured status:", error);
-    }
-  };
+  // const handleToggleFeatured = async (id: string, currentFeatured: boolean) => {
+  //   try {
+  //     await fetch(`/api/admin/news/${id}/toggle-featured`, {
+  //       method: "PATCH",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({ featured: !currentFeatured }),
+  //     });
+  //     fetchNews();
+  //   } catch (error) {
+  //     console.error("Error toggling featured status:", error);
+  //   }
+  // };
 
-  // const categories = ["all", ...new Set(news.map((n) => n.category))];
+  const categories = ["all"];
 
   const filteredNews = news.filter((item) => {
     const matchesSearch =
@@ -169,7 +167,7 @@ export default function NewsPage() {
               className="w-full pl-10 pr-4 py-2 border border-lilac/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-lilac/50"
             />
           </div>
-          {/* <select
+          <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
             className="px-4 py-2 border border-lilac/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-lilac/50"
@@ -179,7 +177,7 @@ export default function NewsPage() {
                 {category === "all" ? "All Categories" : category}
               </option>
             ))}
-          </select> */}
+          </select>
           <label className="flex items-center gap-2 text-sm text-gray-600">
             <input
               type="checkbox"
