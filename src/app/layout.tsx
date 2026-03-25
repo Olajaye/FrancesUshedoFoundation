@@ -1,9 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import {edu_QLD_Beginner, montserrat, roboto } from "@/app/Font/font";
-
-import { Navbar } from "@/components/Navbar/Navbar";
-import Footer from "@/components/Footer/Footer";
+import { edu_QLD_Beginner, montserrat, roboto } from "@/app/Font/font";
 
 export const metadata: Metadata = {
   title: "Frances Ushedo Foundation",
@@ -17,10 +14,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${roboto.variable} ${edu_QLD_Beginner.variable} ${montserrat.variable} `}>
-        <Navbar />
+      <body
+        suppressHydrationWarning={true}
+        className={`${roboto.variable} ${edu_QLD_Beginner.variable} ${montserrat.variable} `}
+      >
         {children}
-        <Footer />
       </body>
     </html>
   );

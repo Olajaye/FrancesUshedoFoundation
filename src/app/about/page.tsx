@@ -1,5 +1,6 @@
 "use client";
 import { PagesHero } from "@/components/hearderCom/hearder";
+import { Navbar } from "@/components/Navbar/Navbar";
 import Image from "next/image";
 import React from "react";
 // import { useInView } from "react-intersection-observer"; { useEffect, useState }
@@ -7,6 +8,7 @@ import React from "react";
 const page = () => {
   return (
     <>
+      <Navbar />
       <PagesHero img={"/about/IMG_3137.jpg"} title={"About Us"} />
 
       <section className="container px-4 mx-auto py-6">

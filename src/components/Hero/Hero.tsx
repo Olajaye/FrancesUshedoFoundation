@@ -198,7 +198,7 @@ const Hero = () => {
             <div className="absolute inset-0 flex flex-col items-center justify-center text-start text-white px-4">
               <div className="container mx-auto px-4">
                 {/* <FadeText /> */}
-                <h2 className="text-5xl md:text-7xl font-montserrat font-semibold md:max-w-[60%]">
+                <h2 className="text-3xl md:text-7xl font-montserrat font-semibold md:max-w-[60%]">
                   {slide.text}
                 </h2>
                 <p className="text-xl mb-7 mt-7 italic md:max-w-[70%]">

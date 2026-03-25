@@ -1,6 +1,8 @@
 "use client";
 
+import Footer from "@/components/Footer/Footer";
 import { PagesHero } from "@/components/hearderCom/hearder";
+import { Navbar } from "@/components/Navbar/Navbar";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
@@ -88,11 +90,13 @@ const albums: Album[] = [
 const page = () => {
   return (
     <>
+      <Navbar />
       <PagesHero img={"/portfolio/picture1.jpg"} title={"Gallery"} />
 
       <section className="container px-4 mx-auto py-12">
         <PhotoGallery />
       </section>
+      <Footer />
     </>
   );
 };

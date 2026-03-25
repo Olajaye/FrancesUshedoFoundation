@@ -13,6 +13,8 @@ import { useMemo } from "react";
 import Button from "@/components/Button/button";
 import { SponsorsCarousel } from "@/components/Sponsors/SponsorCar";
 import { CalendarX } from "lucide-react";
+import { Navbar } from "@/components/Navbar/Navbar";
+import Footer from "@/components/Footer/Footer";
 
 const cardsData = [
   {
@@ -93,6 +95,7 @@ export default function Home() {
 
   return (
     <div className="">
+      <Navbar />
       <Hero />
 
       <section className="py-12 md:py-16 bg-[#ffffff]">
@@ -125,7 +128,7 @@ export default function Home() {
               <div className="lg:w-[50%] w-[100%] order-1 lg:order-1 mt-5">
                 <div className="">
                   <div className="mb-10">
-                    <h1 className="text-4xl font-montserrat font-medium">
+                    <h1 className="text-xl md:text-3xl font-montserrat font-medium">
                       Welcome to The Frances Ushedo Foundation
                     </h1>
                     <div className="w-[100px] h-1 rounded-md bg-darckLilac mt-4"></div>
@@ -235,6 +238,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 }
@@ -253,15 +257,15 @@ const Card = ({
   return (
     <Link
       href={href ?? ""}
-      className="block w-full max-w-sm md:w-[360px] rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 bg-[#ecf2f5] text-black hover:text-white  hover:bg-lilac" // Made clickable, added hover effects for engagement
+      className="block w-full max-w-sm md:w-[360px] rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 bg-[#ecf2f5] text-black hover:text-white  hover:bg-lilac"
     >
       <div className="p-6 md:p-8 text-center flex flex-col items-center justify-center h-full">
         <Image
           src={icon}
-          alt={`${title} icon`} // Dynamic alt for accessibility
-          width={100} // Optimized size
+          alt={`${title} icon`}
+          width={100}
           height={100}
-          className="mb-4 w-20 md:w-24" // Responsive size
+          className="mb-4 w-20 md:w-24"
         />
         <h3 className="text-xl md:text-2xl font-montserrat mb-2 hover:text-white ">
           {title}
@@ -342,61 +346,63 @@ const FeaturedCause = ({
   const progress = Math.min(100, (raised / goal) * 100).toFixed(0); // Dynamic progress calculation
 
   return (
-    <div className="bg-gray-100 p-4 md:p-6 rounded-xl shadow-md">
-      <h2 className="text-2xl md:text-3xl font-montserrat font-bold text-gray-800 mb-3">
-        Featured Cause
-      </h2>
-      <div className="flex flex-col md:flex-row items-centergap-3">
-        <div className="w-full md:w-1/2 h-[350px] mr-2">
-          <img
-            src={imageSrc}
-            alt="Featured Cause"
-            className="h-[350px] object-cover rounded-lg"
-          />
-        </div>
-
-        <div className="w-full h-full flex-1">
-          <h3 className="text-xl font-montserrat font-semibold text-gray-800 mb-2">
-            {title}
-          </h3>
-          <p className="text-sm font-montserrat text-gray-600 mb-4">
-            {date} | {location}
-          </p>
-          <p className="text-sm font-montserrat text-gray-700 leading-relaxed mb-6">
-            {description}
-          </p>
-          <div className="flex justify-between">
-            <Link
-              href={donateHref}
-              className="w-auto p-3 bg-lilac text-dark font-bold font-montserrat rounded-xl transition duration-300 hover:bg-darckLilac hover:text-white"
-            >
-              Donate Now
-            </Link>
-            <Button
-              variant="outline"
-              size="md"
-              // onClick={() => router.push(donateHref)}
-            >
-              Details
-            </Button>
+    <>
+      <div className="bg-gray-100 p-4 md:p-6 rounded-xl shadow-md">
+        <h2 className="text-2xl md:text-3xl font-montserrat font-bold text-gray-800 mb-3">
+          Featured Cause
+        </h2>
+        <div className="flex flex-col md:flex-row items-centergap-3">
+          <div className="w-full md:w-1/2 h-[350px] mr-2">
+            <img
+              src={imageSrc}
+              alt="Featured Cause"
+              className="h-[350px] object-cover rounded-lg"
+            />
           </div>
 
-          <div className="mt-6">
-            <div className="flex justify-between text-sm font-montserrat text-gray-600 mb-2">
-              <span>Raised: ${raised.toLocaleString()}</span>{" "}
-              {/* Formatted number */}
-              <span>Goal: ${goal.toLocaleString()}</span>
+          <div className="w-full h-full flex-1">
+            <h3 className="text-xl font-montserrat font-semibold text-gray-800 mb-2">
+              {title}
+            </h3>
+            <p className="text-sm font-montserrat text-gray-600 mb-4">
+              {date} | {location}
+            </p>
+            <p className="text-sm font-montserrat text-gray-700 leading-relaxed mb-6">
+              {description}
+            </p>
+            <div className="flex justify-between">
+              <Link
+                href={donateHref}
+                className="w-auto p-3 bg-lilac text-dark font-bold font-montserrat rounded-xl transition duration-300 hover:bg-darckLilac hover:text-white"
+              >
+                Donate Now
+              </Link>
+              <Button
+                variant="outline"
+                size="md"
+                // onClick={() => router.push(donateHref)}
+              >
+                Details
+              </Button>
             </div>
-            <div className="w-full bg-gray-300 rounded-full h-2.5 overflow-hidden">
-              <div
-                className="bg-darkLilac h-2.5 rounded-full transition-all duration-500"
-                style={{ width: `${progress}%` }}
-              />
+
+            <div className="mt-6">
+              <div className="flex justify-between text-sm font-montserrat text-gray-600 mb-2">
+                <span>Raised: ${raised.toLocaleString()}</span>{" "}
+                {/* Formatted number */}
+                <span>Goal: ${goal.toLocaleString()}</span>
+              </div>
+              <div className="w-full bg-gray-300 rounded-full h-2.5 overflow-hidden">
+                <div
+                  className="bg-darkLilac h-2.5 rounded-full transition-all duration-500"
+                  style={{ width: `${progress}%` }}
+                />
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
@@ -415,7 +421,7 @@ const StatCard = ({
       alt={`${label} icon`}
       width={100}
       height={100}
-      className=" w-full h-12  md:h-44 mb-3 rounded-t-lg object-cover"
+      className=" w-full h-44 mb-3 rounded-t-lg object-cover"
     />
     <h3 className="text-xl font-montserrat font-bold text-darkLilac mb-2">
       {number}

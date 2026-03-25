@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import { BsInstagram } from "react-icons/bs"; //BsTwitter BsDribbble,
 import { FaFacebook } from "react-icons/fa";
@@ -15,14 +16,14 @@ const FooterSocial: React.FC = () => {
   return (
     <div className="flex space-x-4 mt-6">
       {socialLinks.map((social, index) => (
-        <a
+        <Link
           key={index}
           href={social.href}
           aria-label={social.ariaLabel}
           className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-700/50 text-gray-300 hover:bg-darckLilac hover:text-white transition-all duration-300"
         >
           <social.Icon size={16} />
-        </a>
+        </Link>
       ))}
     </div>
   );

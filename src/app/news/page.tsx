@@ -2,6 +2,8 @@ import React from "react";
 import { PagesHero } from "@/components/hearderCom/hearder";
 import Link from "next/link";
 import Image from "next/image";
+import { Navbar } from "@/components/Navbar/Navbar";
+import Footer from "@/components/Footer/Footer";
 
 const newsArticles = [
   {
@@ -51,6 +53,7 @@ const newsArticles = [
 const NewsPage = () => {
   return (
     <>
+      <Navbar />
       <PagesHero img={"/portfolio/picture1.jpg"} title="News & Reports" />
 
       <section className="container mx-auto px-4 py-12 md:py-16">
@@ -142,6 +145,7 @@ const NewsPage = () => {
           </div>
         </div>
       </section>
+      <Footer />
     </>
   );
 };

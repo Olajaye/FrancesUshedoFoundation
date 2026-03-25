@@ -1,5 +1,7 @@
 "use client";
+import Footer from "@/components/Footer/Footer";
 import { PagesHero } from "@/components/hearderCom/hearder";
+import { Navbar } from "@/components/Navbar/Navbar";
 import { useState } from "react";
 import React from "react";
 
@@ -31,6 +33,7 @@ const Page = () => {
   };
   return (
     <>
+      <Navbar />
       <PagesHero img={"/portfolio/picture1.jpg"} title={"Contact Us"} />
 
       <section className="py-12">
@@ -127,6 +130,7 @@ const Page = () => {
           </div>
         </div>
       </section>
+      <Footer />
     </>
   );
 };
