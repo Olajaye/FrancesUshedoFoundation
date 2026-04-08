@@ -1,5 +1,115 @@
 import { SponsorProps } from "@/components/Sponsor/Sponsor";
 
+export interface HomeCardData {
+  title: string;
+  text: string;
+  icon: string;
+  href: string;
+}
+
+export interface HomeEventData {
+  image: string;
+  title: string;
+  date: string;
+  location: string;
+  description: string;
+}
+
+export interface HomeStatData {
+  icon: string;
+  number: string;
+  label: string;
+}
+
+export interface FeaturedCauseData {
+  title: string;
+  date: string;
+  location: string;
+  description: string;
+  imageSrc: string;
+  raised: number;
+  goal: number;
+  donateHref: string;
+}
+
+export const homeCards: HomeCardData[] = [
+  {
+    title: "Become a Volunteer",
+    text: "Becoming a volunteer with TFUF brings purpose, connection, and the chance to make lasting positive change.",
+    icon: "/junks/checking.png",
+    href: "/contact",
+  },
+  {
+    title: "Donate",
+    text: "Donating through TFUF empowers change, supports vital causes, and helps build stronger communities for a better future.",
+    icon: "/junks/handIcon.png",
+    href: "/donate",
+  },
+  {
+    title: "Partner with Us",
+    text: "Partnering with TFUF amplifies impact, fosters collaboration, and drives meaningful change for vulnerable children in Nigeria.",
+    icon: "/junks/icontry.png",
+    href: "/contact",
+  },
+];
+
+export const homeEvents: HomeEventData[] = [
+  {
+    image: "/junks/IMG_2792.JPG",
+    title: "Empowering Nigeria's Youth",
+    date: "Aug 25, 2026",
+    location: "Kano State, Nigeria",
+    description:
+      "Get ready for our upcoming fundraiser to support vital health and education programs. Your generosity will help transform young lives across Nigeria.",
+  },
+  {
+    image: "/junks/IMG_2792.JPG",
+    title: "Community Health Workshop",
+    date: "Aug 25, 2026",
+    location: "Lagos State, Nigeria",
+    description:
+      "We're planning a workshop to educate families on health practices, including sickle cell awareness. Join us to promote healthier futures for children.",
+  },
+  {
+    image: "/junks/IMG_2792.JPG",
+    title: "School Outreach Program",
+    date: "Aug 25, 2026",
+    location: "Abuja, Nigeria",
+    description:
+      "Our upcoming school visits will provide resources and support to students in need. Help us empower the next generation through education.",
+  },
+];
+
+export const homeStats: HomeStatData[] = [
+  {
+    icon: "/childrenSupported.jpg",
+    number: "220+",
+    label: "Children Supported",
+  },
+  {
+    icon: "/road.jpg",
+    number: "3",
+    label: "States Reached (Lagos, Delta, Kano)",
+  },
+  {
+    icon: "/communityReached.jpg",
+    number: "12",
+    label: "Community Initiatives Launched",
+  },
+];
+
+export const featuredCause: FeaturedCauseData = {
+  title: "Building The Butterfly Clinic",
+  date: "1 April 2026",
+  location: "Delta State, Nigeria",
+  description:
+    "We are raising funds to establish The Butterfly Clinic, a dedicated healthcare centre for children aged 0–18, with priority support for sickle cell patients and families in need.",
+  imageSrc: "/feture.png",
+  raised: 56880,
+  goal: 70000,
+  donateHref: "/donate",
+};
+
 export const sponsors: SponsorProps[] = [
   {
     name: "TechCorp",

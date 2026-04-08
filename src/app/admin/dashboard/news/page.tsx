@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
-// import { useRouter } from "next/navigation";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -15,103 +14,31 @@ import {
   User,
   Loader2,
 } from "lucide-react";
-
-interface News {
-  id: string;
-  title: string;
-  excerpt: string;
-  category: string;
-  date: string;
-  postedTime: string;
-  image: string;
-  author: string;
-  authorRole: string;
-  authorImage: string;
-  featured: boolean;
-  tags: string[];
-  content: string;
-  stats: Stat[];
-  gallery: GalleryImage[];
-  createdAt: string;
-  updatedAt: string;
-  hidden?: boolean; // For hide/unhide functionality
-}
-
-interface Stat {
-  id: string;
-  label: string;
-  value: string;
-}
-
-interface GalleryImage {
-  id: string;
-  url: string;
-}
+import {
+  useGetNewsQuery,
+  useDeleteNewsMutation,
+  useToggleHiddenMutation,
+} from "@/store/api/newsApi";
 
 export default function NewsPage() {
-  // const router = useRouter();
-  const [news, setNews] = useState<News[]>([]);
-  const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [showHidden, setShowHidden] = useState(false);
 
-  useEffect(() => {
-    fetchNews();
-  }, []);
-
-  const fetchNews = async () => {
-    try {
-      const response = await fetch("/api/admin/news");
-      const data = await response.json();
-      setNews(data);
-    } catch (error) {
-      console.error("Error fetching news:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { data: news = [], isLoading } = useGetNewsQuery();
+  const [deleteNews] = useDeleteNewsMutation();
+  const [toggleHidden] = useToggleHiddenMutation();
 
   const handleDelete = async (id: string) => {
     if (!confirm("Are you sure you want to delete this news?")) return;
-
-    try {
-      await fetch(`/api/admin/news/${id}`, {
-        method: "DELETE",
-      });
-      fetchNews();
-    } catch (error) {
-      console.error("Error deleting news:", error);
-    }
+    await deleteNews(id);
   };
 
   const handleToggleHide = async (id: string, currentHidden: boolean) => {
-    try {
-      await fetch(`/api/admin/news/${id}/toggle-hidden`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ hidden: !currentHidden }),
-      });
-      fetchNews();
-    } catch (error) {
-      console.error("Error toggling news visibility:", error);
-    }
+    await toggleHidden({ id, hidden: !currentHidden });
   };
 
-  // const handleToggleFeatured = async (id: string, currentFeatured: boolean) => {
-  //   try {
-  //     await fetch(`/api/admin/news/${id}/toggle-featured`, {
-  //       method: "PATCH",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify({ featured: !currentFeatured }),
-  //     });
-  //     fetchNews();
-  //   } catch (error) {
-  //     console.error("Error toggling featured status:", error);
-  //   }
-  // };
-
-  const categories = ["all"];
+  const categories = ["all", ...Array.from(new Set(news.map((n) => n.category)))];
 
   const filteredNews = news.filter((item) => {
     const matchesSearch =
@@ -120,16 +47,13 @@ export default function NewsPage() {
       item.tags.some((tag) =>
         tag.toLowerCase().includes(searchTerm.toLowerCase()),
       );
-
     const matchesCategory =
       selectedCategory === "all" || item.category === selectedCategory;
-
     const matchesVisibility = showHidden ? true : !item.hidden;
-
     return matchesSearch && matchesCategory && matchesVisibility;
   });
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <Loader2 className="w-8 h-8 animate-spin text-lilac" />
@@ -158,7 +82,7 @@ export default function NewsPage() {
       <div className="bg-white rounded-xl p-4 shadow-sm border border-lilac/20">
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="flex-1 relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
             <input
               type="text"
               placeholder="Search news..."
@@ -185,7 +109,7 @@ export default function NewsPage() {
               onChange={(e) => setShowHidden(e.target.checked)}
               className="rounded border-lilac/30 text-lilac focus:ring-lilac"
             />
-            Show hidden news
+            Show hidden
           </label>
         </div>
       </div>
@@ -198,7 +122,6 @@ export default function NewsPage() {
               item.hidden ? "opacity-60" : ""
             }`}
           >
-            {/* Image */}
             <div className="relative h-48 bg-gray-100">
               {item.image ? (
                 <Image
@@ -224,7 +147,6 @@ export default function NewsPage() {
               )}
             </div>
 
-            {/* Content */}
             <div className="p-4">
               <div className="flex items-center gap-2 mb-2">
                 <span className="px-2 py-1 bg-lilac/10 text-darckLilac text-xs font-medium rounded">
@@ -239,12 +161,10 @@ export default function NewsPage() {
               <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2">
                 {item.title}
               </h3>
-
               <p className="text-sm text-gray-600 mb-4 line-clamp-2">
                 {item.excerpt}
               </p>
 
-              {/* Tags */}
               <div className="flex flex-wrap gap-1 mb-4">
                 {item.tags.slice(0, 3).map((tag, index) => (
                   <span
@@ -261,7 +181,6 @@ export default function NewsPage() {
                 )}
               </div>
 
-              {/* Author */}
               <div className="flex items-center gap-2 mb-4">
                 <div className="relative w-8 h-8 rounded-full overflow-hidden bg-gray-200">
                   {item.authorImage ? (
@@ -272,7 +191,7 @@ export default function NewsPage() {
                       className="object-cover"
                     />
                   ) : (
-                    <User className="w-4 h-4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-gray-400" />
+                    <User className="w-4 h-4 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-gray-400" />
                   )}
                 </div>
                 <div>
@@ -283,13 +202,10 @@ export default function NewsPage() {
                 </div>
               </div>
 
-              {/* Actions */}
               <div className="flex items-center justify-between pt-3 border-t border-lilac/20">
                 <div className="flex items-center gap-1">
                   <button
-                    onClick={() =>
-                      handleToggleHide(item.id, item.hidden || false)
-                    }
+                    onClick={() => handleToggleHide(item.id, item.hidden)}
                     className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
                     title={item.hidden ? "Unhide" : "Hide"}
                   >

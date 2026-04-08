@@ -8,8 +8,10 @@
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "bundler",
+    "target": "ES2023",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "ignoreDeprecations": "6.0",
     "jsx": "preserve",
     "incremental": true,
     "plugins": [

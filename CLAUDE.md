@@ -19,9 +19,16 @@ npx prisma studio            # Open Prisma Studio (DB browser)
 
 No test runner is configured in this project.
 
+## Environment Variables
+
+```env
+DATABASE_URL=   # PostgreSQL connection string (required)
+JWT_SECRET=     # Secret for signing JWTs (required for auth)
+```
+
 ## Architecture
 
-**Next.js 14 App Router** website for a charity/foundation with a public-facing site and an admin dashboard.
+**Next.js 14 App Router** website for a charity/foundation (The Frances Ushedo Foundation) with a public-facing site and an admin dashboard.
 
 ### Key Directories
 
@@ -30,12 +37,14 @@ No test runner is configured in this project.
 - `src/hooks/` — Custom animation hooks (typewriter effects, fading text).
 - `src/constant/constant.ts` — Static data: sponsor list, blog posts, and other hardcoded content.
 - `src/lib/utils.ts` — `cn()` helper (clsx + tailwind-merge).
+- `src/lib/auth.ts` — JWT sign/verify helpers using `jose`.
+- `src/lib/prisma.ts` — Prisma client singleton using `@prisma/adapter-pg` driver adapter.
 - `src/app/Font/font.tsx` — Google Font definitions (Roboto, Poppins, Montserrat, Edu_QLD) imported in the root layout.
 - `prisma/schema.prisma` — Database schema (PostgreSQL). Prisma client is generated to `src/generated/prisma`.
 
 ### Routing Structure
 
-```
+```text
 /                         → Home (hero, cards, events, stats)
 /about                    → About page
 /donate                   → Donation page (Paystack/Stripe)
@@ -63,7 +72,20 @@ No test runner is configured in this project.
 
 ### Database
 
-Prisma with PostgreSQL. The `DATABASE_URL` must be set in `.env`. The schema at `prisma/schema.prisma` is minimal and expects models to be added. After any schema change, run `npx prisma generate` to update the client in `src/generated/prisma`.
+Prisma with PostgreSQL using the `@prisma/adapter-pg` driver adapter (not the standard Prisma client). The `DATABASE_URL` must be set in `.env`. The schema at `prisma/schema.prisma` defines a `User` model; the generated client at `src/generated/prisma` also includes an `Admin` model. After any schema change, run `npx prisma generate`.
+
+### Auth
+
+JWT-based authentication using `jose`. `src/lib/auth.ts` provides `signToken` and `verifyToken`. Login sets an `httpOnly` cookie named `admin_token` (8-hour expiry). Logout clears it via `POST /api/auth/logout`.
+
+**Current state (in-progress migration from MongoDB to PostgreSQL):**
+
+- `src/app/api/auth/login/route.ts` — login handler is fully commented out; needs to be reimplemented using Prisma + bcryptjs.
+- `src/middleware.ts` — was deleted; admin route protection is currently absent.
+
+### Content
+
+Much of the homepage content (events, stats, featured cause) is currently hardcoded in `src/app/page.tsx` rather than fetched from the database. The long-term intent is to manage this data via the admin dashboard.
 
 ### "use client" Convention
 

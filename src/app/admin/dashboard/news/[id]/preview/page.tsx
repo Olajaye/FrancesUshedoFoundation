@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,83 +13,41 @@ import {
   Eye,
   EyeOff,
 } from "lucide-react";
-
-interface News {
-  id: string;
-  title: string;
-  excerpt: string;
-  category: string;
-  date: string;
-  postedTime: string;
-  image: string;
-  author: string;
-  authorRole: string;
-  authorImage: string;
-  featured: boolean;
-  tags: string[];
-  content: string;
-  stats: Stat[];
-  gallery: GalleryImage[];
-  hidden?: boolean;
-}
-
-interface Stat {
-  id: string;
-  label: string;
-  value: string;
-}
-
-interface GalleryImage {
-  id: string;
-  url: string;
-}
+import {
+  useGetNewsByIdQuery,
+  useToggleHiddenMutation,
+} from "@/store/api/newsApi";
 
 export default function PreviewNewsPage() {
   const params = useParams();
   const router = useRouter();
-  const [news, setNews] = useState<News | null>(null);
-  const [loading, setLoading] = useState(true);
+  const id = params.id as string;
 
-  useEffect(() => {
-    fetchNews();
-  }, [params.id]);
-
-  const fetchNews = async () => {
-    try {
-      const response = await fetch(`/api/admin/news/${params.id}`);
-      const data = await response.json();
-      setNews(data);
-    } catch (error) {
-      console.error("Error fetching news:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { data: news, isLoading, isError } = useGetNewsByIdQuery(id);
+  const [toggleHidden] = useToggleHiddenMutation();
 
   const handleToggleHide = async () => {
     if (!news) return;
-
-    try {
-      await fetch(`/api/admin/news/${news.id}/toggle-hidden`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ hidden: !news.hidden }),
-      });
-      fetchNews();
-    } catch (error) {
-      console.error("Error toggling visibility:", error);
-    }
+    await toggleHidden({ id: news.id, hidden: !news.hidden });
   };
 
-  if (loading) {
+  const stats = Array.isArray(news?.stats)
+    ? (news.stats as { label: string; value: string }[])
+    : [];
+
+  const gallery = Array.isArray(news?.gallery)
+    ? (news.gallery as { url: string }[])
+    : [];
+
+  if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex items-center justify-center min-h-[60vh]">
         <Loader2 className="w-8 h-8 animate-spin text-lilac" />
       </div>
     );
   }
 
-  if (!news) {
+  if (isError || !news) {
     return (
       <div className="text-center py-12">
         <p className="text-gray-500">News not found</p>
@@ -118,7 +75,7 @@ export default function PreviewNewsPage() {
         <div className="flex items-center gap-3">
           <button
             onClick={handleToggleHide}
-            className={`px-4 py-2 rounded-xl flex items-center gap-2 ${
+            className={`px-4 py-2 rounded-xl flex items-center gap-2 transition-colors ${
               news.hidden
                 ? "bg-green-50 text-green-700 hover:bg-green-100"
                 : "bg-gray-50 text-gray-700 hover:bg-gray-100"
@@ -126,13 +83,11 @@ export default function PreviewNewsPage() {
           >
             {news.hidden ? (
               <>
-                <Eye className="w-4 h-4" />
-                Unhide
+                <Eye className="w-4 h-4" /> Unhide
               </>
             ) : (
               <>
-                <EyeOff className="w-4 h-4" />
-                Hide
+                <EyeOff className="w-4 h-4" /> Hide
               </>
             )}
           </button>
@@ -140,8 +95,7 @@ export default function PreviewNewsPage() {
             href={`/admin/dashboard/news/${news.id}/edit`}
             className="px-4 py-2 bg-lilac/10 text-darckLilac rounded-xl hover:bg-lilac/20 flex items-center gap-2"
           >
-            <Edit className="w-4 h-4" />
-            Edit
+            <Edit className="w-4 h-4" /> Edit
           </Link>
         </div>
       </div>
@@ -178,7 +132,7 @@ export default function PreviewNewsPage() {
         )}
 
         <div className="p-8">
-          {/* Meta Info */}
+          {/* Meta */}
           <div className="flex items-center gap-4 mb-6">
             <span className="px-3 py-1 bg-lilac/10 text-darckLilac text-sm font-medium rounded-full">
               {news.category}
@@ -194,13 +148,11 @@ export default function PreviewNewsPage() {
           </div>
 
           {/* Title */}
-          <h1 className="text-4xl font-bold text-gray-900 mb-6">
-            {news.title}
-          </h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-6">{news.title}</h1>
 
           {/* Author */}
           <div className="flex items-center gap-4 mb-8 pb-8 border-b border-lilac/20">
-            <div className="relative w-16 h-16 rounded-full overflow-hidden bg-gray-200">
+            <div className="relative w-16 h-16 rounded-full overflow-hidden bg-gray-200 flex-shrink-0">
               {news.authorImage ? (
                 <Image
                   src={news.authorImage}
@@ -209,13 +161,11 @@ export default function PreviewNewsPage() {
                   className="object-cover"
                 />
               ) : (
-                <User className="w-8 h-8 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-gray-400" />
+                <User className="w-8 h-8 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-gray-400" />
               )}
             </div>
             <div>
-              <p className="text-xl font-semibold text-gray-900">
-                {news.author}
-              </p>
+              <p className="text-xl font-semibold text-gray-900">{news.author}</p>
               <p className="text-gray-600">{news.authorRole}</p>
             </div>
           </div>
@@ -228,11 +178,11 @@ export default function PreviewNewsPage() {
           </div>
 
           {/* Stats */}
-          {news.stats && news.stats.length > 0 && (
+          {stats.length > 0 && (
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
-              {news.stats.map((stat) => (
+              {stats.map((stat, i) => (
                 <div
-                  key={stat.id}
+                  key={i}
                   className="bg-gradient-to-br from-lilac/10 to-darckLilac/5 p-6 rounded-xl text-center"
                 >
                   <p className="text-3xl font-bold text-darckLilac mb-2">
@@ -245,20 +195,17 @@ export default function PreviewNewsPage() {
           )}
 
           {/* Content */}
-          <div className="prose prose-lg max-w-none mb-8">
-            {news.content.split("\n").map((paragraph, index) => (
-              <p key={index} className="mb-4 text-gray-700 leading-relaxed">
-                {paragraph}
-              </p>
-            ))}
-          </div>
+          <div
+            className="prose prose-lg max-w-none mb-8"
+            dangerouslySetInnerHTML={{ __html: news.content }}
+          />
 
           {/* Tags */}
-          {news.tags && news.tags.length > 0 && (
+          {news.tags.length > 0 && (
             <div className="flex flex-wrap gap-2 mb-8">
-              {news.tags.map((tag, index) => (
+              {news.tags.map((tag, i) => (
                 <span
-                  key={index}
+                  key={i}
                   className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full flex items-center gap-1"
                 >
                   <Tag className="w-3 h-3" />
@@ -269,18 +216,15 @@ export default function PreviewNewsPage() {
           )}
 
           {/* Gallery */}
-          {news.gallery && news.gallery.length > 0 && (
+          {gallery.length > 0 && (
             <div className="mt-8">
               <h2 className="text-2xl font-semibold mb-4">Gallery</h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {news.gallery.map((image) => (
-                  <div
-                    key={image.id}
-                    className="relative h-48 rounded-lg overflow-hidden"
-                  >
+                {gallery.map((image, i) => (
+                  <div key={i} className="relative h-48 rounded-lg overflow-hidden">
                     <Image
                       src={image.url}
-                      alt="Gallery image"
+                      alt={`Gallery image ${i + 1}`}
                       fill
                       className="object-cover hover:scale-110 transition-transform duration-300"
                     />
@@ -290,7 +234,7 @@ export default function PreviewNewsPage() {
             </div>
           )}
 
-          {/* Published Date */}
+          {/* Footer */}
           <div className="mt-8 pt-8 border-t border-lilac/20">
             <p className="text-sm text-gray-500">
               Published on{" "}
@@ -298,8 +242,8 @@ export default function PreviewNewsPage() {
                 year: "numeric",
                 month: "long",
                 day: "numeric",
-              })}{" "}
-              at {news.postedTime}
+              })}
+              {news.postedTime ? ` at ${news.postedTime}` : ""}
             </p>
           </div>
         </div>

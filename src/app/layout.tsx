@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { edu_QLD_Beginner, montserrat, roboto } from "@/app/Font/font";
+import StoreProvider from "@/store/StoreProvider";
 
 export const metadata: Metadata = {
   title: "Frances Ushedo Foundation",
@@ -18,7 +19,7 @@ export default function RootLayout({
         suppressHydrationWarning={true}
         className={`${roboto.variable} ${edu_QLD_Beginner.variable} ${montserrat.variable} `}
       >
-        {children}
+        <StoreProvider>{children}</StoreProvider>
       </body>
     </html>
   );

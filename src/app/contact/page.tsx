@@ -11,26 +11,32 @@ const Page = () => {
     email: "",
     message: "",
   });
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
-  const handleChange = (e: { target: { name: string; value: string } }) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setStatus("Sending...");
+    setStatus("sending");
 
     try {
-      // Replace with your actual form submission logic (e.g., API call)
-      // This is a placeholder for demonstration
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      setStatus("Message sent successfully!");
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) throw new Error("Failed");
+
+      setStatus("success");
       setFormData({ name: "", email: "", message: "" });
-    } catch (error) {
-      setStatus(`Error sending message. Please try again. ${error}`);
+    } catch {
+      setStatus("error");
     }
   };
+
   return (
     <>
       <Navbar />
@@ -49,19 +55,18 @@ const Page = () => {
                 We would love to hear from you! Please fill out the form and we
                 will get back to you as soon as possible.
               </p>
-              <div className="mt-8 text-gray-600">
+              <div className="mt-8 text-gray-600 space-y-1">
                 <p>Phone: (123) 456-78908888</p>
                 <p>Email: info@charityorg.org</p>
                 <p>Address: 123 Charity Lane, City, State 123458898</p>
               </div>
             </div>
+
             <div className="w-full md:w-1/2">
               <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="rounded-md shadow-sm space-y-[-1px]">
                   <div>
-                    <label htmlFor="name" className="sr-only">
-                      Name
-                    </label>
+                    <label htmlFor="name" className="sr-only">Name</label>
                     <input
                       id="name"
                       name="name"
@@ -74,9 +79,7 @@ const Page = () => {
                     />
                   </div>
                   <div>
-                    <label htmlFor="email" className="sr-only">
-                      Email address
-                    </label>
+                    <label htmlFor="email" className="sr-only">Email address</label>
                     <input
                       id="email"
                       name="email"
@@ -89,9 +92,7 @@ const Page = () => {
                     />
                   </div>
                   <div>
-                    <label htmlFor="message" className="sr-only">
-                      Message
-                    </label>
+                    <label htmlFor="message" className="sr-only">Message</label>
                     <textarea
                       id="message"
                       name="message"
@@ -108,21 +109,21 @@ const Page = () => {
                 <div>
                   <button
                     type="submit"
-                    className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-lilac hover:bg-darkLilac focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lilac"
+                    disabled={status === "sending"}
+                    className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-lilac hover:bg-darkLilac focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lilac disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    Send Message
+                    {status === "sending" ? "Sending…" : "Send Message"}
                   </button>
                 </div>
 
-                {status && (
-                  <p
-                    className={`text-center text-sm ${
-                      status.includes("success")
-                        ? "text-green-600"
-                        : "text-red-600"
-                    }`}
-                  >
-                    {status}
+                {status === "success" && (
+                  <p className="text-center text-sm text-green-600">
+                    Message sent successfully! We&apos;ll get back to you soon.
+                  </p>
+                )}
+                {status === "error" && (
+                  <p className="text-center text-sm text-red-600">
+                    Failed to send message. Please try again.
                   </p>
                 )}
               </form>

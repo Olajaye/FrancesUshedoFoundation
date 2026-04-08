@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-import { connectDB } from "@/lib/db";
-import Admin from "@/lib/models/Admin";
+import { prisma } from "@/lib/prisma";
 import { signToken } from "@/lib/auth";
 
 export async function POST(req: NextRequest) {
@@ -11,39 +10,39 @@ export async function POST(req: NextRequest) {
     if (!email || !password) {
       return NextResponse.json(
         { error: "Email and password are required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
-    await connectDB();
+    const user = await prisma.user.findUnique({
+      where: { email: email.toLowerCase() },
+    });
 
-    const admin = await Admin.findOne({ email: email.toLowerCase() });
-
-    if (!admin) {
+    if (!user) {
       return NextResponse.json(
         { error: "Invalid email or password" },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
-    const passwordMatch = await bcrypt.compare(password, admin.password);
+    const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
       return NextResponse.json(
         { error: "Invalid email or password" },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
     const token = await signToken({
-      id: admin._id.toString(),
-      email: admin.email,
-      name: admin.name,
+      id: user.id,
+      email: user.email,
+      name: user.name,
     });
 
     const response = NextResponse.json(
-      { success: true, name: admin.name },
-      { status: 200 }
+      { success: true, name: user.name },
+      { status: 200 },
     );
 
     response.cookies.set("admin_token", token, {
@@ -59,7 +58,7 @@ export async function POST(req: NextRequest) {
     console.error("Login error:", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

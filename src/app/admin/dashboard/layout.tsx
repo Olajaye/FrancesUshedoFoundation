@@ -12,6 +12,9 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useLogoutMutation } from "@/store/api/authApi";
+import { clearCredentials } from "@/store/slices/authSlice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
 export default function RootLayout({
   children,
@@ -20,9 +23,13 @@ export default function RootLayout({
 }) {
   const pathname = usePathname();
   const router = useRouter();
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.auth.user);
+  const [logout] = useLogoutMutation();
 
   const handleLogout = async () => {
-    await fetch("/api/auth/logout", { method: "POST" });
+    await logout().unwrap().catch(() => {});
+    dispatch(clearCredentials());
     router.push("/admin");
   };
 
@@ -88,12 +95,19 @@ export default function RootLayout({
               <div className="h-8 w-px bg-lilac/30 mx-2 hidden sm:block"></div>
 
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 bg-gradient-to-r from-lilac to-darckLilac rounded-xl flex items-center justify-center text-white font-semibold">
-                  JD
+                <div className="w-9 h-9 bg-gradient-to-r from-lilac to-darckLilac rounded-xl flex items-center justify-center text-white font-semibold text-sm">
+                  {user?.name
+                    ? user.name
+                        .split(" ")
+                        .map((n) => n[0])
+                        .join("")
+                        .toUpperCase()
+                        .slice(0, 2)
+                    : "AD"}
                 </div>
                 <div className="hidden lg:block">
                   <p className="text-sm font-medium text-gray-700">
-                    Jessica Davis
+                    {user?.name ?? "Admin"}
                   </p>
                   <p className="text-xs text-gray-500">Admin</p>
                 </div>

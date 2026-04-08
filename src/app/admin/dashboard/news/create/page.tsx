@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Plus, X, Loader2, Eye } from "lucide-react";
 import Link from "next/link";
+import { useCreateNewsMutation } from "@/store/api/newsApi";
 
 interface Stat {
   label: string;
@@ -18,8 +19,9 @@ interface GalleryImage {
 
 export default function CreateNewsPage() {
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
+  const [createNews, { isLoading, error }] = useCreateNewsMutation();
   const [showPreview, setShowPreview] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const [formData, setFormData] = useState({
     title: "",
     excerpt: "",
@@ -109,25 +111,34 @@ export default function CreateNewsPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+    setSubmitError("");
 
     try {
-      // Here you would upload images to your server/storage
-      // and then save the news data
+      await createNews({
+        title: formData.title,
+        excerpt: formData.excerpt,
+        category: formData.category,
+        date: formData.date,
+        content: formData.content,
+        author: formData.author,
+        image: formData.image,
+        authorRole: formData.authorRole,
+        authorImage: formData.authorImage,
+        featured: formData.featured,
+        tags: formData.tags,
+        postedTime: formData.postedTime,
+        stats: formData.stats,
+        // strip the File object — only send the url
+        gallery: formData.gallery.map(({ url }) => ({ url })),
+      }).unwrap();
 
-      const response = await fetch("/api/admin/news", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        router.push("/admin/dashboard/news");
-      }
-    } catch (error) {
-      console.error("Error creating news:", error);
-    } finally {
-      setLoading(false);
+      router.push("/admin/dashboard/news");
+    } catch (err: unknown) {
+      const message =
+        err && typeof err === "object" && "data" in err
+          ? (err as { data: { error: string } }).data?.error
+          : "Failed to create news. Please try again.";
+      setSubmitError(message || "Failed to create news.");
     }
   };
 
@@ -290,6 +301,13 @@ export default function CreateNewsPage() {
             </Link>
           </div>
         </div>
+
+        {/* Error banner */}
+        {(submitError || error) && (
+          <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl px-4 py-3">
+            {submitError || "Something went wrong. Please try again."}
+          </div>
+        )}
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -591,7 +609,7 @@ export default function CreateNewsPage() {
                       type="text"
                       value={currentTag}
                       onChange={(e) => setCurrentTag(e.target.value)}
-                      onKeyPress={(e) =>
+                      onKeyDown={(e) =>
                         e.key === "Enter" && (e.preventDefault(), addTag())
                       }
                       className="flex-1 px-4 py-2 border border-lilac/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-lilac/50"
@@ -675,10 +693,10 @@ export default function CreateNewsPage() {
             </Link>
             <button
               type="submit"
-              disabled={loading}
+              disabled={isLoading}
               className="px-6 py-3 bg-gradient-to-r from-lilac to-darckLilac text-white rounded-xl hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center gap-2"
             >
-              {loading ? (
+              {isLoading ? (
                 <>
                   <Loader2 className="w-5 h-5 animate-spin" />
                   Publishing...
