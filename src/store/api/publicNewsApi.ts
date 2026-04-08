@@ -1,8 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { News } from "./newsApi";
 
-export interface NewsListItem
-  extends Omit<News, "content" | "stats" | "gallery" | "hidden"> {}
+export type NewsListItem = Omit<News, "content" | "stats" | "gallery" | "hidden">;
 
 export interface PaginatedNewsResponse {
   data: NewsListItem[];
