@@ -36,6 +36,7 @@ JWT_SECRET=     # Secret for signing JWTs (required for auth)
 - `src/components/` — Reusable UI components, each in their own folder (e.g., `Navbar/`, `Footer/`, `Hero/`).
 - `src/hooks/` — Custom animation hooks (typewriter effects, fading text).
 - `src/constant/constant.ts` — Static data: sponsor list, blog posts, and other hardcoded content.
+- `src/assets/assest.ts` — Asset imports (images, etc.).
 - `src/lib/utils.ts` — `cn()` helper (clsx + tailwind-merge).
 - `src/lib/auth.ts` — JWT sign/verify helpers using `jose`.
 - `src/lib/apiAuth.ts` — `requireAuth(req)` helper used in admin API routes; returns a `NextResponse` (401) on failure or `null` on success.
@@ -73,7 +74,7 @@ JWT_SECRET=     # Secret for signing JWTs (required for auth)
 
 ### Database
 
-Prisma with PostgreSQL using the `@prisma/adapter-pg` driver adapter (not the standard Prisma client). The `DATABASE_URL` must be set in `.env`. Current models: `User`, `Message`, `News`. After any schema change, run `npx prisma generate`.
+Prisma with PostgreSQL using the `@prisma/adapter-pg` driver adapter (not the standard Prisma client). The `DATABASE_URL` must be set in `.env`. Current models: `User`, `Message`, `News`, `Event`. After any schema change, run `npx prisma generate`.
 
 ### Auth
 
@@ -93,6 +94,8 @@ Redux Toolkit + RTK Query, wrapped in `redux-persist` (persists only the `auth` 
 - `src/store/api/newsApi.ts` — admin news CRUD (`/api/admin/news`).
 - `src/store/api/publicNewsApi.ts` — public news reads (`/api/news`).
 - `src/store/api/messagesApi.ts` — admin messages CRUD (`/api/admin/messages`).
+- `src/store/api/eventsApi.ts` — admin events CRUD (`/api/admin/events`).
+- `src/store/api/publicContactApi.ts` — public contact form submission (`/api/contact`).
 
 Use `useAppDispatch` and `useAppSelector` from `src/store/hooks.ts` (typed wrappers).
 

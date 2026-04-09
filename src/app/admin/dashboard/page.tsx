@@ -2,37 +2,15 @@
 // import Image from "next/image";
 import Link from "next/link";
 import {
-  // Home,
   Users,
   Heart,
   Globe,
   DollarSign,
-  // TrendingUp,
-  // Calendar,
-  // Download,
-  // Bell,
-  // Search,
-  // Menu,
-  // X,
-  // Settings,
-  // LogOut,
-  // User,
-  // Gift,
-  // FileText,
-  // PieChart,
-  // Activity,
-  // Mail,
-  // Phone,
-  // MapPin,
-  // Award,
   Clock,
   ChevronRight,
   MoreVertical,
   Plus,
-  // Filter,
-  // PictureInPicture,
 } from "lucide-react";
-// import { link } from "fs";
 
 export default function Dashboard() {
   return (
@@ -40,7 +18,7 @@ export default function Dashboard() {
       {/* Welcome Section */}
       <div className="mb-8">
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 font-montserrat">
-          Welcome back, Jessica! 👋
+          Welcome back, Admin! 👋
         </h1>
         <p className="text-gray-600 mt-1">
           Here&apos;s what&apos;s happening with your foundation today.

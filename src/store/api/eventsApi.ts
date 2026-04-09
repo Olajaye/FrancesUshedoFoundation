@@ -1,5 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+export interface GalleryPhoto {
+  id: string;
+  url: string;
+  description?: string;
+}
+
 export interface Speaker {
   name: string;
   title: string;
@@ -28,6 +34,14 @@ export interface Event {
   goals: string[];
   createdAt: string;
   updatedAt: string;
+}
+
+export interface EventGallery {
+  id?: string;
+  eventId: string;
+  photos: GalleryPhoto[];
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface CreateEventRequest {
@@ -71,6 +85,20 @@ export const eventsApi = createApi({
       query: (id) => ({ url: `/events/${id}`, method: "DELETE" }),
       invalidatesTags: ["Event"],
     }),
+    getEventGallery: builder.query<EventGallery, string>({
+      query: (eventId) => `/events/${eventId}/gallery`,
+      providesTags: (_result, _err, eventId) => [{ type: "Event", id: `gallery-${eventId}` }],
+    }),
+    saveEventGallery: builder.mutation<EventGallery, { eventId: string; photos: GalleryPhoto[] }>({
+      query: ({ eventId, photos }) => ({
+        url: `/events/${eventId}/gallery`,
+        method: "PUT",
+        body: { photos },
+      }),
+      invalidatesTags: (_result, _err, { eventId }) => [
+        { type: "Event", id: `gallery-${eventId}` },
+      ],
+    }),
   }),
 });
 
@@ -80,4 +108,6 @@ export const {
   useCreateEventMutation,
   useUpdateEventMutation,
   useDeleteEventMutation,
+  useGetEventGalleryQuery,
+  useSaveEventGalleryMutation,
 } = eventsApi;

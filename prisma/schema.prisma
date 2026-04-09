@@ -31,22 +31,32 @@ model Message {
 }
 
 model Event {
-  id               String   @id @default(uuid())
+  id               String        @id @default(uuid())
   title            String
   category         String
   date             String
   time             String
   location         String
-  featured         Boolean  @default(false)
-  image            String   @default("")
+  featured         Boolean       @default(false)
+  image            String        @default("")
   description      String
   longDescription  String
-  registrationLink String   @default("/donate")
-  speakers         Json     @default("[]")
-  agenda           Json     @default("[]")
-  goals            Json     @default("[]")
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
+  registrationLink String        @default("/donate")
+  speakers         Json          @default("[]")
+  agenda           Json          @default("[]")
+  goals            Json          @default("[]")
+  gallery          EventGallery?
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+}
+
+model EventGallery {
+  id        String   @id @default(uuid())
+  eventId   String   @unique
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  photos    Json     @default("[]")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model News {

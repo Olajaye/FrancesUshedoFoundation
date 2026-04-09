@@ -35,7 +35,7 @@ export async function PUT(req: NextRequest, { params }: Params) {
     const {
       title, category, date, time, location, featured,
       image, description, longDescription, registrationLink,
-      speakers, agenda, goals,
+      speakers, agenda, goals, gallery,
     } = body;
 
     const event = await prisma.event.update({
@@ -54,6 +54,7 @@ export async function PUT(req: NextRequest, { params }: Params) {
         ...(speakers !== undefined && { speakers }),
         ...(agenda !== undefined && { agenda }),
         ...(goals !== undefined && { goals }),
+        ...(gallery !== undefined && { gallery }),
       },
     });
 

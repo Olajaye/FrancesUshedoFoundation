@@ -1,4 +1,5 @@
 "use client";
+import Footer from "@/components/Footer/Footer";
 import { PagesHero } from "@/components/hearderCom/hearder";
 import { Navbar } from "@/components/Navbar/Navbar";
 import Image from "next/image";
@@ -91,8 +92,8 @@ const page = () => {
       </section>
 
       <section className="">
-        <div className="grid grid-cols-4 w-full">
-          <div className="relative h-[300px]">
+        <div className="grid grid-cols-2 md:grid-cols-4 w-full">
+          <div className="relative h-[150px] md:h-[300px]">
             <Image
               src={"/junks/IMG_2792.JPG"}
               alt="pic"
@@ -101,7 +102,7 @@ const page = () => {
               sizes="25vw"
             />
           </div>
-          <div className="relative h-[300px]">
+          <div className="relative h-[150px] md:h-[300px]">
             <Image
               src={"/portfolio/tryout1.png"}
               alt="pic"
@@ -110,7 +111,7 @@ const page = () => {
               sizes="25vw"
             />
           </div>
-          <div className="relative h-[300px]">
+          <div className="relative h-[150px] md:h-[300px]">
             <Image
               src={"/about/IMG_3137.jpg"}
               alt="pic"
@@ -119,7 +120,7 @@ const page = () => {
               sizes="25vw"
             />
           </div>
-          <div className="relative h-[300px]">
+          <div className="relative h-[150px] md:h-[300px]">
             <Image
               src={"/home/PHOTO-2025-01-31-12-29-05.jpg"}
               alt="pic"
@@ -182,6 +183,8 @@ const page = () => {
           </div>
         </div>
       </section>
+
+      <Footer />
     </>
   );
 };

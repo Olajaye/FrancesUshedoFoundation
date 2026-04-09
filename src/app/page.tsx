@@ -10,21 +10,73 @@ import HomeCard from "@/components/HomeCard/HomeCard";
 import EventCard from "@/components/EventCard/EventCard";
 import StatCard from "@/components/StatCard/StatCard";
 import FeaturedCause from "@/components/FeaturedCause/FeaturedCause";
+import { prisma } from "@/lib/prisma";
 
 import {
   Sponsors,
   homeCards,
-  homeEvents,
   homeStats,
   featuredCause,
 } from "@/constant/constant";
 
-export default function Home() {
-  const now = new Date();
-  const upcomingEvents = homeEvents
-    .filter((event) => new Date(event.date) > now)
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
-    .slice(0, 2);
+export default async function Home() {
+  // Fetch events from DB and pick the 2 closest upcoming ones.
+  // Fall back to any 2 events if no future dates exist.
+  let upcomingEvents: {
+    id: string;
+    image: string;
+    title: string;
+    date: string;
+    location: string;
+    description: string;
+  }[] = [];
+
+  try {
+    const events = await prisma.event.findMany({
+      select: {
+        id: true,
+        title: true,
+        date: true,
+        location: true,
+        description: true,
+        image: true,
+      },
+    });
+
+    const now = new Date();
+
+    // Attach a parsed Date for sorting; keep originals with unparseable dates
+    const withParsed = events.map((ev) => ({
+      ...ev,
+      parsedDate: new Date(ev.date),
+    }));
+
+    const upcoming = withParsed
+      .filter((ev) => !isNaN(ev.parsedDate.getTime()) && ev.parsedDate >= now)
+      .sort((a, b) => a.parsedDate.getTime() - b.parsedDate.getTime());
+
+    let picked = upcoming.slice(0, 2);
+
+    // Not enough upcoming — fill from the rest (shuffle for variety)
+    if (picked.length < 2) {
+      const pickedIds = new Set(picked.map((e) => e.id));
+      const rest = withParsed
+        .filter((ev) => !pickedIds.has(ev.id))
+        .sort(() => Math.random() - 0.5);
+      picked = [...picked, ...rest].slice(0, 2);
+    }
+
+    upcomingEvents = picked.map((ev) => ({
+      id: ev.id,
+      image: ev.image || "/home/picture2.jpg",
+      title: ev.title,
+      date: ev.date,
+      location: ev.location,
+      description: ev.description,
+    }));
+  } catch {
+    // DB unavailable — show empty state
+  }
 
   return (
     <div>

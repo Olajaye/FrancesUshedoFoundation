@@ -3,6 +3,7 @@ import Link from "next/link";
 import { HomeEventData } from "@/constant/constant";
 
 export default function EventCard({
+  id,
   image,
   title,
   date,
@@ -31,7 +32,7 @@ export default function EventCard({
           {description}
         </p>
         <Link
-          href="/event"
+          href={`/event/${encodeURIComponent(id)}`}
           className="text-darkLilac text-sm font-montserrat font-medium mt-2 inline-block hover:underline"
         >
           Read More

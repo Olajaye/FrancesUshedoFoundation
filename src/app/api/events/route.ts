@@ -31,6 +31,7 @@ export async function GET(req: NextRequest) {
           image: true,
           description: true,
           registrationLink: true,
+          gallery: true,
           createdAt: true,
         },
       }),
