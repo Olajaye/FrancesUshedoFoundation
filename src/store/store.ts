@@ -13,6 +13,7 @@ import { authApi } from "./api/authApi";
 import { newsApi } from "./api/newsApi";
 import { publicNewsApi } from "./api/publicNewsApi";
 import { messagesApi } from "./api/messagesApi";
+import { eventsApi } from "./api/eventsApi";
 
 // SSR-safe localStorage wrapper — avoids require() and window access on server
 const storage = {
@@ -45,6 +46,7 @@ const rootReducer = combineReducers({
   [newsApi.reducerPath]: newsApi.reducer,
   [publicNewsApi.reducerPath]: publicNewsApi.reducer,
   [messagesApi.reducerPath]: messagesApi.reducer,
+  [eventsApi.reducerPath]: eventsApi.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -57,7 +59,7 @@ export const makeStore = () =>
         serializableCheck: {
           ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         },
-      }).concat(authApi.middleware, newsApi.middleware, publicNewsApi.middleware, messagesApi.middleware),
+      }).concat(authApi.middleware, newsApi.middleware, publicNewsApi.middleware, messagesApi.middleware, eventsApi.middleware),
   });
 
 export type AppStore = ReturnType<typeof makeStore>;

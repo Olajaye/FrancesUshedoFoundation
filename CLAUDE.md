@@ -38,6 +38,7 @@ JWT_SECRET=     # Secret for signing JWTs (required for auth)
 - `src/constant/constant.ts` — Static data: sponsor list, blog posts, and other hardcoded content.
 - `src/lib/utils.ts` — `cn()` helper (clsx + tailwind-merge).
 - `src/lib/auth.ts` — JWT sign/verify helpers using `jose`.
+- `src/lib/apiAuth.ts` — `requireAuth(req)` helper used in admin API routes; returns a `NextResponse` (401) on failure or `null` on success.
 - `src/lib/prisma.ts` — Prisma client singleton using `@prisma/adapter-pg` driver adapter.
 - `src/app/Font/font.tsx` — Google Font definitions (Roboto, Poppins, Montserrat, Edu_QLD) imported in the root layout.
 - `prisma/schema.prisma` — Database schema (PostgreSQL). Prisma client is generated to `src/generated/prisma`.
@@ -47,7 +48,7 @@ JWT_SECRET=     # Secret for signing JWTs (required for auth)
 ```text
 /                         → Home (hero, cards, events, stats)
 /about                    → About page
-/donate                   → Donation page (Paystack/Stripe)
+/donate                   → Donation page
 /contact                  → Contact form
 /gallery                  → Image gallery
 /event                    → Events list
@@ -72,16 +73,28 @@ JWT_SECRET=     # Secret for signing JWTs (required for auth)
 
 ### Database
 
-Prisma with PostgreSQL using the `@prisma/adapter-pg` driver adapter (not the standard Prisma client). The `DATABASE_URL` must be set in `.env`. The schema at `prisma/schema.prisma` defines a `User` model; the generated client at `src/generated/prisma` also includes an `Admin` model. After any schema change, run `npx prisma generate`.
+Prisma with PostgreSQL using the `@prisma/adapter-pg` driver adapter (not the standard Prisma client). The `DATABASE_URL` must be set in `.env`. Current models: `User`, `Message`, `News`. After any schema change, run `npx prisma generate`.
 
 ### Auth
 
-JWT-based authentication using `jose`. `src/lib/auth.ts` provides `signToken` and `verifyToken`. Login sets an `httpOnly` cookie named `admin_token` (8-hour expiry). Logout clears it via `POST /api/auth/logout`.
+JWT-based auth using `jose`. `src/lib/auth.ts` provides `signToken` and `verifyToken`. Login sets an `httpOnly` cookie named `admin_token` (8-hour expiry). Logout clears it via `POST /api/auth/logout`.
 
-**Current state (in-progress migration from MongoDB to PostgreSQL):**
+- `src/middleware.ts` — protects all `/admin/dashboard/:path*` routes; redirects unauthenticated requests to `/admin`.
+- `src/lib/apiAuth.ts` — `requireAuth()` must be called at the top of every admin API route handler to protect it server-side.
 
-- `src/app/api/auth/login/route.ts` — login handler is fully commented out; needs to be reimplemented using Prisma + bcryptjs.
-- `src/middleware.ts` — was deleted; admin route protection is currently absent.
+### State Management
+
+Redux Toolkit + RTK Query, wrapped in `redux-persist` (persists only the `auth` slice to localStorage via an SSR-safe storage shim).
+
+- `src/store/store.ts` — store setup with `makeStore()` factory.
+- `src/store/StoreProvider.tsx` — wraps the app; must remain a Client Component.
+- `src/store/slices/authSlice.ts` — auth state (name, isAuthenticated).
+- `src/store/api/authApi.ts` — login/logout mutations.
+- `src/store/api/newsApi.ts` — admin news CRUD (`/api/admin/news`).
+- `src/store/api/publicNewsApi.ts` — public news reads (`/api/news`).
+- `src/store/api/messagesApi.ts` — admin messages CRUD (`/api/admin/messages`).
+
+Use `useAppDispatch` and `useAppSelector` from `src/store/hooks.ts` (typed wrappers).
 
 ### Content
 
@@ -89,4 +102,4 @@ Much of the homepage content (events, stats, featured cause) is currently hardco
 
 ### "use client" Convention
 
-Server Components are the default. Add `"use client"` at the top of any component that uses hooks, browser APIs, or Framer Motion animations.
+Server Components are the default. Add `"use client"` at the top of any component that uses hooks, browser APIs, Framer Motion animations, or Redux.
