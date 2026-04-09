@@ -22,8 +22,12 @@ export default function LoginPage() {
 
     try {
       const data = await login({ email, password }).unwrap();
+
       dispatch(setCredentials({ name: data.name, email }));
+      console.log("Login successful:", data);
+      console.log("Redirecting to dashboard...");
       router.push("/admin/dashboard");
+      console.log("/admin/dashboard");
     } catch (err: unknown) {
       const message =
         err && typeof err === "object" && "data" in err
