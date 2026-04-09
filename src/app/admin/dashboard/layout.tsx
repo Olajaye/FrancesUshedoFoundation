@@ -7,11 +7,13 @@ import {
   LogOut,
   Mail,
   PictureInPicture,
+  Loader2,
 } from "lucide-react";
 
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { useLogoutMutation } from "@/store/api/authApi";
 import { clearCredentials } from "@/store/slices/authSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
@@ -25,7 +27,25 @@ export default function RootLayout({
   const router = useRouter();
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.auth.user);
+  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
   const [logout] = useLogoutMutation();
+
+  // Guard: redirect to login if not authenticated.
+  // PersistGate ensures the store is rehydrated before this component mounts,
+  // so isAuthenticated is already the persisted value on first render.
+  useEffect(() => {
+    if (!isAuthenticated) {
+      router.replace("/admin");
+    }
+  }, [isAuthenticated, router]);
+
+  if (!isAuthenticated) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-lilac/10">
+        <Loader2 className="w-8 h-8 animate-spin text-lilac" />
+      </div>
+    );
+  }
 
   const handleLogout = async () => {
     await logout().unwrap().catch(() => {});
