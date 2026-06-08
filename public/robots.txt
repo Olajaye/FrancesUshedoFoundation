@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Block admin, dashboard, and API routes
+Disallow: /admin/
+Disallow: /api/
+
+# Block payment flow pages (not useful in search results)
+Disallow: /donate/success
+Disallow: /donate/cancel
+
+Sitemap: https://frances-ushedo-foundation.vercel.app/sitemap.xml
