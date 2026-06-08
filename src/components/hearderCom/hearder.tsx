@@ -20,7 +20,7 @@ export const PagesHero = ({ img, title }: { img: string; title: string }) => {
             {title}
           </h1>
           <div className="w-[100px] h-2 bg-darckLilac"></div>
-          <div className="w-24 h-1 bg-darkLilac mt-4" />
+          {/* <div className="w-24 h-1 bg-darkLilac" /> */}
         </div>
       </div>
     </section>

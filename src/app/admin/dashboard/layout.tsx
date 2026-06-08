@@ -8,6 +8,7 @@ import {
   Mail,
   PictureInPicture,
   Loader2,
+  DollarSign,
 } from "lucide-react";
 
 import Image from "next/image";
@@ -60,11 +61,11 @@ export default function RootLayout({
       link: "/admin/dashboard",
     },
     // { icon: Users, label: "Donors", link: "/admin/dashboard/donors" },
-    // {
-    //   icon: DollarSign,
-    //   label: "Donations",
-    //   link: "/admin/dashboard/donations",
-    // },
+    {
+      icon: DollarSign,
+      label: "Donations",
+      link: "/admin/dashboard/donations",
+    },
     { icon: Globe, label: "News", link: "/admin/dashboard/news" },
     {
       icon: Calendar,

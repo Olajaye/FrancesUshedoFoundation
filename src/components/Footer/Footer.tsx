@@ -1,7 +1,8 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import Link from "next/link"; // Added for links
+import Link from "next/link";
 import { BiHeart } from "react-icons/bi";
 import FooterLinks from "./FooterLinks";
 import FooterNewsItem from "./FooterNewsItem";
@@ -9,34 +10,39 @@ import FooterContact from "./FooterContacts";
 import FooterSocial from "./FooterSocial";
 
 const usefulLinks = [
-  { text: "Privacy Policy", href: "/privacy" }, // Updated hrefs to actual paths; adjust as needed
   { text: "Become a Volunteer", href: "/contact" },
   { text: "Donate", href: "/donate" },
-  // { text: "Testimonials", href: "/testimonials" },
-  // { text: "Causes", href: "/causes" },
   { text: "Gallery", href: "/gallery" },
   { text: "News", href: "/news" },
 ];
 
-const newsItems = [
-  { title: "A new cause to help", date: "July 27, 2025" }, // Updated dates to current context
-  { title: "We love to help people", date: "July 20, 2025" },
-  { title: "The new ideas for helping", date: "July 15, 2025" },
-];
+interface NewsItem {
+  id: string;
+  title: string;
+  date: string;
+}
 
 const Footer = () => {
+  const [latestNews, setLatestNews] = useState<NewsItem[]>([]);
+
+  useEffect(() => {
+    fetch("/api/news?limit=3")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((res) => {
+        if (res?.data) setLatestNews(res.data);
+      })
+      .catch(() => {});
+  }, []);
+
   return (
     <footer
       className="relative bg-cover bg-top bg-no-repeat text-white"
       style={{ backgroundImage: "url('/footer/footer.jpg')" }}
     >
-      {" "}
-      {/* Assumed bg image path; adjust */}
-      <div className="absolute inset-0 bg-black/80" />{" "}
-      {/* Lighter overlay for better image visibility */}
+      <div className="absolute inset-0 bg-black/80" />
       <div className="relative container mx-auto px-4 md:px-6 py-12 md:py-16 z-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
-          {/* Logo and About: Enhanced spacing, responsive text */}
+          {/* Logo and About */}
           <div className="space-y-6">
             <Link
               href="/"
@@ -78,15 +84,26 @@ const Footer = () => {
             <h3 className="text-xl md:text-2xl font-montserrat font-semibold mb-6">
               Latest News
             </h3>
-            <div className="space-y-6">
-              {newsItems.map((item, index) => (
-                <FooterNewsItem
-                  key={index}
-                  title={item.title}
-                  date={item.date}
-                />
-              ))}
-            </div>
+            {latestNews.length > 0 ? (
+              <div className="space-y-6">
+                {latestNews.map((item) => (
+                  <FooterNewsItem
+                    key={item.id}
+                    id={item.id}
+                    title={item.title}
+                    date={new Date(item.date).toLocaleDateString("en-GB", {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                    })}
+                  />
+                ))}
+              </div>
+            ) : (
+              <p className="text-gray-500 text-sm font-montserrat">
+                No news yet.
+              </p>
+            )}
           </div>
 
           {/* Contact */}
@@ -95,15 +112,12 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Copyright: Centered, with heart icon */}
+        {/* Copyright */}
         <div className="mt-12 pt-8 border-t border-gray-700 text-center text-gray-400 text-sm font-montserrat">
           <p>
-            Copyright © 2025 All rights reserved | The Frances Ushedo Foundation
-            <BiHeart
-              className="inline-block ml-1 text-darkLilac"
-              size={16}
-            />{" "}
-            {/* Fixed typo, removed unnecessary fill */}
+            Copyright © 2025 All rights reserved | The Frances Ushedo
+            Foundation
+            <BiHeart className="inline-block ml-1 text-darkLilac" size={16} />
           </p>
         </div>
       </div>

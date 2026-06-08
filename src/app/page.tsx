@@ -9,17 +9,43 @@ import { SponsorsCarousel } from "@/components/Sponsors/SponsorCar";
 import HomeCard from "@/components/HomeCard/HomeCard";
 import EventCard from "@/components/EventCard/EventCard";
 import StatCard from "@/components/StatCard/StatCard";
-import FeaturedCause from "@/components/FeaturedCause/FeaturedCause";
+import FeaturedCause, { FeaturedCausePlaceholder } from "@/components/FeaturedCause/FeaturedCause";
 import { prisma } from "@/lib/prisma";
 
-import {
-  Sponsors,
-  homeCards,
-  homeStats,
-  featuredCause,
-} from "@/constant/constant";
+import { Sponsors, homeCards, homeStats } from "@/constant/constant";
+
+export const dynamic = "force-dynamic";
 
 export default async function Home() {
+  // Featured cause
+  let featuredCauseData: {
+    id: string; title: string; date: string; location: string;
+    description: string; image: string; raised: number;
+    donationGoal: number; goalCurrency: string;
+  } | null = null;
+
+  try {
+    const causeEvent = await prisma.event.findFirst({
+      where: { featuredCause: true },
+      select: { id: true, title: true, date: true, location: true, description: true, image: true, donationGoal: true, goalCurrency: true },
+    });
+
+    if (causeEvent?.donationGoal) {
+      const agg = await prisma.donation.aggregate({
+        where: { eventId: causeEvent.id, currency: causeEvent.goalCurrency ?? "GBP", status: "success" },
+        _sum: { amount: true },
+      });
+      featuredCauseData = {
+        ...causeEvent,
+        donationGoal: causeEvent.donationGoal,
+        goalCurrency: causeEvent.goalCurrency ?? "GBP",
+        raised: agg._sum.amount ?? 0,
+      };
+    }
+  } catch (err) {
+    console.error("[Homepage] featured cause fetch failed:", err);
+  }
+
   // Fetch events from DB and pick the 2 closest upcoming ones.
   // Fall back to any 2 events if no future dates exist.
   let upcomingEvents: {
@@ -146,7 +172,11 @@ export default async function Home() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row gap-8">
             <div className="w-full lg:w-1/2">
-              <FeaturedCause {...featuredCause} />
+              {featuredCauseData ? (
+                <FeaturedCause {...featuredCauseData} />
+              ) : (
+                <FeaturedCausePlaceholder />
+              )}
             </div>
 
             <div className="w-full lg:w-1/2">

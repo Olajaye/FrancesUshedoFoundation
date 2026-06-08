@@ -248,7 +248,7 @@ export default function EventDetailPage() {
                     Register for Event
                   </Link>
                   <Link
-                    href="/donate"
+                    href={`/donate?eventId=${event.id}&source=event&eventTitle=${encodeURIComponent(event.title)}`}
                     className="block w-full text-center px-6 py-3 border border-lilac text-darkLilac font-medium rounded-lg hover:bg-lilac/10 transition-colors"
                   >
                     Donate to Support

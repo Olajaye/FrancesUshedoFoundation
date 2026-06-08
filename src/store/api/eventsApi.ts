@@ -32,6 +32,9 @@ export interface Event {
   speakers: Speaker[];
   agenda: AgendaItem[];
   goals: string[];
+  featuredCause: boolean;
+  donationGoal: number | null;
+  goalCurrency: string | null;
   createdAt: string;
   updatedAt: string;
 }

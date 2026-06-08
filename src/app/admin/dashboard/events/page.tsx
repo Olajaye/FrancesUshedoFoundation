@@ -27,6 +27,8 @@ import {
   AlignCenter,
   AlignRight,
   Quote,
+  Star,
+  Target,
 } from "lucide-react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
@@ -475,17 +477,19 @@ function EventForm({
               <label className="block text-sm font-medium text-gray-700 mb-1.5">
                 Category *
               </label>
-              <select
+              <input
                 required
+                list="category-options"
+                placeholder="Select or type…"
                 value={form.category}
                 onChange={(e) => set({ category: e.target.value })}
                 className="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-lilac/40 bg-white"
-              >
-                <option value="">Select...</option>
+              />
+              <datalist id="category-options">
                 {CATEGORIES.map((c) => (
-                  <option key={c}>{c}</option>
+                  <option key={c} value={c} />
                 ))}
-              </select>
+              </datalist>
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1.5">
@@ -1108,16 +1112,18 @@ function EventCard({
   onEdit,
   onDelete,
   onPreview,
+  onSetFeaturedCause,
 }: {
   event: Event;
   onEdit: () => void;
   onDelete: () => void;
   onPreview: () => void;
+  onSetFeaturedCause: () => void;
 }) {
   const [expanded, setExpanded] = useState(false);
   return (
     <div
-      className={`bg-white rounded-xl shadow-sm border overflow-hidden ${event.featured ? "border-lilac border-2" : "border-gray-100"}`}
+      className={`bg-white rounded-xl shadow-sm border overflow-hidden ${event.featuredCause ? "border-yellow-400 border-2" : event.featured ? "border-lilac border-2" : "border-gray-100"}`}
     >
       <div className="flex">
         <div className="relative w-32 shrink-0 bg-gray-100">
@@ -1133,6 +1139,11 @@ function EventCard({
               <ImageIcon className="w-6 h-6 text-gray-300" />
             </div>
           )}
+          {event.featuredCause && (
+            <div className="absolute top-1.5 left-1.5 bg-yellow-400 rounded-full p-0.5">
+              <Star className="w-3 h-3 text-white fill-white" />
+            </div>
+          )}
         </div>
         <div className="flex-1 p-4 min-w-0">
           <div className="flex items-start gap-2 justify-between mb-1">
@@ -1145,8 +1156,21 @@ function EventCard({
                   Featured
                 </span>
               )}
+              {event.featuredCause && (
+                <span className="bg-yellow-100 text-yellow-700 px-2.5 py-0.5 rounded-full text-xs font-medium flex items-center gap-1">
+                  <Star className="w-2.5 h-2.5 fill-yellow-500 text-yellow-500" />
+                  Featured Cause
+                </span>
+              )}
             </div>
             <div className="flex items-center gap-1 shrink-0">
+              <button
+                onClick={onSetFeaturedCause}
+                title={event.featuredCause ? "Edit featured cause" : "Set as featured cause"}
+                className={`p-1.5 rounded-lg ${event.featuredCause ? "text-yellow-500 hover:bg-yellow-50" : "text-gray-400 hover:bg-gray-100 hover:text-yellow-500"}`}
+              >
+                <Star className={`w-4 h-4 ${event.featuredCause ? "fill-yellow-400 text-yellow-500" : ""}`} />
+              </button>
               <button
                 onClick={onPreview}
                 title="Preview"
@@ -1218,6 +1242,134 @@ function EventCard({
   );
 }
 
+// ─── Featured Cause Modal ────────────────────────────────────────────────────
+
+const GOAL_CURRENCIES = [
+  { code: "GBP", label: "£ GBP – British Pound" },
+  { code: "NGN", label: "₦ NGN – Nigerian Naira" },
+  { code: "USD", label: "$ USD – US Dollar" },
+  { code: "EUR", label: "€ EUR – Euro" },
+  { code: "GHS", label: "GH₵ GHS – Ghanaian Cedi" },
+  { code: "ZAR", label: "R ZAR – South African Rand" },
+];
+
+function FeaturedCauseModal({
+  event,
+  onClose,
+  onSaved,
+}: {
+  event: Event;
+  onClose: () => void;
+  onSaved: () => void;
+}) {
+  const [goal, setGoal] = useState(event.donationGoal ? String(event.donationGoal) : "");
+  const [currency, setCurrency] = useState(event.goalCurrency ?? "GBP");
+  const [saving, setSaving] = useState(false);
+  const [removing, setRemoving] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSave = async () => {
+    if (!goal || isNaN(Number(goal)) || Number(goal) <= 0) {
+      setError("Enter a valid goal amount.");
+      return;
+    }
+    setSaving(true);
+    setError("");
+    const res = await fetch(`/api/admin/events/${event.id}/set-featured-cause`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ donationGoal: Number(goal), goalCurrency: currency }),
+    });
+    setSaving(false);
+    if (!res.ok) { setError("Failed to save. Please try again."); return; }
+    onSaved();
+    onClose();
+  };
+
+  const handleRemove = async () => {
+    setRemoving(true);
+    await fetch(`/api/admin/events/${event.id}/set-featured-cause`, { method: "DELETE" });
+    setRemoving(false);
+    onSaved();
+    onClose();
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+      <div className="bg-white rounded-2xl shadow-xl max-w-sm w-full p-6 space-y-5">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Star className="w-5 h-5 text-yellow-500 fill-yellow-400" />
+            <h3 className="text-base font-bold text-gray-900">Set as Featured Cause</h3>
+          </div>
+          <button onClick={onClose} className="p-1.5 hover:bg-gray-100 rounded-lg">
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+
+        <p className="text-sm text-gray-500 leading-relaxed">
+          This event will appear as the <strong>Featured Cause</strong> on the homepage with a live donation progress bar.
+          Any previously featured cause will be replaced.
+        </p>
+
+        <div className="bg-lilac/10 rounded-xl px-4 py-3">
+          <p className="text-xs text-gray-500 mb-0.5">Event</p>
+          <p className="text-sm font-semibold text-gray-800 line-clamp-1">{event.title}</p>
+        </div>
+
+        <div className="space-y-3">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1.5">Donation Goal *</label>
+            <input
+              type="number"
+              min="1"
+              placeholder="e.g. 10000"
+              value={goal}
+              onChange={(e) => setGoal(e.target.value)}
+              className="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-lilac/40"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1.5">Currency</label>
+            <select
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value)}
+              className="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-lilac/40 bg-white"
+            >
+              {GOAL_CURRENCIES.map((c) => (
+                <option key={c.code} value={c.code}>{c.label}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        {error && <p className="text-sm text-red-600">{error}</p>}
+
+        <div className="flex gap-3 pt-1">
+          {event.featuredCause && (
+            <button
+              onClick={handleRemove}
+              disabled={removing}
+              className="px-4 py-2.5 border border-red-200 text-red-600 hover:bg-red-50 rounded-xl text-sm font-medium flex items-center gap-1.5 disabled:opacity-50"
+            >
+              {removing ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <X className="w-3.5 h-3.5" />}
+              Remove
+            </button>
+          )}
+          <button
+            onClick={handleSave}
+            disabled={saving}
+            className="flex-1 px-4 py-2.5 bg-gradient-to-r from-lilac to-darckLilac text-white text-sm font-medium rounded-xl hover:opacity-90 disabled:opacity-50 flex items-center justify-center gap-2"
+          >
+            {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Target className="w-4 h-4" />}
+            {saving ? "Saving…" : "Set as Featured Cause"}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─── Conversions ──────────────────────────────────────────────────────────────
 
 function eventToFormData(e: Event): FormData {
@@ -1262,7 +1414,7 @@ function formDataToPayload(data: FormData) {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function AdminEventsPage() {
-  const { data: events = [], isLoading, isError } = useGetEventsQuery();
+  const { data: events = [], isLoading, isError, refetch } = useGetEventsQuery();
   const [createEvent, { isLoading: isCreating }] = useCreateEventMutation();
   const [updateEvent, { isLoading: isUpdating }] = useUpdateEventMutation();
   const [deleteEvent, { isLoading: isDeleting }] = useDeleteEventMutation();
@@ -1271,6 +1423,7 @@ export default function AdminEventsPage() {
   const [editingEvent, setEditingEvent] = useState<Event | null>(null);
   const [previewEvent, setPreviewEvent] = useState<Event | null>(null);
   const [deletingEvent, setDeletingEvent] = useState<Event | null>(null);
+  const [featuredCauseEvent, setFeaturedCauseEvent] = useState<Event | null>(null);
   const [formError, setFormError] = useState("");
 
   const formInitial = editingEvent ? eventToFormData(editingEvent) : EMPTY_FORM;
@@ -1381,6 +1534,7 @@ export default function AdminEventsPage() {
                 onEdit={() => openEdit(event)}
                 onDelete={() => setDeletingEvent(event)}
                 onPreview={() => setPreviewEvent(event)}
+                onSetFeaturedCause={() => setFeaturedCauseEvent(event)}
               />
             ))}
           </div>
@@ -1407,6 +1561,13 @@ export default function AdminEventsPage() {
           onConfirm={handleDelete}
           onCancel={() => setDeletingEvent(null)}
           isDeleting={isDeleting}
+        />
+      )}
+      {featuredCauseEvent && (
+        <FeaturedCauseModal
+          event={featuredCauseEvent}
+          onClose={() => setFeaturedCauseEvent(null)}
+          onSaved={() => refetch()}
         />
       )}
     </>

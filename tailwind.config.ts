@@ -11,6 +11,7 @@ const config: Config = {
       backgroundColor: {
         lilac: "#E89EED",
         darckLilac: "#d154d6",
+        darkLilac: "#d154d6",
         "lilac-gradient": "linear-gradient(to right, #d0b1d1, #d154d6)",
       },
       screens: {
@@ -32,6 +33,7 @@ const config: Config = {
       colors: {
         lilac: "#d0b1d1",
         darckLilac: "#d154d6",
+        darkLilac: "#d154d6",
       },
       fontFamily: {
         EduQld: ["var(--eduQld-beginner)"],

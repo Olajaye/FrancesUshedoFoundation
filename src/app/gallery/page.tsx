@@ -74,6 +74,7 @@ const PhotoModal: React.FC<{
   onClose: () => void;
   onPhotoSelect: (photo: Photo) => void;
 }> = ({ album, selectedPhoto, onClose, onPhotoSelect }) => {
+  const donateHref = `/donate?eventId=${album.id}&source=gallery&eventTitle=${encodeURIComponent(album.name)}`;
   const [imageLoaded, setImageLoaded] = useState(false);
   const currentIndex = album.photos.findIndex((p) => p.id === selectedPhoto.id);
   const canGoPrev = currentIndex > 0;
@@ -175,7 +176,7 @@ const PhotoModal: React.FC<{
 
             <div className="border-t pt-4">
               <Link
-                href="/donate"
+                href={donateHref}
                 className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-darckLilac text-white rounded-lg hover:bg-lilac transition-colors duration-200"
               >
                 Donate to this Outreach

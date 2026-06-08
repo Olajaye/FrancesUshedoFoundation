@@ -1,8 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
   provider = "prisma-client"
   output   = "../src/generated/prisma"
@@ -45,18 +40,36 @@ model Event {
   speakers         Json          @default("[]")
   agenda           Json          @default("[]")
   goals            Json          @default("[]")
-  gallery          EventGallery?
+  featuredCause    Boolean       @default(false)
+  donationGoal     Float?
+  goalCurrency     String?       @default("GBP")
   createdAt        DateTime      @default(now())
   updatedAt        DateTime      @updatedAt
+  gallery          EventGallery?
 }
 
 model EventGallery {
   id        String   @id @default(uuid())
   eventId   String   @unique
-  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
   photos    Json     @default("[]")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+}
+
+model Donation {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  amount    Float
+  currency  String
+  provider  String
+  reference String   @unique
+  status    String   @default("pending")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  eventId   String?
+  source    String?
 }
 
 model News {

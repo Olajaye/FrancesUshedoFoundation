@@ -180,7 +180,7 @@ export default function EventsPage() {
 
                     <div className="flex items-center gap-2 mt-auto">
                       <Link
-                        href={event.registrationLink || "/donate"}
+                        href={`/donate?eventId=${event.id}&source=event&eventTitle=${encodeURIComponent(event.title)}`}
                         className="flex-1 text-center px-4 py-2 bg-lilac text-white text-sm font-medium rounded-lg hover:bg-darkLilac transition-colors"
                       >
                         Donate
